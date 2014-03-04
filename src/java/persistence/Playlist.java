@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -32,7 +33,8 @@ public class Playlist implements Serializable {
     private Integer playlist_size;
     @ManyToMany
     private ArrayList<Music> musics;
-    private Integer user_id;
+    @ManyToOne
+    private Registered_User user;
 
     public Playlist() {
     }
@@ -85,13 +87,15 @@ public class Playlist implements Serializable {
         this.musics = musics;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Registered_User getUser() {
+        return user;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUser(Registered_User user) {
+        this.user = user;
     }
+    
+    
 
     @Override
     public int hashCode() {

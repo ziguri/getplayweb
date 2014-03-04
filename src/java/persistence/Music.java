@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -29,7 +30,8 @@ public class Music implements Serializable {
     private String album;
     private int music_year;
     private String music_path;
-    private Integer user_id; 
+    @ManyToOne
+    private Registered_User user;
     @ManyToMany(mappedBy = "musics")
     private List<Playlist> playlists_has_musics;
 
@@ -43,6 +45,14 @@ public class Music implements Serializable {
 
     public void setId(Integer id) {
         this.music_id = id;
+    }
+
+    public Integer getMusic_id() {
+        return music_id;
+    }
+
+    public void setMusic_id(Integer music_id) {
+        this.music_id = music_id;
     }
 
     public String getTitle() {
@@ -69,29 +79,41 @@ public class Music implements Serializable {
         this.album = album;
     }
 
-    public int getYear() {
+    public int getMusic_year() {
         return music_year;
     }
 
-    public void setYear(int year) {
-        this.music_year = year;
+    public void setMusic_year(int music_year) {
+        this.music_year = music_year;
     }
 
-    public String getPath() {
+    public String getMusic_path() {
         return music_path;
     }
 
-    public void setPath(String path) {
-        this.music_path = path;
+    public void setMusic_path(String music_path) {
+        this.music_path = music_path;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Registered_User getUser() {
+        return user;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUser(Registered_User user) {
+        this.user = user;
     }
+
+    public List<Playlist> getPlaylists_has_musics() {
+        return playlists_has_musics;
+    }
+
+    public void setPlaylists_has_musics(List<Playlist> playlists_has_musics) {
+        this.playlists_has_musics = playlists_has_musics;
+    }
+
+   
+    
+    
 
     @Override
     public int hashCode() {
