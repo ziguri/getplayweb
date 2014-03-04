@@ -28,7 +28,7 @@ public class Music implements Serializable {
     private String title;
     private String artist;
     private String album;
-    private int music_year;
+    private Integer music_year;
     private String music_path;
     @ManyToOne
     private Registered_User user;
@@ -79,11 +79,11 @@ public class Music implements Serializable {
         this.album = album;
     }
 
-    public int getMusic_year() {
+    public Integer getMusic_year() {
         return music_year;
     }
 
-    public void setMusic_year(int music_year) {
+    public void setMusic_year(Integer music_year) {
         this.music_year = music_year;
     }
 
