@@ -7,10 +7,16 @@
 package persistence;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -22,18 +28,30 @@ public class Registered_User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
+    @NotNull
+    @Pattern (regexp = "^[\\p{L} .'-]+$", message = "Invalid Name")
     private String name;
+    @NotNull
+    @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Invalid Email")
     private String email;
+    @NotNull
+    @Size(min=6, max=12, message = "Minimum ")
+    @Pattern(regexp ="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})", message="Invalid Password. You need between 6-12 characteres, at least 1 lower case, 1 upper case and 1 numeric")
     private String password;
+    @NotNull
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date register_date;
+    @OneToOne(mappedBy = "user")
+    private Music music;
 
     public Registered_User() {
     }
     
-    public Integer getId() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setId(Integer id) {
+    public void setUser_id(Integer id) {
         this.user_id = id;
     }
 
@@ -60,6 +78,24 @@ public class Registered_User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Date getRegister_date() {
+        return register_date;
+    }
+
+    public void setRegister_date(Date register_date) {
+        this.register_date = register_date;
+    }
+
+    public Music getMusic() {
+        return music;
+    }
+
+    public void setMusic(Music music) {
+        this.music = music;
+    }
+     
+    
 
     @Override
     public int hashCode() {

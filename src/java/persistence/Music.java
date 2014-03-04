@@ -7,6 +7,8 @@
 package persistence;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import static javax.swing.text.StyleConstants.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -22,13 +30,24 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Music implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final int ano_max = new GregorianCalendar().YEAR;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer music_id;
+    @NotNull
+    @Size(max=40, message = "Max size 40char")
     private String title;
+    @NotNull
+    @Size(max=40, message = "Max size 40char")
     private String artist;
+    @NotNull
+    @Size(max=40, message = "Max size 40char")
     private String album;
-    private Integer music_year;
+    @NotNull
+    @Past 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date music_year;
+    @NotNull
     private String music_path;
     @ManyToOne
     private Registered_User user;
@@ -79,11 +98,11 @@ public class Music implements Serializable {
         this.album = album;
     }
 
-    public Integer getMusic_year() {
+    public Date getMusic_year() {
         return music_year;
     }
 
-    public void setMusic_year(Integer music_year) {
+    public void setMusic_year(Date music_year) {
         this.music_year = music_year;
     }
 

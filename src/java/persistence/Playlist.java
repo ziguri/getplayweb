@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -27,12 +29,16 @@ public class Playlist implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer playlist_id;
+    @NotNull
+    @Size(max=40)
     private String playlist_name;
+    @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date creation_date;
     private Integer playlist_size;
     @ManyToMany
     private ArrayList<Music> musics;
+    @NotNull
     @ManyToOne
     private Registered_User user;
 
