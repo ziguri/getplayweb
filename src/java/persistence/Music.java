@@ -51,11 +51,11 @@ public class Music implements Serializable {
     private String album;
     
     @NotNull 
-    @Column(nullable =false, name = "MUSIC YEAR")
+    @Column(nullable =false, name = "MUSIC_YEAR")
     private Integer music_year;
     
     @NotNull
-    @Column(nullable =false, name = "MUSIC PATH")
+    @Column(nullable =false, name = "MUSIC_PATH")
     private String music_path;
     
     @ManyToOne
