@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -24,31 +25,44 @@ import javax.validation.constraints.Size;
  * @author Zueb LDA
  */
 @Entity
+@Table(name = "REGISTERED USER")
 public class Registered_User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
     
-    @Column (name = "Name")
     @NotNull
     @Pattern (regexp = "^[\\p{L} .'-]+$", message = "{invalid.name}")
+    @Column (name = "NAME", nullable = false, length = 40)
     private String name;
     
     @NotNull
     @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="{invalid.email}")
+    @Column (name = "EMAIL", nullable = false, length = 50)
     private String email;
+    
     @NotNull
     @Size(min=6, max=12, message = "Minimum ")
     @Pattern(regexp ="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})", message="Invalid Password. You need between 6-12 characteres, at least 1 lower case, 1 upper case and 1 numeric")
+    @Column (name = "PASSWORD", nullable = false, length = 12)
     private String password;
+    
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column (name = "REGISTER DATE", nullable = false)
     private Date register_date;
+    
     @OneToOne(mappedBy = "user")
     private Music music;
 
     public Registered_User() {
+    }
+
+    public Registered_User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
     
     public Integer getUser_id() {
