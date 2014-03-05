@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
  * @author Zueb LDA
  */
 @Entity
-@Table(name = "REGISTERED USER")
+@Table(name = "REGISTERED_USER")
 public class Registered_User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,7 +50,7 @@ public class Registered_User implements Serializable {
     
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
-    @Column (name = "REGISTER DATE", nullable = false)
+    @Column (name = "REGISTER_DATE", nullable = false)
     private Date register_date;
     
     @OneToOne(mappedBy = "user")
