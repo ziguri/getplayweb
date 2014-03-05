@@ -5,8 +5,8 @@
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="3306"/>
         <property name="databaseName" value="getplay"/>
-        <property name="User" value="orlando"/>
-        <property name="Password" value="artaxboy69"/>
+        <property name="User" value="elsasantos"/>
+        <property name="Password" value="7337"/>
         <property name="URL" value="jdbc:mysql://localhost:3306/getplay?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>

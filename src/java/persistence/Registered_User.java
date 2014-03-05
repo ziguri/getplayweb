@@ -8,6 +8,7 @@ package persistence;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,11 +29,14 @@ public class Registered_User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
+    
+    @Column (name = "Name")
     @NotNull
-    @Pattern (regexp = "^[\\p{L} .'-]+$", message = "Invalid Name")
+    @Pattern (regexp = "^[\\p{L} .'-]+$", message = "{invalid.name}")
     private String name;
+    
     @NotNull
-    @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Invalid Email")
+    @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="{invalid.email}")
     private String email;
     @NotNull
     @Size(min=6, max=12, message = "Minimum ")

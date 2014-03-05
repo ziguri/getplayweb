@@ -10,12 +10,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import static javax.swing.text.StyleConstants.Size;
 import javax.validation.constraints.Max;
@@ -28,35 +30,57 @@ import javax.validation.constraints.Size;
  * @author Zueb LDA
  */
 @Entity
+@Table(name = "MUSIC")
 public class Music implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final int ano_max = new GregorianCalendar().YEAR;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer music_id;
+    
     @NotNull
     @Size(max=40, message = "Max size 40char")
+    @Column(name = "TITLE")
     private String title;
+    
     @NotNull
     @Size(max=40, message = "Max size 40char")
+    @Column(name = "ARTIST")
     private String artist;
+    
     @NotNull
     @Size(max=40, message = "Max size 40char")
+    @Column(name = "ALBUM")
     private String album;
+    
     @NotNull
     @Past 
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "MUSIC YEAR")
     private Date music_year;
+    
     @NotNull
+    @Column(name = "MUSIC PATH")
     private String music_path;
+    
     @ManyToOne
     private Registered_User user;
+    
     @ManyToMany(mappedBy = "musics")
     private List<Playlist> playlists_has_musics;
 
     public Music() {
     }
-    
+
+    public Music(String title, String artist, String album, Date music_year, String music_path, Registered_User user, List<Playlist> playlists_has_musics) {
+        this.title = title;
+        this.artist = artist;
+        this.album = album;
+        this.music_year = music_year;
+        this.music_path = music_path;
+        this.user = user;
+        this.playlists_has_musics = playlists_has_musics;
+    }    
 
     public Integer getId() {
         return music_id;

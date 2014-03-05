@@ -9,12 +9,14 @@ package persistence;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,6 +26,7 @@ import javax.validation.constraints.Size;
  * @author Zueb LDA
  */
 @Entity
+@Table(name = "PLAYLIST")
 public class Playlist implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -31,10 +34,13 @@ public class Playlist implements Serializable {
     private Integer playlist_id;
     @NotNull
     @Size(max=40)
+    @Column(name = "NAME")
     private String playlist_name;
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "CREATION DATE")
     private Date creation_date;
+    
     private Integer playlist_size;
     @ManyToMany
     private ArrayList<Music> musics;
