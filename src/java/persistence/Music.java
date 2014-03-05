@@ -19,8 +19,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import static javax.swing.text.StyleConstants.Size;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -33,34 +31,31 @@ import javax.validation.constraints.Size;
 @Table(name = "MUSIC")
 public class Music implements Serializable {
     private static final long serialVersionUID = 1L;
-    private static final int ano_max = new GregorianCalendar().YEAR;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer music_id;
     
     @NotNull
     @Size(max=40, message = "Max size 40char")
-    @Column(name = "TITLE")
+    @Column(nullable =false,length =40, name = "TITLE")
     private String title;
     
     @NotNull
     @Size(max=40, message = "Max size 40char")
-    @Column(name = "ARTIST")
+    @Column(nullable =false,length =40, name = "ARTIST")
     private String artist;
     
     @NotNull
     @Size(max=40, message = "Max size 40char")
-    @Column(name = "ALBUM")
+    @Column(nullable =false, length =40, name = "ALBUM")
     private String album;
     
-    @NotNull
-    @Past 
-    @Temporal(javax.persistence.TemporalType.DATE)
-    @Column(name = "MUSIC YEAR")
-    private Date music_year;
+    @NotNull 
+    @Column(nullable =false, name = "MUSIC YEAR")
+    private Integer music_year;
     
     @NotNull
-    @Column(name = "MUSIC PATH")
+    @Column(nullable =false, name = "MUSIC PATH")
     private String music_path;
     
     @ManyToOne
@@ -72,7 +67,7 @@ public class Music implements Serializable {
     public Music() {
     }
 
-    public Music(String title, String artist, String album, Date music_year, String music_path, Registered_User user, List<Playlist> playlists_has_musics) {
+    public Music(String title, String artist, String album, Integer music_year, String music_path, Registered_User user, List<Playlist> playlists_has_musics) {
         this.title = title;
         this.artist = artist;
         this.album = album;
@@ -122,11 +117,11 @@ public class Music implements Serializable {
         this.album = album;
     }
 
-    public Date getMusic_year() {
+    public Integer getMusic_year() {
         return music_year;
     }
 
-    public void setMusic_year(Date music_year) {
+    public void setMusic_year(Integer music_year) {
         this.music_year = music_year;
     }
 

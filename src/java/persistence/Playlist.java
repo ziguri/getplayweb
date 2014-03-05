@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -40,9 +42,9 @@ public class Playlist implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "CREATION DATE")
     private Date creation_date;
-    
     private Integer playlist_size;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="playlists_has_musics")
     private ArrayList<Music> musics;
     @NotNull
     @ManyToOne
