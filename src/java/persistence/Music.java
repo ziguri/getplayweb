@@ -55,7 +55,7 @@ public class Music implements Serializable {
     private String music_path;
     
     @ManyToOne
-    private Registered_User user;
+    private AppUser user;
     
     @ManyToMany(mappedBy = "musics")
     private List<Playlist> playlists;
@@ -119,11 +119,11 @@ public class Music implements Serializable {
         this.music_path = music_path;
     }
 
-    public Registered_User getUser() {
+    public AppUser getUser() {
         return user;
     }
 
-    public void setUser(Registered_User user) {
+    public void setUser(AppUser user) {
         this.user = user;
     }
 

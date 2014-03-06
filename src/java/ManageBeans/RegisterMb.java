@@ -12,7 +12,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import persistence.Registered_User;
+import persistence.AppUser;
 
 /**
  *
@@ -24,7 +24,7 @@ public class RegisterMb implements Serializable {
     
     @EJB
     private Registered_UserFacade user_ejb;
-    private Registered_User user;
+    private AppUser user;
     /**
      * Creates a new instance of UserManagedBean
      */
@@ -46,14 +46,14 @@ public class RegisterMb implements Serializable {
         this.user_ejb = user_ejb;
     }
 
-    public Registered_User getUser() {
+    public AppUser getUser() {
         if(user == null) {
-            user = new Registered_User();
+            user = new AppUser();
         }
         return user;
     }
 
-    public void setUser(Registered_User user) { 
+    public void setUser(AppUser user) { 
         this.user = user;
     }
 

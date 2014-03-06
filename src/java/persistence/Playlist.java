@@ -49,7 +49,7 @@ public class Playlist implements Serializable {
     private List<Music> musics;
     @NotNull
     @ManyToOne
-    private Registered_User user;
+    private AppUser user;
 
     public Playlist() {
     }
@@ -102,11 +102,11 @@ public class Playlist implements Serializable {
         this.musics = musics;
     }
 
-    public Registered_User getUser() {
+    public AppUser getUser() {
         return user;
     }
 
-    public void setUser(Registered_User user) {
+    public void setUser(AppUser user) {
         this.user = user;
     }
     

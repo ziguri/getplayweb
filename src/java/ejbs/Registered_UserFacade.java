@@ -10,14 +10,14 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.ValidationException;
-import persistence.Registered_User;
+import persistence.AppUser;
 
 /**
  *
  * @author Zueb LDA
  */
 @Stateless
-public class Registered_UserFacade extends AbstractFacade<Registered_User> {
+public class Registered_UserFacade extends AbstractFacade<AppUser> {
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
@@ -27,10 +27,10 @@ public class Registered_UserFacade extends AbstractFacade<Registered_User> {
     }
 
     public Registered_UserFacade() {
-        super(Registered_User.class);
+        super(AppUser.class);
     }
     
-    public void addUser(Registered_User u)  {
+    public void addUser(AppUser u)  {
         try{
             
         
