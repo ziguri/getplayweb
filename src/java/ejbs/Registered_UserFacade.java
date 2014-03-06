@@ -4,19 +4,19 @@
  * and open the template in the editor.
  */
 
-package session;
+package ejbs;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import persistence.Playlist;
+import persistence.Registered_User;
 
 /**
  *
  * @author Zueb LDA
  */
 @Stateless
-public class PlaylistFacade extends AbstractFacade<Playlist> {
+public class Registered_UserFacade extends AbstractFacade<Registered_User> {
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
@@ -25,8 +25,14 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         return em;
     }
 
-    public PlaylistFacade() {
-        super(Playlist.class);
+    public Registered_UserFacade() {
+        super(Registered_User.class);
+    }
+    
+    public void addUser(String nome, String email, String password){
+    
+        Registered_User a = new Registered_User(nome, email, password);
+        this.create(a);
     }
     
 }
