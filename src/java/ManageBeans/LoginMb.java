@@ -60,7 +60,7 @@ public class LoginMb implements Serializable{
         } catch(Exception e) {
             System.out.println("User not find" + e);
         }
-        return "login";
+        return "index";
     }
     
 }
