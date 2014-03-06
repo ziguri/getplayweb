@@ -10,14 +10,14 @@ import ejbs.Registered_UserFacade;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author Elsa
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class LoginMb implements Serializable{
 @EJB
     private Registered_UserFacade user;
@@ -53,8 +53,13 @@ public class LoginMb implements Serializable{
         this.password = password;
     }
     
-    public void confirmaLogin(){
-        user.find(this.email);
+    public String confirmaLogin()throws Exception{
+        try{
+            user.find(this.email);
+            return "principal";
+        } catch(NullPointerException e) {
+            throw new Exception("User does't exist");
+            }
     }
     
 }
