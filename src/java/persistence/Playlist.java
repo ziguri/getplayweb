@@ -9,6 +9,7 @@ package persistence;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +46,7 @@ public class Playlist implements Serializable {
     private Integer playlist_size;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="playlists_has_musics")
-    private ArrayList<Music> musics;
+    private List<Music> musics;
     @NotNull
     @ManyToOne
     private Registered_User user;
@@ -93,7 +94,7 @@ public class Playlist implements Serializable {
         this.playlist_size = playlist_size;
     }
 
-    public ArrayList<Music> getMusics() {
+    public List<Music> getMusics() {
         return musics;
     }
 
