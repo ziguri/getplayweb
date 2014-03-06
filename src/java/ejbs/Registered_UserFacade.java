@@ -9,6 +9,7 @@ package ejbs;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ValidationException;
 import persistence.Registered_User;
 
 /**
@@ -29,10 +30,15 @@ public class Registered_UserFacade extends AbstractFacade<Registered_User> {
         super(Registered_User.class);
     }
     
-    public void addUser(String nome, String email, String password){
-    
+    public void addUser(String nome, String email, String password)  {
+        try{
+            
         Registered_User a = new Registered_User(nome, email, password);
         this.create(a);
+        
+        }catch(Exception e){
+            System.out.println("Excepção " + e);
+        }
     }
     
 }
