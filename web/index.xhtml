@@ -14,17 +14,17 @@
          
         Nome
         <br></br>
-        <h:inputText label="Nome" />
+        <h:inputText label="Nome" value="#{registerMb.name}" />
         <br></br>
         Email
         <br></br>
-        <h:inputText label="Email" />
+        <h:inputText label="Email" value="#{registerMb.email}"/>
         <br></br>
         Password
         <br></br>
-        <h:inputText label="Password" />
+        <h:inputText label="Password" value="#{registerMb.password}"/>
         <br></br>
-        <input type="submit" value="registar" name="btnRegisto" />
+        <h:commandButton type="submit"  value="SAVE" action="#{registerMb.addUser()}"  />
         
             
         </form>
