@@ -30,11 +30,11 @@ public class Registered_UserFacade extends AbstractFacade<Registered_User> {
         super(Registered_User.class);
     }
     
-    public void addUser(String nome, String email, String password)  {
+    public void addUser(Registered_User u)  {
         try{
             
-        Registered_User a = new Registered_User(nome, email, password);
-        this.create(a);
+        
+        this.create(u);
         
         }catch(Exception e){
             System.out.println("Excepção " + e);

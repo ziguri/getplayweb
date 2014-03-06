@@ -23,10 +23,8 @@ import persistence.Registered_User;
 public class RegisterMb implements Serializable {
     
     @EJB
-    private Registered_UserFacade user;
-    private String name;
-    private String email;
-    private String password;
+    private Registered_UserFacade user_ejb;
+    private Registered_User user;
     /**
      * Creates a new instance of UserManagedBean
      */
@@ -36,39 +34,28 @@ public class RegisterMb implements Serializable {
     
     public String addUser(){
     
-        user.addUser(name, email, password);
-        return "index";
+        user_ejb.addUser(user);
+        return "principal";
     }
 
-    public Registered_UserFacade getUser() {
+    public Registered_UserFacade getUser_ejb() {
+        return user_ejb;
+    }
+
+    public void setUser_ejb(Registered_UserFacade user_ejb) {
+        this.user_ejb = user_ejb;
+    }
+
+    public Registered_User getUser() {
+        if(user == null) {
+            user = new Registered_User();
+        }
         return user;
     }
 
-    public void setUser(Registered_UserFacade user) {
+    public void setUser(Registered_User user) { 
         this.user = user;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    
 }
