@@ -41,7 +41,7 @@ public class Playlist implements Serializable {
     private String playlist_name;
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
-    @Column(name = "CREATION DATE")
+    @Column(name = "CREATION_DATE")
     private Date creation_date;
     private Integer playlist_size;
     @ManyToMany(fetch = FetchType.LAZY)

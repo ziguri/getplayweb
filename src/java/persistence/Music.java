@@ -7,8 +7,6 @@
 package persistence;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,9 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 /**
@@ -62,20 +58,10 @@ public class Music implements Serializable {
     private Registered_User user;
     
     @ManyToMany(mappedBy = "musics")
-    private List<Playlist> playlists_has_musics;
+    private List<Playlist> playlists;
 
     public Music() {
     }
-
-    public Music(String title, String artist, String album, Integer music_year, String music_path, Registered_User user, List<Playlist> playlists_has_musics) {
-        this.title = title;
-        this.artist = artist;
-        this.album = album;
-        this.music_year = music_year;
-        this.music_path = music_path;
-        this.user = user;
-        this.playlists_has_musics = playlists_has_musics;
-    }    
 
     public Integer getId() {
         return music_id;
@@ -141,18 +127,15 @@ public class Music implements Serializable {
         this.user = user;
     }
 
-    public List<Playlist> getPlaylists_has_musics() {
-        return playlists_has_musics;
+    public List<Playlist> getPlaylists() {
+        return playlists;
     }
 
-    public void setPlaylists_has_musics(List<Playlist> playlists_has_musics) {
-        this.playlists_has_musics = playlists_has_musics;
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
     }
 
-   
-    
-    
-
+ 
     @Override
     public int hashCode() {
         int hash = 0;

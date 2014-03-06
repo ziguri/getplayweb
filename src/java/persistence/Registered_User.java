@@ -32,26 +32,22 @@ public class Registered_User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
     
-    @NotNull
-    @Pattern (regexp = "^[\\p{L} .'-]+$", message = "{invalid.name}")
-    @Column (name = "NAME", nullable = false, length = 40)
+    //@NotNull
+    //@Pattern (regexp = "^[\\p{L} .'-]+$", message = "{invalid.name}")
+    @Column (name = "NAME", nullable = false)
     private String name;
     
-    @NotNull
-    @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="{invalid.email}")
-    @Column (name = "EMAIL", nullable = false, length = 50)
+    //@NotNull
+    //@Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="{invalid.email}")
+    @Column (name = "EMAIL", nullable = false)
     private String email;
     
-    @NotNull
-    @Size(min=6, max=12, message = "Minimum ")
-    @Pattern(regexp ="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})", message="Invalid Password. You need between 6-12 characteres, at least 1 lower case, 1 upper case and 1 numeric")
-    @Column (name = "PASSWORD", nullable = false, length = 12)
+    //@NotNull
+    //@Size(min=6, max=12, message = "Minimum ")
+    //@Pattern(regexp ="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})", message="Invalid Password. You need between 6-12 characteres, at least 1 lower case, 1 upper case and 1 numeric")
+    @Column (name = "PASSWORD", nullable = false)
     private String password;
-    
-    @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
-    @Column (name = "REGISTER_DATE", nullable = false)
-    private Date register_date;
+   
     
     @OneToOne(mappedBy = "user")
     private Music music;
@@ -95,14 +91,6 @@ public class Registered_User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getRegister_date() {
-        return register_date;
-    }
-
-    public void setRegister_date(Date register_date) {
-        this.register_date = register_date;
     }
 
     public Music getMusic() {

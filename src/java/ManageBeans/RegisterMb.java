@@ -7,8 +7,10 @@
 package ManageBeans;
 
 import ejbs.Registered_UserFacade;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import persistence.Registered_User;
 
@@ -16,9 +18,9 @@ import persistence.Registered_User;
  *
  * @author Elsa
  */
-@ManagedBean
-@SessionScoped
-public class RegisterMb {
+@ManagedBean(name="registerMb")
+@RequestScoped
+public class RegisterMb implements Serializable {
     
     @EJB
     private Registered_UserFacade user;
@@ -32,17 +34,18 @@ public class RegisterMb {
        
     }
     
-    public void addUser(){
+    public String addUser(){
     
         user.addUser(name, email, password);
+        return "index";
     }
 
-    public Registered_UserFacade getUser_facade() {
+    public Registered_UserFacade getUser() {
         return user;
     }
 
-    public void setUser_facade(Registered_UserFacade user_facade) {
-        this.user = user_facade;
+    public void setUser(Registered_UserFacade user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -68,9 +71,4 @@ public class RegisterMb {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
-    
-    
 }

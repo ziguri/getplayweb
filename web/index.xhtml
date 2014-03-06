@@ -9,7 +9,7 @@
     <h:body>
         Registo Utilizador teste
         
-        <form name="registo">
+        <h:form>
         <br></br>
          
         Nome
@@ -24,10 +24,10 @@
         <br></br>
         <h:inputText label="Password" value="#{registerMb.password}"/>
         <br></br>
-        <h:commandButton type="submit"  value="SAVE" action="#{registerMb.addUser()}"  />
+        <h:commandButton type="submit"  value="Save" action="#{registerMb.addUser}"  />
         
             
-        </form>
+        </h:form>
        
     </h:body>
 
