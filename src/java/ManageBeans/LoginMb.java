@@ -57,9 +57,10 @@ public class LoginMb implements Serializable{
         try{
             user.find(this.email);
             return "principal";
-        } catch(NullPointerException e) {
-            throw new Exception("User does't exist");
-            }
+        } catch(Exception e) {
+            System.out.println("User not find" + e);
+        }
+        return "login";
     }
     
 }
