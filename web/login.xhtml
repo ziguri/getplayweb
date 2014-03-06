@@ -24,12 +24,15 @@ and open the template in the editor.
                 
                 Password
                 <br></br>
-                <h:inputText label="Password" 
-                             value="#{loginMb.password}"/>
+                
+                <input type="password" 
+                       label="Password" 
+                       value="#{loginMb.password}"/>
                 <br></br>
                 <h:commandButton type="submit"  
                                  value="Login" 
                                  action="#{loginMb.confirmaLogin()}"/>
+                
             </h:form>
         </f:view>
 
