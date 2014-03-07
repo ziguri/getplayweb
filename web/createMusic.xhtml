@@ -41,13 +41,8 @@ and open the template in the editor.
                     <br></br>
                     <h:inputText label="Path" value="#{musicMb.music.music_path}"/>
                     <br></br>
-                    <h:outputLabel value="Utilizador"/>
-                    <br></br>
-                    <h:selectOneMenu id="user" value="#{musicMb.music.user}" >
-                    </h:selectOneMenu>
-                    <br></br>
                     
-                    <h:commandButton type="submit"  value="Save" action="#{musicMb.addMusic()}"  />
+                    <h:commandButton type="submit"  value="Save" action="#{musicMb.addMusic}"  />
                 </h:form>
 
             </ui:define>
