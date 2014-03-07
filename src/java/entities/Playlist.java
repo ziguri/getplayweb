@@ -49,7 +49,7 @@ public class Playlist implements Serializable {
     @Size(max=40)
     @Column(name = "NAME")
     private String playlist_name;
-    @NotNull
+//    @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "CREATION_DATE")
     private Date creation_date;
@@ -57,7 +57,7 @@ public class Playlist implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="playlists_has_musics")
     private List<Music> musics;
-    @NotNull
+//    @NotNull
     @ManyToOne
     private AppUser user;
 

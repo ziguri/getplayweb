@@ -23,6 +23,7 @@ public class MusicMb implements Serializable{
     @EJB
     private MusicFacade music_ejb;
     private Music music;
+    private LoggedUser user;
     
     /**
      * Creates a new instance of MusicMb
@@ -31,6 +32,7 @@ public class MusicMb implements Serializable{
     }
     
     public String addMusic(){
+        music.setUser(user.getUser());
         music_ejb.addMusic(music);
         return "principal";
     }

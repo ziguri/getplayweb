@@ -16,7 +16,7 @@ import entities.Music;
  *
  * @author Zueb LDA
  */
-//@Stateless
+@Stateless
 public class MusicFacade extends AbstractFacade<Music> {
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
