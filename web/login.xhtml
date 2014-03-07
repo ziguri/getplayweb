@@ -16,22 +16,20 @@ and open the template in the editor.
     <body>
         <f:view>
             <h:form>
-                Email
                 <br></br>
                 <h:inputText label="Email" 
                              value="#{loginMb.email}"/>
                 <br></br>
-                
-                Password
+
                 <br></br>
                 
-                <input type="password" 
+                <h:inputSecret
                        label="Password" 
                        value="#{loginMb.password}"/>
                 <br></br>
                 <h:commandButton type="submit"  
                                  value="Login" 
-                                 action="#{loginMb.confirmaLogin()}"/>
+                                 action="#{loginMb.confirmaLogin}"/>
                 
             </h:form>
         </f:view>

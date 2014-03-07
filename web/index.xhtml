@@ -20,28 +20,18 @@
                     <h:inputText label="Email" class="logfield" value="#{loginMb.email}"/>
                     
                     <h:outputLabel value="Password"  class="logtitulos"/>
-                    <input type="password" class="logfield" label="Password" value="#{loginMb.password}"/>
+                    <h:inputSecret class="logfield" label="Password" value="#{loginMb.password}"/>
                     <br></br>
                     
                     <h:commandButton class="logbtn" type="submit"  
                                      value="Login" 
-                                     action="#{loginMb.confirmaLogin()}"/>
+                                     action="#{loginMb.confirmaLogin}"/>
                     
                      <h:commandButton class="logbtn" type="submit"  
                                      value="Register" 
                                      action="registo.xhtml"/>
-                     
-                     
+
                 </h:form>
-            </ui:define>
-            
-            <ui:define name="left">
-                <br />
-                <h:link outcome="createMusic.xhtml" value="Create Music"/>
-                <br />
-                <br />
-                <h:link outcome="createPlaylist.xhtml" value="Create Playlist"/>
-                <br />
             </ui:define>
             
         </ui:composition>

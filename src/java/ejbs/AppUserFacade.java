@@ -32,10 +32,7 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
     
     public void addUser(AppUser u)  {
         try{
-            
-        
         this.create(u);
-        
         }catch(Exception e){
             System.out.println("Excepção " + e);
         }
@@ -44,7 +41,7 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
     private AppUser existUser(String email){
     
         try{
-        AppUser u = (AppUser) em.createNamedQuery("AppUser.findByEmail").setParameter("email", email).getSingleResult();
+        AppUser u = (AppUser) em.createNamedQuery("appuser.findByEmail").setParameter("email", email).getSingleResult();
         return u;
         }catch(Exception e){
         

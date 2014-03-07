@@ -29,8 +29,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "appuser")
 @NamedQueries({
-    @NamedQuery(name = "AppUser.findAll", query = "SELECT u FROM AppUser u"),
-    @NamedQuery(name ="AppUser.findByEmail", query = "SELECT u FROM AppUser u WHERE u.email = :email")
+    @NamedQuery(name = "appuser.findAll", query = "SELECT u FROM AppUser u"),
+    @NamedQuery(name ="appuser.findByEmail", query = "SELECT u FROM AppUser u WHERE u.email = :email")
 })
 public class AppUser implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -38,17 +38,17 @@ public class AppUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
     
-    @NotNull
+    //@NotNull
     @Pattern (regexp = "^[\\p{L} .'-]+$", message = "{invalid.name}")
     @Column (name = "NAME", nullable = false)
     private String name;
     
-    @NotNull
+    //@NotNull
     @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Invalid Email")
     @Column (name = "EMAIL", nullable = false)
     private String email;
     
-    @NotNull
+    //@NotNull
     //@Pattern(regexp ="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})", message="Invalid Password. You need between 6-12 characteres, at least 1 lower case, 1 upper case and 1 numeric")
     @Column (name = "PASSWORD", nullable = false)
     private String password;

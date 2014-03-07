@@ -35,7 +35,7 @@ public class RegisterMb implements Serializable {
     public String addUser(){
     
         user_ejb.addUser(user);
-        return "principal";
+        return "index.xhtml";
     }
 
     public AppUserFacade getUser_ejb() {

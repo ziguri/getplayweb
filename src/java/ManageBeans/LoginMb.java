@@ -63,11 +63,13 @@ public class LoginMb implements Serializable{
         this.logado = logado;
     }
     
-    public String confirmaLogin()throws Exception{
+    public String confirmaLogin(){
+        
         AppUser us =  user.validaPassword(this.email, this.password);
         
         if(us!= null){
         
+            logado=new LoggedUser();
             logado.setUser(us);
             return"principal.xhtml";
             
@@ -75,14 +77,6 @@ public class LoginMb implements Serializable{
         
             return"index.xhtml";
         }
-        
-//        try{
-//            user.find(this.email);
-//            return "principal";
-//        } catch(Exception e) {
-//            System.out.println("User not find" + e);
-//        }
-//        return "index";
     }
     
 }
