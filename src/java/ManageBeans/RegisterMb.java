@@ -6,13 +6,13 @@
 
 package ManageBeans;
 
-import ejbs.Registered_UserFacade;
+import ejbs.AppUserFacade;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import persistence.AppUser;
+import entities.AppUser;
 
 /**
  *
@@ -23,7 +23,7 @@ import persistence.AppUser;
 public class RegisterMb implements Serializable {
     
     @EJB
-    private Registered_UserFacade user_ejb;
+    private AppUserFacade user_ejb;
     private AppUser user;
     /**
      * Creates a new instance of UserManagedBean
@@ -38,11 +38,11 @@ public class RegisterMb implements Serializable {
         return "principal";
     }
 
-    public Registered_UserFacade getUser_ejb() {
+    public AppUserFacade getUser_ejb() {
         return user_ejb;
     }
 
-    public void setUser_ejb(Registered_UserFacade user_ejb) {
+    public void setUser_ejb(AppUserFacade user_ejb) {
         this.user_ejb = user_ejb;
     }
 

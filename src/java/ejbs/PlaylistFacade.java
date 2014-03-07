@@ -9,7 +9,7 @@ package ejbs;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import persistence.Playlist;
+import entities.Playlist;
 
 /**
  *

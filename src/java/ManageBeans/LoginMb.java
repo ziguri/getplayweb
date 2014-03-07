@@ -6,7 +6,7 @@
 
 package ManageBeans;
 
-import ejbs.Registered_UserFacade;
+import ejbs.AppUserFacade;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -20,7 +20,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class LoginMb implements Serializable{
 @EJB
-    private Registered_UserFacade user;
+    private AppUserFacade user;
     private String email;
     private String password;
     /**
@@ -29,11 +29,11 @@ public class LoginMb implements Serializable{
     public LoginMb() {
     }
 
-    public Registered_UserFacade getUser() {
+    public AppUserFacade getUser() {
         return user;
     }
 
-    public void setUser(Registered_UserFacade user) {
+    public void setUser(AppUserFacade user) {
         this.user = user;
     }
 
