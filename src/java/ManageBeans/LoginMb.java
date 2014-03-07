@@ -7,6 +7,7 @@
 package ManageBeans;
 
 import ejbs.AppUserFacade;
+import entities.AppUser;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -23,6 +24,7 @@ public class LoginMb implements Serializable{
     private AppUserFacade user;
     private String email;
     private String password;
+    private LoggedUser logado;
     /**
      * Creates a new instance of LoginMb
      */
@@ -52,15 +54,35 @@ public class LoginMb implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public LoggedUser getLogado() {
+        return logado;
+    }
+
+    public void setLogado(LoggedUser logado) {
+        this.logado = logado;
+    }
     
     public String confirmaLogin()throws Exception{
-        try{
-            user.find(this.email);
-            return "principal";
-        } catch(Exception e) {
-            System.out.println("User not find" + e);
+        AppUser us =  user.validaPassword(this.email, this.password);
+        
+        if(us!= null){
+        
+            logado.setUser(us);
+            return"principal.xhtml";
+            
+        }else{
+        
+            return"index.xhtml";
         }
-        return "index";
+        
+//        try{
+//            user.find(this.email);
+//            return "principal";
+//        } catch(Exception e) {
+//            System.out.println("User not find" + e);
+//        }
+//        return "index";
     }
     
 }
