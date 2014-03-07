@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,6 +27,14 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "MUSIC")
+@NamedQueries({
+    @NamedQuery(name = "Music.findAll", query = "SELECT m FROM Music m"),
+    @NamedQuery(name = "Music.findMusicById", query = "SELECT m FROM Music m WHERE m.music_id = :music_id"),
+    @NamedQuery(name = "Music.findMusicByTitle", query = "SELECT m FROM Music m WHERE m.title = :title"),
+    @NamedQuery(name = "Music.findMusicByArtist", query = "SELECT m FROM Music m WHERE m.artist = :artist"),
+    @NamedQuery(name = "Music.findMusicByUser", query = "SELECT m FROM Music m WHERE m.user = :user"),
+    @NamedQuery(name = "Music.findMusicByPlaylist", query = "SELECT m FROM Music m WHERE m.playlists = :playlists"),
+})
 public class Music implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
