@@ -6,6 +6,7 @@
 
 package ManageBeans;
 
+import ejbs.LoggedUser;
 import ejbs.MusicFacade;
 import entities.Music;
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public class MusicMb implements Serializable{
     @EJB
     private MusicFacade music_ejb;
     private Music music;
+    @EJB
     private LoggedUser user;
     
     /**
@@ -48,6 +50,7 @@ public class MusicMb implements Serializable{
     public Music getMusic() {
         if (music==null){
             music= new Music();
+            music.setUser(user.getUser());
         }
         return music;
     }

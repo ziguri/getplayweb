@@ -8,29 +8,29 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-      
+
     <head>
         <title>Login do utilizador</title>
         <meta name="viewport" content="width=device-width"/>
     </head>
     <body>
         <f:view>
-            <h:form>
-                <br></br>
-                <h:inputText label="Email" 
-                             value="#{loginMb.email}"/>
+            <h:form class="log">
+                <h:outputLabel value="Email" class="logtitulos"/>
+                <h:inputText label="Email" class="logfield" value="#{loginMb.email}"/>
+
+                <h:outputLabel value="Password"  class="logtitulos"/>
+                <h:inputSecret class="logfield" label="Password" value="#{loginMb.password}"/>
                 <br></br>
 
-                <br></br>
-                
-                <h:inputSecret
-                       label="Password" 
-                       value="#{loginMb.password}"/>
-                <br></br>
-                <h:commandButton type="submit"  
+                <h:commandButton class="logbtn" type="submit"  
                                  value="Login" 
                                  action="#{loginMb.confirmaLogin}"/>
-                
+
+                <h:commandButton class="logbtn" type="submit"  
+                                 value="Register" 
+                                 action="registo.xhtml"/>
+
             </h:form>
         </f:view>
 

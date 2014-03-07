@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 
-package ManageBeans;
+package ejbs;
 
 import entities.AppUser;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -16,8 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Zueb LDA
  */
-@ManagedBean
-@SessionScoped
+@Stateless
 public class LoggedUser {
 private AppUser user;
     /**

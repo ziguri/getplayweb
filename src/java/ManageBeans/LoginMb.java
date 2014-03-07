@@ -7,6 +7,7 @@
 package ManageBeans;
 
 import ejbs.AppUserFacade;
+import ejbs.LoggedUser;
 import entities.AppUser;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -25,7 +26,7 @@ public class LoginMb implements Serializable{
     private AppUserFacade user;
     private String email;
     private String password;
-    @ManagedProperty(value = "#{loggedUser}")
+    @EJB
     private LoggedUser logado;
     /**
      * Creates a new instance of LoginMb
