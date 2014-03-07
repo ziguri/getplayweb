@@ -8,10 +8,10 @@ html, body {
     height: 96px;
 }
 #top {
-    background-color: #036FAB;
+    background-color: #323232;
     color: #FFFFFF;
     height: 100px;
-    margin: -100px 0 10px 170px;
+    margin: -100px 0 10px 0px;
     padding: 5px;
 }
 

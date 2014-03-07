@@ -9,6 +9,8 @@ package ManageBeans;
 import entities.AppUser;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,6 +33,15 @@ private AppUser user;
 
     public void setUser(AppUser user) {
         this.user = user;
+    }
+    
+    public String logout(){
+    
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+        session.invalidate();
+        
+        return "index.xhtml";
     }
     
 }

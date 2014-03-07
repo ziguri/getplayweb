@@ -11,6 +11,7 @@ import entities.AppUser;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 /**
@@ -24,6 +25,7 @@ public class LoginMb implements Serializable{
     private AppUserFacade user;
     private String email;
     private String password;
+    @ManagedProperty(value = "#{loggedUser}")
     private LoggedUser logado;
     /**
      * Creates a new instance of LoginMb
@@ -69,7 +71,6 @@ public class LoginMb implements Serializable{
         
         if(us!= null){
         
-            logado=new LoggedUser();
             logado.setUser(us);
             return"principal.xhtml";
             
