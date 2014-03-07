@@ -7,6 +7,8 @@
 package ManageBeans;
 
 import ejbs.MusicFacade;
+import entities.Music;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -15,16 +17,38 @@ import javax.faces.bean.RequestScoped;
  *
  * @author Elsa
  */
-@ManagedBean
+@ManagedBean(name="musicMb")
 @RequestScoped
-public class MusicMb {
+public class MusicMb implements Serializable{
     @EJB
-    private MusicFacade musics;
+    private MusicFacade music_ejb;
+    private Music music;
     
     /**
      * Creates a new instance of MusicMb
      */
     public MusicMb() {
+    }
+    
+    public String addMusic(){
+        music_ejb.addMusic(music);
+        return "principal";
+    }
+    
+    public MusicFacade getMusic_ejb() {
+        return music_ejb;
+    }
+
+    public void setMusic_ejb(MusicFacade music_ejb) {
+        this.music_ejb = music_ejb;
+    }
+
+    public Music getMusic() {
+        return music;
+    }
+
+    public void setMusic(Music music) {
+        this.music = music;
     }
     
 }
