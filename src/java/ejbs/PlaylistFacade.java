@@ -6,6 +6,7 @@
 
 package ejbs;
 
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,11 +16,21 @@ import entities.Playlist;
  *
  * @author Zueb LDA
  */
-@Stateless
+//@Stateless
 public class PlaylistFacade extends AbstractFacade<Playlist> {
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
+    public void addPlaylist(Playlist p)  {
+        try{
+         
+        this.create(p);
+        
+        }catch(Exception e){
+            System.out.println("Excepção " + e);
+        }
+    }
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
