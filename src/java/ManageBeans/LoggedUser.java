@@ -33,9 +33,4 @@ private AppUser user;
         this.user = user;
     }
     
-    public String logout(){
-    
-        
-    }
-    
 }
