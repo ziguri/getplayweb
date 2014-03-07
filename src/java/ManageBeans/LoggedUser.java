@@ -6,6 +6,7 @@
 
 package ManageBeans;
 
+import entities.AppUser;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,11 +17,22 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class LoggedUser {
-
+private AppUser user;
     /**
      * Creates a new instance of LoggedUser
      */
     public LoggedUser() {
+  
     }
+
+    public AppUser getUser() {
+        return user;
+    }
+
+    public void setUser(AppUser user) {
+        this.user = user;
+    }
+    
+    
     
 }

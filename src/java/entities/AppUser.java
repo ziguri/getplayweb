@@ -27,10 +27,10 @@ import javax.validation.constraints.Size;
  * @author Zueb LDA
  */
 @Entity
-@Table(name = "REGISTERED_USER")
+@Table(name = "appuser")
 @NamedQueries({
-    @NamedQuery(name = "AppUser.findAll", query = "SELECT u FROM registered_user u"),
-    @NamedQuery(name ="AppUser.findByEmail", query = "SELECT u FROM registered_user u WHERE u.email = :email")
+    @NamedQuery(name = "AppUser.findAll", query = "SELECT u FROM AppUser u"),
+    @NamedQuery(name ="AppUser.findByEmail", query = "SELECT u FROM AppUser u WHERE u.email = :email")
 })
 public class AppUser implements Serializable {
     private static final long serialVersionUID = 1L;

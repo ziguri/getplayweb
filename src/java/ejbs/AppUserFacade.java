@@ -41,4 +41,28 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
         }
     }
     
+    private AppUser existUser(String email){
+    
+        try{
+        AppUser u = (AppUser) em.createNamedQuery("AppUser.findByEmail").setParameter("email", email).getSingleResult();
+        return u;
+        }catch(Exception e){
+        
+            return null;
+        }
+    }
+    
+    public AppUser validaPassword (String email, String password){
+    
+        AppUser u = existUser(email);
+        
+        if(u!=null && password.equals(u.getPassword())){
+        
+            return u;
+        }else{
+        
+            return null;
+        }
+    }
+    
 }
