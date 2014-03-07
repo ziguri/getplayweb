@@ -32,7 +32,7 @@ public class MusicMb implements Serializable{
     }
     
     public String addMusic(){
-        music.setUser(user.getUser());
+//        music.setUser(user.getUser());
         music_ejb.addMusic(music);
         return "principal";
     }
@@ -46,6 +46,9 @@ public class MusicMb implements Serializable{
     }
 
     public Music getMusic() {
+        if (music==null){
+            music= new Music();
+        }
         return music;
     }
 
