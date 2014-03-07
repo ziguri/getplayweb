@@ -22,9 +22,11 @@
                     <h:outputLabel value="Password"  class="logtitulos"/>
                     <input type="password" class="logfield" label="Password" value="#{loginMb.password}"/>
                     <br></br>
+                    
                     <h:commandButton class="logbtn" type="submit"  
                                      value="Login" 
                                      action="#{loginMb.confirmaLogin()}"/>
+                    
                      <h:commandButton class="logbtn" type="submit"  
                                      value="Register" 
                                      action="registo.xhtml"/>
@@ -32,6 +34,16 @@
                      
                 </h:form>
             </ui:define>
+            
+            <ui:define name="left">
+                <br />
+                <h:link outcome="/resources/createMusic.xhtml" value="Create Music" target="content"/>
+                <br />
+                <br />
+                <h:link outcome="/resources/createPlaylist.xhtml" value="Create Playlist" target="content"/>
+                <br />
+            </ui:define>
+            
         </ui:composition>
 
 
