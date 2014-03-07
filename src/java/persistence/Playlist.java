@@ -19,6 +19,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
@@ -30,6 +32,14 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "PLAYLIST")
+@NamedQueries({
+    @NamedQuery(name = "Playlist.findAll", query = "SELECT p FROM Playlist p"),
+    @NamedQuery(name = "Playlist.findPlaylistById", query = "SELECT p FROM Playlist p WHERE p.playlist_id = :playlist_id"),
+    @NamedQuery(name = "Playlist.findPlaylistByName", query = "SELECT p FROM Playlist p WHERE p.playlist_name = :playlist_name"),
+    @NamedQuery(name = "Playlist.findPlaylistByCreation", query = "SELECT p FROM Playlist p WHERE p.creation_date = :creation_date"),
+    @NamedQuery(name = "Playlist.findPlaylistByUser", query = "SELECT p FROM Playlist p WHERE p.user = :user"),
+    @NamedQuery(name = "Playlist.findPlaylistBySize", query = "SELECT p FROM Playlist p WHERE p.playlist_size = :playlists"),
+})
 public class Playlist implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
