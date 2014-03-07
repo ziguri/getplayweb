@@ -1,35 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
+
     <h:body>
-        Registo Utilizador teste
-        
-        <h:form>
-        <br></br>
-         
-        <h:outputLabel value="Nome"/>
-        <br></br>
-        <h:inputText label="Nome" value="#{registerMb.user.name}" />
-        <br></br>
-        <h:outputLabel value="Email"/>
-        <br></br>
-        <h:inputText label="Email" value="#{registerMb.user.email}"/>
-        <br></br>
-        <h:outputLabel value="Password"/>
-        <br></br>
-        <h:inputText id="pass"  label="Password" value="#{registerMb.user.password}"/>
-        <h:message for="pass" style="color: red"/>
-        <br></br>
-        <h:commandButton type="submit"  value="Save" action="#{registerMb.addUser}"  />
-        
-            
-        </h:form>
-       
+
+        <ui:composition template="Template/GetPlayTemp.xhtml">
+
+            <ui:define name="top">
+
+                <h:form class="log">
+                    <h:outputLabel value="Email" class="logtitulos"/>
+                    <h:inputText label="Email" class="logfield" value="#{loginMb.email}"/>
+                    
+                    <h:outputLabel value="Password"  class="logtitulos"/>
+                    <input type="password" class="logfield" label="Password" value="#{loginMb.password}"/>
+                    <br></br>
+                    <h:commandButton class="logbtn" type="submit"  
+                                     value="Login" 
+                                     action="#{loginMb.confirmaLogin()}"/>
+                     <h:commandButton class="logbtn" type="submit"  
+                                     value="Register" 
+                                     action="registo.xhtml"/>
+                     
+                     
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+
     </h:body>
 
 

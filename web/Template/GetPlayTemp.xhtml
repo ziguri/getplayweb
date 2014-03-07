@@ -12,12 +12,18 @@
     </h:head>
 
     <h:body>
+        
+        <div id="logo">
+            <img src="resources/images/logo_100.png" width="150" height="96" alt="logo_100"/>
+            
+        </div>
 
         <div id="top">
             <ui:insert name="top" >
-                <ui:include src="index.xhtml"/>
+                <ui:insert name="topP">Top</ui:insert>
             </ui:insert>
         </div>
+        
         <div>
             <div id="left">
                 <ui:insert name="left">Left</ui:insert>

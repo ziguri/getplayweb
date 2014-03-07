@@ -1,24 +1,35 @@
+html, body {
+   height: 100%;
+}
 
-#top {
+#logo{
     position: relative;
-    background-color: #036fab;
-    color: white;
+    width: 150px;
+    height: 96px;
+}
+#top {
+    background-color: #036FAB;
+    color: #FFFFFF;
+    height: 100px;
+    margin: -100px 0 10px 170px;
     padding: 5px;
-    margin: 0px 0px 10px 0px;
 }
 
 #bottom {
-    position: relative;
-    background-color: #c2dfef;
+    background-color: #C2DFEF;
+    margin: 10px 0 0 170px;
     padding: 5px;
-    margin: 10px 0px 0px 0px;
+    position: relative;
+    width: auto;
 }
 
 #left {
     float: left;
     background-color: #ece3a5;
+    position: absolute;
     padding: 5px;
     width: 150px;
+    height: 100%;
 }
 
 #right {
@@ -56,6 +67,26 @@
   color: black;
   font-weight : bold;
   text-decoration : underline;
+}
+
+.log{
+    float: right;
+    width: 445px; 
+}
+
+.logtitulos{
+    margin-left: 10px;
+}
+
+.logfield{
+    margin-left: 10px;
+}
+
+.logbtn{
+    float: right;
+    margin-right: 7px;
+    margin-top: 5px;
+    width: 72px;
 }
 
 
