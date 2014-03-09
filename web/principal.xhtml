@@ -13,10 +13,10 @@ and open the template in the editor.
     <body>
         <ui:composition template="Template/GetPlayTemp.xhtml">
             <ui:define name="top">
-                <h:form>
+                <h:form class="logform">
                 <h:outputLabel value="Welcome "/>
                 <h:outputLabel value="#{loggedUser.user.name}"/>
-                <h:commandButton value="Logout" action="#{loggedUser.logout}"/>
+                <h:commandButton value="Logout" action="#{loggedUser}"/>
                 </h:form>
             </ui:define>
             
