@@ -8,10 +8,13 @@ package ManageBeans;
 
 import ejbs.MusicFacade;
 import entities.Music;
+import java.io.File;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.model.DataModel;
 
 /**
  *
@@ -22,7 +25,9 @@ import javax.faces.bean.RequestScoped;
 public class MusicMb implements Serializable{
     @EJB
     private MusicFacade music_ejb;
+    private DataModel items = null;
     private Music music;
+    private String pathToSave;
     @EJB
     private LoggedUserMb user;
     
@@ -33,11 +38,20 @@ public class MusicMb implements Serializable{
     }
     
     public String addMusic(){
-//        music.setUser(user.getUser());
+        pathToSave = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        music.setMusic_path(pathToSave);
+        music.setUser(user.getUser());
         music_ejb.addMusic(music);
         return "principal";
     }
     
+    public void viewAllMusic(){
+        music_ejb.findAll();
+    }
+    
+    public int countAllItens(){
+        return music_ejb.count();
+    }
     public MusicFacade getMusic_ejb() {
         return music_ejb;
     }
@@ -57,5 +71,31 @@ public class MusicMb implements Serializable{
     public void setMusic(Music music) {
         this.music = music;
     }
+
+    public DataModel getItems() {
+        return items;
+    }
+
+    public void setItems(DataModel items) {
+        this.items = items;
+    }
+
+    public String getPathToSave() {
+        return pathToSave;
+    }
+
+    public void setPathToSave(String pathToSave) {
+        this.pathToSave = pathToSave;
+    }
+
+    public LoggedUser getUser() {
+        return user;
+    }
+
+    public void setUser(LoggedUser user) {
+        this.user = user;
+    }
+
     
+ 
 }
