@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
@@ -28,6 +29,7 @@ public class MusicMb implements Serializable{
     private DataModel items = null;
     private Music music;
     private String pathToSave;
+    @ManagedProperty(value="#{logged}")
     private LoggedUserMb user;
     
     /**
@@ -85,5 +87,15 @@ public class MusicMb implements Serializable{
     public void setPathToSave(String pathToSave) {
         this.pathToSave = pathToSave;
     }
+
+    public LoggedUserMb getUser() {
+        return user;
+    }
+
+    public void setUser(LoggedUserMb user) {
+        this.user = user;
+    }
+    
+    
 
 }
