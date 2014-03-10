@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 
-package ejbs;
+package ManageBeans;
 
 import entities.AppUser;
 import javax.ejb.EJB;
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -18,13 +19,14 @@ import javax.servlet.http.HttpSession;
  *
  * @author Zueb LDA
  */
-@Stateless
-public class LoggedUser {
+@ManagedBean(name="logged")
+@SessionScoped
+public class LoggedUserMb {
 private AppUser user;
     /**
      * Creates a new instance of LoggedUser
      */
-    public LoggedUser() {
+    public LoggedUserMb() {
   
     }
 

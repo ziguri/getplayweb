@@ -8,13 +8,15 @@ package ManageBeans;
 
 import ejbs.AppUserFacade;
 import ejbs.CodificarMD5;
-import ejbs.LoggedUser;
 import entities.AppUser;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,12 +25,12 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class LoginMb implements Serializable{
-@EJB
+    @EJB
     private AppUserFacade user;
     private String email;
     private String password;
-    @EJB
-    private LoggedUser logado;
+    @ManagedProperty(value="#{logged}")
+    private LoggedUserMb logado;
     /**
      * Creates a new instance of LoginMb
      */
@@ -59,11 +61,11 @@ public class LoginMb implements Serializable{
         this.password = password;
     }
 
-    public LoggedUser getLogado() {
+    public LoggedUserMb getLogado() {
         return logado;
     }
 
-    public void setLogado(LoggedUser logado) {
+    public void setLogado(LoggedUserMb logado) {
         this.logado = logado;
     }
     
@@ -73,7 +75,7 @@ public class LoginMb implements Serializable{
         AppUser us =  user.validaPassword(this.email, pass);
         
         if(us!= null){
-        
+     
             logado.setUser(us);
             return"principal.xhtml";
             
