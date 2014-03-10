@@ -28,7 +28,6 @@ public class MusicMb implements Serializable{
     private DataModel items = null;
     private Music music;
     private String pathToSave;
-    @EJB
     private LoggedUserMb user;
     
     /**
@@ -40,7 +39,6 @@ public class MusicMb implements Serializable{
     public String addMusic(){
         pathToSave = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
         music.setMusic_path(pathToSave);
-        music.setUser(user.getUser());
         music_ejb.addMusic(music);
         return "principal";
     }
@@ -88,14 +86,4 @@ public class MusicMb implements Serializable{
         this.pathToSave = pathToSave;
     }
 
-    public LoggedUser getUser() {
-        return user;
-    }
-
-    public void setUser(LoggedUser user) {
-        this.user = user;
-    }
-
-    
- 
 }
