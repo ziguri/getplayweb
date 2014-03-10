@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:head>
+        <title>List Music</title>
+    </h:head>
+
+    <h:body>
+
+        <ui:composition template="Template/GetPlayTemp.xhtml">
+
+            <ui:define name="content">
+
+                <h:form>
+                    <f:view>
+                        <h:form>
+                            <h1><h:outputText value="List"/></h1>
+                            <h:dataTable value="#{musicMb.viewAllMusic}" var="item" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px">
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="MUSIC_ID"/>
+                                    </f:facet>
+                                    <h:outputText value="#{musicMb.music.music_id}"/>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TITLE"/>
+                                    </f:facet>
+                                    <h:outputText value="#{musicMb.music.title}"/>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ARTIST"/>
+                                    </f:facet>
+                                    <h:outputText value="#{musicMb.music.artist}"/>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ALBUM"/>
+                                    </f:facet>
+                                    <h:outputText value="#{musicMb.music.album}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="YEAR"/>
+                                    </f:facet>
+                                    <h:outputText value="#{musicMb.music.music_year}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PATH"/>
+                                    </f:facet>
+                                    <h:outputText value="#{musicMb.music.music_path}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="USER"/>
+                                    </f:facet>
+                                    <h:outputText value="#{musicMb.music.user}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </f:view>
+
+                   
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
