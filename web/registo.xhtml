@@ -23,7 +23,7 @@
                     <br></br>
                     <h:outputLabel value="Password"/>
                     <br></br>
-                    <h:inputText id="pass"  label="Password" value="#{registerMb.user.password}"/>
+                    <h:inputSecret id="pass"  label="Password" value="#{registerMb.user.password}"/>
                     <h:message for="pass" style="color: red"/>
                     <br></br>
                     <h:commandButton type="submit"  value="Save" action="#{registerMb.addUser}"  />

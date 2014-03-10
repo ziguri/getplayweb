@@ -7,6 +7,7 @@
 package ManageBeans;
 
 import ejbs.AppUserFacade;
+import ejbs.CodificarMD5;
 import ejbs.LoggedUser;
 import entities.AppUser;
 import java.io.Serializable;
@@ -68,7 +69,8 @@ public class LoginMb implements Serializable{
     
     public String confirmaLogin(){
         
-        AppUser us =  user.validaPassword(this.email, this.password);
+        String pass = CodificarMD5.cryptWithMD5(this.password);
+        AppUser us =  user.validaPassword(this.email, pass);
         
         if(us!= null){
         

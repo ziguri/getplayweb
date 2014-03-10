@@ -8,9 +8,8 @@ package ejbs;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.validation.ValidationException;
 import entities.AppUser;
-import javax.ejb.EJB;
+
 
 /**
  *
