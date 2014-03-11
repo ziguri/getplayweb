@@ -81,7 +81,7 @@ public class MusicFacade extends AbstractFacade<Music> {
     
     public List<Music> showMusicsPlaylist(String p){//Mostra as músicas de uma determinada playlist.
         try{
-            List<Music> m =(List<Music>) em.createNamedQuery("Music.findMusicByPlaylist").setParameter("playlist", p);
+            List<Music> m =(List<Music>) em.createNamedQuery("Music.findMusicByPlaylist").setParameter("playlist", p).getResultList();
             return m;
         } catch (Exception e){
             return null;
