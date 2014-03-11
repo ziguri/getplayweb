@@ -10,6 +10,7 @@ import ejbs.MusicFacade;
 import entities.Music;
 import java.io.File;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -47,8 +48,9 @@ public class MusicMb implements Serializable{
         return "principal";
     }
     
-    public void viewAllMusic(){
-        music_ejb.showAllMusics();
+    public List<Music> viewAllMusic(){
+        return music_ejb.showAllMusics();
+        
     }
     
     public int countAllItens(){
