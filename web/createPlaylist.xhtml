@@ -32,9 +32,18 @@ and open the template in the editor.
                     <h:inputText label="Name" value="#{playlistMb.playlist.playlist_name}" />
                     <br></br>
                 
-                    <h:commandButton type="submit"  value="Save" action="#{playlistMb.addPlaylist}"  />
+                    <h:commandButton type="submit"  value="Save" action="#{playlistMb.addPlaylist()}"  />
                 </h:form>
 
+            </ui:define>
+            
+            <ui:define name="left">
+                <ul>
+                    <li><a href='principal.xhtml'><span>Home</span></a></li>
+                    <li><a href='createMusic.xhtml'><span>Insert Music</span></a></li>
+                    <li><a href='listAllMusic.xhtml'><span>View All Musics</span></a></li>
+                    <li class='last'><a href='createPlaylist.xhtml'><span>Insert Playlist</span></a></li>
+                </ul>
             </ui:define>
         </ui:composition>
     </h:body>

@@ -45,18 +45,23 @@ public class Playlist implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer playlist_id;
+    
     @NotNull
     @Size(max=40)
     @Column(name = "NAME")
     private String playlist_name;
+    
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "CREATION_DATE")
     private Date creation_date;
+    
     private Integer playlist_size;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="playlists_has_musics")
     private List<Music> musics;
+    
     @NotNull
     @ManyToOne
     private AppUser user;

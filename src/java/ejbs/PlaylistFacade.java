@@ -27,7 +27,7 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         this.create(p);
         
         }catch(Exception e){
-            System.out.println("Excepção " + e);
+            System.err.println("Excepção " + e);
         }
     }
     

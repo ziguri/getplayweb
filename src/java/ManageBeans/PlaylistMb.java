@@ -6,10 +6,12 @@
 
 package ManageBeans;
 
+import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Playlist;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 /**
@@ -21,15 +23,24 @@ import javax.faces.bean.RequestScoped;
 public class PlaylistMb {
     @EJB
     private PlaylistFacade playlist_ejb;
+    @EJB
+    private MusicFacade musics_ejb;
     private Playlist playlist;
+    @ManagedProperty(value="#{logged}")
+    private LoggedUserMb user;
 
     /**
      * Creates a new instance of PlaylistMB
      */
     public PlaylistMb() {
+        this.playlist = new Playlist();
     }
 
     public String addPlaylist(){
+//        int i;
+//        i = musics_ejb.showMusicsPlaylist(playlist.getPlaylist_name()).size();
+        playlist.setPlaylist_size(0);
+        playlist.setUser(user.getUser());
         playlist_ejb.addPlaylist(playlist);
         return "principal";
     }
@@ -48,6 +59,22 @@ public class PlaylistMb {
 
     public void setPlaylist(Playlist playlist) {
         this.playlist = playlist;
+    }
+
+    public MusicFacade getMusics_ejb() {
+        return musics_ejb;
+    }
+
+    public void setMusics_ejb(MusicFacade musics_ejb) {
+        this.musics_ejb = musics_ejb;
+    }
+
+    public LoggedUserMb getUser() {
+        return user;
+    }
+
+    public void setUser(LoggedUserMb user) {
+        this.user = user;
     }
     
 }

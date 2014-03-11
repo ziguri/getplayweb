@@ -6,6 +6,7 @@
 
 package ManageBeans;
 
+import ejbs.AppUserFacade;
 import entities.AppUser;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -24,6 +25,10 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class LoggedUserMb implements Serializable {
 private AppUser user;
+@EJB
+private AppUserFacade user_ejb;
+private String password;
+
     /**
      * Creates a new instance of LoggedUser
      */
@@ -38,6 +43,22 @@ private AppUser user;
     public void setUser(AppUser user) {
         this.user = user;
     }
+
+    public AppUserFacade getUser_ejb() {
+        return user_ejb;
+    }
+
+    public void setUser_ejb(AppUserFacade user_ejb) {
+        this.user_ejb = user_ejb;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
     public String logout(){
     
@@ -46,6 +67,16 @@ private AppUser user;
         session.invalidate();
         
         return "index.xhtml";
+    }
+    
+    public String editUser(){
+        user_ejb.editUserLogado(user);
+        return "principal";
+    }
+    
+    public String deleteUser(){
+        user_ejb.remove(user);
+        return "index";
     }
     
 }
