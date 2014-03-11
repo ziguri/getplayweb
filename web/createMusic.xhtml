@@ -45,7 +45,7 @@ and open the template in the editor.
                     <br></br>
                     <h:outputLabel value="Path"/>
                     <br></br>
-                    <input type="file"  name="Browse" accept="audio/*" id="fileUpload"  value="#{musicMb.pathToSave}" />
+                    <input type="file" name="Browse" accept="audio/*"  value="#{musicMb.music.music_path}" />
                     <br></br>
                     <h:commandButton type="submit"  value="Save" action="#{musicMb.addMusic()}"  />
                 </h:form>
