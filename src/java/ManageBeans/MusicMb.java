@@ -48,7 +48,7 @@ public class MusicMb implements Serializable{
     }
     
     public void viewAllMusic(){
-        music_ejb.findAll();
+        music_ejb.showAllMusics();
     }
     
     public int countAllItens(){
