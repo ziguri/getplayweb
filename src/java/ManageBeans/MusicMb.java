@@ -7,6 +7,7 @@
 package ManageBeans;
 
 import ejbs.MusicFacade;
+import ejbs.Uploader;
 import entities.Music;
 import java.io.File;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 
@@ -32,6 +34,8 @@ public class MusicMb implements Serializable{
     private String pathToSave;
     @ManagedProperty(value="#{logged}")
     private LoggedUserMb user;
+    @EJB
+    private Uploader uploader;
     
     /**
      * Creates a new instance of MusicMb
@@ -42,8 +46,9 @@ public class MusicMb implements Serializable{
     public String addMusic(){
         
         
-//        pathToSave = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-//        music.setMusic_path(pathToSave);
+        pathToSave = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        music.setMusic_path(pathToSave);
+        //uploader.upload();
         music_ejb.addMusic(music);
         return "principal";
     }
@@ -99,7 +104,14 @@ public class MusicMb implements Serializable{
     public void setUser(LoggedUserMb user) {
         this.user = user;
     }
-    
-    
+
+    public Uploader getUploader() {
+        return uploader;
+    }
+
+    public void setUploader(Uploader uploader) {
+        this.uploader = uploader;
+    }
+
 
 }
