@@ -72,7 +72,7 @@ public class MusicFacade extends AbstractFacade<Music> {
     
     public List<Music> showAllMusics(){//Mostra todas as músicas da aplicação.
         try {
-            List<Music> m =(List<Music>) em.createNamedQuery("Music.findAll");
+            List<Music> m =(List<Music>) em.createNamedQuery("Music.findAll").getResultList();
             return m;
         } catch (Exception e) {
             return null;

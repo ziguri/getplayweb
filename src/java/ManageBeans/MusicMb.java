@@ -42,8 +42,8 @@ public class MusicMb implements Serializable{
     public String addMusic(){
         
         
-        pathToSave = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-        music.setMusic_path(pathToSave);
+//        pathToSave = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+//        music.setMusic_path(pathToSave);
         music_ejb.addMusic(music);
         return "principal";
     }
