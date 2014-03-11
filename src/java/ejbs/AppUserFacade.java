@@ -36,10 +36,20 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
             u.setPassword(pass);
             this.create(u);
         } catch (Exception e) {
-            System.out.println("Excepção " + e);
+            System.err.println("Excepção " + e);
         }
     }
 
+    public void editUserLogado(AppUser u) {
+        try {
+            String pass = CodificarMD5.cryptWithMD5(u.getPassword());
+            u.setPassword(pass);
+            this.edit(u);
+        } catch (Exception e) {
+            System.err.println("Excepção " + e);
+        }
+    }
+    
     private AppUser existUser(String email) {
 
         try {

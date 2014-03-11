@@ -41,6 +41,7 @@ public class MusicMb implements Serializable{
      * Creates a new instance of MusicMb
      */
     public MusicMb() {
+        this.music = new Music();
     }
     
     public String addMusic(){
