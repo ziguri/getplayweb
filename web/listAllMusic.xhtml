@@ -25,7 +25,7 @@ and open the template in the editor.
                     <f:view>
                         <h:form>
                             <h1><h:outputText value="All Musics"/></h1>
-                            <h:dataTable value="#{musicMb.viewAllMusic}" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
+                            <h:dataTable value="#{musicMb.viewAllMusic()}" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
                                 
                                 <h:column>
                                     <f:facet name="header">
