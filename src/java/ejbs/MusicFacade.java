@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 /**
  *
@@ -69,18 +70,18 @@ public class MusicFacade extends AbstractFacade<Music> {
         return d.getPath();
     }
     
-    public Music showAllMusics(){//Mostra todas as músicas da aplicação.
+    public List<Music> showAllMusics(){//Mostra todas as músicas da aplicação.
         try {
-            Music m = (Music) em.createNamedQuery("Music.findAll");
+            List<Music> m =(List<Music>) em.createNamedQuery("Music.findAll");
             return m;
         } catch (Exception e) {
             return null;
         }
     }
     
-    public Music showMusicsPlaylist(String p){//Mostra as músicas de uma determinada playlist.
+    public List<Music> showMusicsPlaylist(String p){//Mostra as músicas de uma determinada playlist.
         try{
-            Music m = (Music) em.createNamedQuery("Music.findMusicByPlaylist").setParameter("playlist", p);
+            List<Music> m =(List<Music>) em.createNamedQuery("Music.findMusicByPlaylist").setParameter("playlist", p);
             return m;
         } catch (Exception e){
             return null;
