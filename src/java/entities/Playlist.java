@@ -52,7 +52,7 @@ public class Playlist implements Serializable {
     private String playlist_name;
     
     @NotNull
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "CREATION_DATE")
     private Date creation_date;
     

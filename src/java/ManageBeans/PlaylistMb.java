@@ -9,6 +9,7 @@ package ManageBeans;
 import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Playlist;
+import java.util.GregorianCalendar;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -37,9 +38,11 @@ public class PlaylistMb {
     }
 
     public String addPlaylist(){
-//        int i;
-//        i = musics_ejb.showMusicsPlaylist(playlist.getPlaylist_name()).size();
+        
+        GregorianCalendar gc = new GregorianCalendar();
+
         playlist.setPlaylist_size(0);
+        playlist.setCreation_date(gc.getTime());
         playlist.setUser(user.getUser());
         playlist_ejb.addPlaylist(playlist);
         return "principal";
