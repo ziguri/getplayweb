@@ -25,7 +25,7 @@ and open the template in the editor.
             </ui:define>
             <ui:define name="content">
 
-                <h:form>
+                <h:form id="form" enctype="multipart/form-data">
                     <br></br>
                     <h:outputLabel value="Title"/>
                     <br></br>
@@ -45,7 +45,7 @@ and open the template in the editor.
                     <br></br>
                     <h:outputLabel value="Path"/>
                     <br></br>
-                    <input type="file" name="Browse" accept="audio/*"  value="#{musicMb.music.music_path}" />
+                    <h:inputFile id="file"  value="#{musicMb.uploader.file}" />
                     <br></br>
                     <h:commandButton type="submit"  value="Save" action="#{musicMb.addMusic()}"  />
                 </h:form>
