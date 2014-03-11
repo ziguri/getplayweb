@@ -17,6 +17,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 
 /**
  *
@@ -27,7 +28,7 @@ import javax.faces.model.DataModel;
 public class MusicMb implements Serializable{
     @EJB
     private MusicFacade music_ejb;
-    private DataModel items = null;
+    private DataModel<Music> items = null;
     private Music music;
     private String pathToSave;
     @ManagedProperty(value="#{logged}")
@@ -52,6 +53,14 @@ public class MusicMb implements Serializable{
     public List<Music> viewAllMusic(){
         return music_ejb.showAllMusics();
         
+    }
+    
+    public DataModel<Music> getMusicList() {
+        if (music_ejb != null) {
+            DataModel model = (DataModel<Music>) new ListDataModel(music_ejb.findAll());
+            return model;
+        }
+        return null;
     }
     
     public int countAllItens(){
