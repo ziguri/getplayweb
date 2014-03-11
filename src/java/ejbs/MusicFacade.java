@@ -57,7 +57,7 @@ public class MusicFacade extends AbstractFacade<Music> {
             Files.copy(f1.toPath(), f2.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
         } catch (IOException ex) {
-            System.out.println("Exception occurred when copying a mp3 file. " + ex);
+            System.err.println("Exception occurred when copying a mp3 file. " + ex);
         }
     }//copia ficheiro
     
@@ -68,4 +68,23 @@ public class MusicFacade extends AbstractFacade<Music> {
         
         return d.getPath();
     }
+    
+    public Music showAllMusics(){//Mostra todas as músicas da aplicação.
+        try {
+            Music m = (Music) em.createNamedQuery("Music.findAll");
+            return m;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public Music showMusicsPlaylist(String p){//Mostra as músicas de uma determinada playlist.
+        try{
+            Music m = (Music) em.createNamedQuery("Music.findMusicByPlaylist").setParameter("playlist", p);
+            return m;
+        } catch (Exception e){
+            return null;
+        }
+    }
+    
 }
