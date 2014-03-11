@@ -14,29 +14,25 @@
         <ui:composition template="Template/GetPlayTemp.xhtml">
 
             <ui:define name="top">
-
                 <h:form class="log">
                     <h:outputLabel value="Email" class="logtitulos"/>
                     <h:inputText label="Email" class="logfield" value="#{loginMb.email}"/>
-                    
+
                     <h:outputLabel value="Password"  class="logtitulos"/>
                     <h:inputSecret class="logfield" label="Password" value="#{loginMb.password}"/>
                     <br></br>
-                    
+
                     <h:commandButton class="logbtn" type="submit"  
                                      value="Login" 
                                      action="#{loginMb.confirmaLogin}"/>
-                    
-                     <h:commandButton class="logbtn" type="submit"  
+
+                    <h:commandButton class="logbtn" type="submit"  
                                      value="Register" 
                                      action="registo.xhtml"/>
 
                 </h:form>
             </ui:define>
-            
-            <ui:define name="top">
-                </ui:define>
-            
+
         </ui:composition>
 
 
