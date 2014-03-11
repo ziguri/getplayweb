@@ -25,52 +25,52 @@ and open the template in the editor.
                     <f:view>
                         <h:form>
                             <h1><h:outputText value="All Musics"/></h1>
-                            <h:dataTable value="#{musicMb.viewAllMusic()}" var="music" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
+                            <h:dataTable value="#{musicMb.musicList}" var="music" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
                                 
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="MUSIC_ID"/>
                                     </f:facet>
-                                    <h:outputText value="#{music.music_id}"/>
+                                    #{music.music_id}
                                 </h:column>
                                 
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="TITLE"/>
                                     </f:facet>
-                                    <h:outputText value="#{music.title}"/>
+                                    #{music.title}
                                 </h:column>
                                 
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="ARTIST"/>
                                     </f:facet>
-                                    <h:outputText value="#{music.artist}"/>
+                                    #{music.artist}
                                 </h:column>
                                 
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="ALBUM"/>
                                     </f:facet>
-                                    <h:outputText value="#{music.album}"/>
+                                    #{music.album}
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="YEAR"/>
                                     </f:facet>
-                                    <h:outputText value="#{music.music_year}"/>
+                                    #{music.music_year}
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="PATH"/>
                                     </f:facet>
-                                    <h:outputText value="#{music.music_path}"/>
+                                    #{music.music_path}
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="USER"/>
                                     </f:facet>
-                                    <h:outputText value="#{music.user}"/>
+                                    #{music.user}
                                 </h:column>
                             </h:dataTable>
                         </h:form>
