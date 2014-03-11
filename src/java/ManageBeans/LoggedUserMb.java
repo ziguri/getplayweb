@@ -7,6 +7,7 @@
 package ManageBeans;
 
 import entities.AppUser;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean(name="logged")
 @SessionScoped
-public class LoggedUserMb {
+public class LoggedUserMb implements Serializable {
 private AppUser user;
     /**
      * Creates a new instance of LoggedUser
