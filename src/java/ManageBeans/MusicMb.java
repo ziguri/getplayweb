@@ -20,6 +20,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.mail.FetchProfile.Item;
 
 
 /**
@@ -27,7 +28,7 @@ import javax.faces.model.ListDataModel;
  * @author Elsa
  */
 @ManagedBean(name="musicMb")
-@SessionScoped
+@RequestScoped
 public class MusicMb implements Serializable{
     @EJB
     private MusicFacade music_ejb;
@@ -74,26 +75,34 @@ public class MusicMb implements Serializable{
         return music_ejb.count();
     }
     
-     public Music getSelected() {
+     public Music getMusicSelected() {
         if (music == null) {
             music = new Music();
             selectedItemIndex = -1;
         }
         return music;
     }
+     
      public String prepareEdit() {
-        music = (Music) getItems().getRowData();
+        items = DataModel.getRowData();
+         music = (Music) getItems().getRowData();
         selectedItemIndex = getItems().getRowIndex();
-        music_ejb.edit(music);
-        return "editMusic";
+        music_ejb.editMusic(music, user.getUser());
+        return "listAllMusic";
     }
      
     public String destroy() {
         music = (Music) getItems().getRowData();
         selectedItemIndex = getItems().getRowIndex();
         music_ejb.remove(music);
+        recreateModel();
+        getMusicList();
         return "listAllMusic";
     }
+    private void recreateModel() {
+        items = null;
+    }
+    
      
     public MusicFacade getMusic_ejb() {
         return music_ejb;

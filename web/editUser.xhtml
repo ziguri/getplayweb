@@ -13,7 +13,15 @@
                 <h:form class="logform">
                     <h:outputLabel value="Welcome "/>
                     <h:outputLabel value="#{logged.user.name}"/>
+                    <br></br>
                     <h:commandButton value="Logout" action="#{logged.logout()}"/>
+
+                    <h:commandButton value="Edit"  
+                                     action="editUser.xhtml"/>
+                    
+                    <h:commandButton value="Delete User"
+                                     action="#{logged.deleteUser()}"/>
+                    
                 </h:form>
             </ui:define>
 

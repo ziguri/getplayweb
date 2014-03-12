@@ -18,7 +18,22 @@ and open the template in the editor.
     <h:body>
 
         <ui:composition template="Template/GetPlayTemp.xhtml">
+            <ui:define name="top">
+                <h:form class="logform">
+                    <h:outputLabel value="Welcome "/>
+                    <h:outputLabel value="#{logged.user.name}"/>
+                    <br></br>
+                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
 
+                    <h:commandButton value="Edit"  
+                                     action="editUser.xhtml"/>
+                    
+                    <h:commandButton value="Delete User"
+                                     action="#{logged.deleteUser()}"/>
+                    
+                </h:form>
+            </ui:define>
+            
             <ui:define name="content">
 
                 <h:form>
