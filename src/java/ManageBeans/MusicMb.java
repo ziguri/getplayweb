@@ -16,10 +16,10 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.faces.model.SelectItem;
 
 /**
  *
@@ -37,6 +37,7 @@ public class MusicMb implements Serializable{
     private LoggedUserMb user;
     @EJB
     private Uploader uploader;
+    private int selectedItemIndex;
     
     /**
      * Creates a new instance of MusicMb
@@ -45,12 +46,11 @@ public class MusicMb implements Serializable{
         this.music = new Music();
     }
     
-    public String addMusic(){
-        
-        
+    public String addMusic(){   
         pathToSave = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
         music.setMusic_path(pathToSave);
         //uploader.upload();
+//        music.setUser(user.getUser());
         music_ejb.addMusic(music);
         return "principal";
     }
@@ -71,6 +71,28 @@ public class MusicMb implements Serializable{
     public int countAllItens(){
         return music_ejb.count();
     }
+    
+     public Music getSelected() {
+        if (music == null) {
+            music = new Music();
+            selectedItemIndex = -1;
+        }
+        return music;
+    }
+     public String prepareEdit() {
+        music = (Music) getItems().getRowData();
+        selectedItemIndex = getItems().getRowIndex();
+        music_ejb.edit(music);
+        return "editMusic";
+    }
+     
+    public String destroy() {
+        music = (Music) getItems().getRowData();
+        selectedItemIndex = getItems().getRowIndex();
+        music_ejb.remove(music);
+        return "listAllMusic";
+    }
+     
     public MusicFacade getMusic_ejb() {
         return music_ejb;
     }
@@ -121,6 +143,14 @@ public class MusicMb implements Serializable{
 
     public void setUploader(Uploader uploader) {
         this.uploader = uploader;
+    }
+
+    public int getSelectedItemIndex() {
+        return selectedItemIndex;
+    }
+
+    public void setSelectedItemIndex(int selectedItemIndex) {
+        this.selectedItemIndex = selectedItemIndex;
     }
 
 
