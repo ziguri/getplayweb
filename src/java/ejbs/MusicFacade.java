@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import javax.ejb.EJB;
 
 /**
  *
@@ -23,12 +24,16 @@ import java.util.List;
  */
 @Stateless
 public class MusicFacade extends AbstractFacade<Music> {
+    @EJB
+    Uploader uploader;
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
-    public void addMusic(Music m)  {
+    public void addMusic(Music m, AppUser u)  {
         try{
-         
+        String filePath = "C:\\APPGetPlayWeb\\";
+        m.setMusic_path(filePath);
+        m.setUser(u);
         this.create(m);
         
         }catch(Exception e){

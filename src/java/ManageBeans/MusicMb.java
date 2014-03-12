@@ -16,17 +16,18 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import javax.faces.model.SelectItem;
+
 
 /**
  *
  * @author Elsa
  */
 @ManagedBean(name="musicMb")
-@RequestScoped
+@SessionScoped
 public class MusicMb implements Serializable{
     @EJB
     private MusicFacade music_ejb;
@@ -46,12 +47,13 @@ public class MusicMb implements Serializable{
         this.music = new Music();
     }
     
-    public String addMusic(){   
-        pathToSave = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-        music.setMusic_path(pathToSave);
+    public String addMusic(){
+        
+        
+        //pathToSave = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+        //music.setMusic_path(pathToSave);
         //uploader.upload();
-//        music.setUser(user.getUser());
-        music_ejb.addMusic(music);
+        music_ejb.addMusic(music, user.getUser());
         return "principal";
     }
     
