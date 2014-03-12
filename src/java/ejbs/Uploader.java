@@ -31,16 +31,15 @@ public class Uploader {
     @EJB
     private MusicFacade musicFacade;
     @ManagedProperty(value="#{musicMb}")
-    
     private MusicMb musicManager;
 
     public void upload() {
         try {
             fileContent = new Scanner(file.getInputStream()).useDelimiter("\\A").next();
 
-            String filePath = "C:\\APPGetPlayWeb\\" + file.getName();
-            musicManager.getMusic().setMusic_path(filePath);
-            musicFacade.addMusic(musicManager.getMusic());
+            //String filePath = "C:\\APPGetPlayWeb\\" + file.getName();
+            //musicManager.getMusic().setMusic_path(filePath);
+            //musicFacade.addMusic(musicManager.getMusic());
             
         } catch (IOException e) {
             // Error handling
