@@ -43,7 +43,7 @@ public class PlaylistMb {
 
         playlist.setPlaylist_size(0);
         playlist.setCreation_date(gc.getTime());
-        playlist.setUser(user.getUser());
+//        playlist.setUser(user.getUser());
         playlist_ejb.addPlaylist(playlist);
         return "principal";
     }

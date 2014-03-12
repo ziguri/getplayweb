@@ -62,7 +62,7 @@ public class Playlist implements Serializable {
     @JoinTable(name="playlists_has_musics")
     private List<Music> musics;
     
-    @NotNull
+//    @NotNull
     @ManyToOne
     private AppUser user;
 
