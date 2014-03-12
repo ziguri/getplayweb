@@ -84,8 +84,7 @@ public class MusicMb implements Serializable{
     }
      
      public String prepareEdit() {
-        items = DataModel.getRowData();
-         music = (Music) getItems().getRowData();
+        music = (Music) getItems().getRowData();
         selectedItemIndex = getItems().getRowIndex();
         music_ejb.editMusic(music, user.getUser());
         return "listAllMusic";
