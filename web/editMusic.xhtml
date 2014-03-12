@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Edit Music</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="Template/GetPlayTemp.xhtml">
+            
+            <ui:define name="top">
+                <h:form class="logform">
+                    <h:outputLabel value="Welcome "/>
+                    <h:outputLabel value="#{logged.user.name}"/>
+                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                
+                 <h:form>
+                    <br></br>
+                    <h:outputLabel value="Title"/>
+                    <br></br>
+                    <h:inputText label="Title" value="#{musicMb.music.title}" />
+                    <br></br>
+                    <h:outputLabel value="Artist"/>
+                    <br></br>
+                    <h:inputText label="Artist" value="#{musicMb.music.artist}"/>
+                    <br></br>
+                    <h:outputLabel value="Album"/>
+                    <br></br>
+                    <h:inputText label="Album" value="#{musicMb.music.album}"/>
+                    <br></br>
+                    <h:outputLabel value="Year"/>
+                    <br></br>
+                    <h:inputText label="Year" value="#{musicMb.music.music_year}"/>
+                    <br></br>
+                    <h:outputLabel value="Path"/>
+                    <br></br>
+                    <h:inputFile id="file"  value="#{musicMb.uploader.file}" />
+                    <br></br>
+                    <h:commandButton type="submit"  value="Save" action="#{musicMb.prepareEdit()}"  />
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
