@@ -41,6 +41,18 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
     
+    public void editMusic(Music m, AppUser u)  {
+        try{
+        String filePath = "C:\\APPGetPlayWeb\\";
+        m.setMusic_path(filePath);
+        m.setUser(u);
+        this.edit(m);
+        
+        }catch(Exception e){
+            System.out.println("Excepção " + e);
+        }
+    }
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
