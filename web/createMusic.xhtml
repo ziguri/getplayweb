@@ -45,26 +45,26 @@ and open the template in the editor.
                     <br></br>
                     <h:outputLabel value="Title"/>
                     <br></br>
-                    <h:inputText label="Title" value="#{musicMb.music.title}" />
+                    <h:inputText label="Title" value="#{requestMusicMb.music.title}" />
                     <br></br>
                     <h:outputLabel value="Artist"/>
                     <br></br>
-                    <h:inputText label="Artist" value="#{musicMb.music.artist}"/>
+                    <h:inputText label="Artist" value="#{requestMusicMb.music.artist}"/>
                     <br></br>
                     <h:outputLabel value="Album"/>
                     <br></br>
-                    <h:inputText label="Album" value="#{musicMb.music.album}"/>
+                    <h:inputText label="Album" value="#{requestMusicMb.music.album}"/>
                     <br></br>
                     <h:outputLabel value="Year"/>
                     <br></br>
-                    <h:inputText label="Year" value="#{musicMb.music.music_year}"/>
+                    <h:inputText label="Year" value="#{requestMusicMb.music.music_year}"/>
                     <br></br>
                     <h:outputLabel value="Path"/>
                     <br></br>
-                    <h:inputFile id="f" required="true" requiredMessage="Please choose a file" value="#{musicMb.file1}" />
+                    <h:inputFile id="f" required="true" requiredMessage="Please choose a file" value="#{requestMusicMb.file1}" />
                     <h:message for="f" errorClass="errorMessage" />
                     <br></br>
-                    <h:commandButton type="submit"  value="Save" action="#{musicMb.addMusic()}"  />
+                    <h:commandButton type="submit"  value="Save" action="#{requestMusicMb.addMusic()}"  />
                 </h:form>
 
             </ui:define>
