@@ -6,7 +6,6 @@
 package ManageBeans;
 
 import ejbs.MusicFacade;
-import ejbs.Uploader;
 import entities.Music;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,34 +26,31 @@ import javax.servlet.http.Part;
  */
 @ManagedBean(name = "musicMb")
 @RequestScoped
-public class MusicMb implements Serializable {
+public class RequestMusicMb implements Serializable {
 
     @EJB
     private MusicFacade music_ejb;
     private DataModel<Music> items = null;
     private Music music;
     private String pathToSave;
-    
     @ManagedProperty(value = "#{logged}")
     private LoggedUserMb user;
-    
-    @EJB
-    private Uploader uploader;
     private int selectedItemIndex;
-
-    //Aqui começa o necessário a carregar ficheiros
+    private DataModel <Music> musics;
+    private String musicPath;
     private Part file1;
 
     /**
      * Creates a new instance of MusicMb
      */
-    public MusicMb() {
+    public RequestMusicMb() {
         this.music = new Music();
+        musics=null;
     }
 
     public String addMusic() throws IOException {
 
-        String musicPath = "C:\\APPGetPlayWeb\\" + file1.getSubmittedFileName();
+        musicPath = "C:\\APPGetPlayWeb\\" + file1.getSubmittedFileName();
         InputStream inputStream = file1.getInputStream();
         FileOutputStream outputStream = new FileOutputStream(musicPath);
 
@@ -85,6 +81,7 @@ public class MusicMb implements Serializable {
     public DataModel<Music> getMusicList() {
         if (music_ejb != null) {
             DataModel model = (DataModel<Music>) new ListDataModel(music_ejb.findAll());
+            musics = model;
             return model;
         }
         return null;
@@ -102,20 +99,16 @@ public class MusicMb implements Serializable {
         return music;
     }
 
-    public String prepareEdit() {
-        music = (Music) getItems().getRowData();
-        selectedItemIndex = getItems().getRowIndex();
-        music_ejb.editMusic(music, user.getUser());
-        return "listAllMusic";
-    }
-
     public String destroy() {
-        music = (Music) getItems().getRowData();
-        selectedItemIndex = getItems().getRowIndex();
-        music_ejb.remove(music);
-        recreateModel();
-        getMusicList();
-        return "listAllMusic";
+        music = (Music) this.musics.getRowData();
+         if(music.getUser().equals(user.getUser())){
+            music_ejb.remove(music);
+            recreateModel();
+            getMusicList();
+            return "listAllMusics";
+        }
+        return "listAllMusics";
+        
     }
 
     private void recreateModel() {
@@ -164,14 +157,6 @@ public class MusicMb implements Serializable {
 
     public void setUser(LoggedUserMb user) {
         this.user = user;
-    }
-
-    public Uploader getUploader() {
-        return uploader;
-    }
-
-    public void setUploader(Uploader uploader) {
-        this.uploader = uploader;
     }
 
     public int getSelectedItemIndex() {
