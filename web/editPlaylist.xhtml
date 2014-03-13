@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      
+    <h:head>
+        <title>Edit Playlist</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="Template/GetPlayTemp.xhtml">
+            
+            <ui:define name="top">
+                <h:form class="logform">
+                    <h:outputLabel value="Welcome "/>
+                    <h:outputLabel value="#{logged.user.name}"/>
+                    <br></br>
+                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
+
+                    <h:commandButton value="Edit"  
+                                     action="editUser.xhtml"/>
+                    
+                    <h:commandButton value="Delete User"
+                                     action="#{logged.deleteUser()}"/>
+                    
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                
+                 <h:form>
+                    <br></br>
+                    <h:outputLabel value="Name"/>
+                    <br></br>
+                    <h:inputText label="Name" value="#{playlistMb.playlist.playlist_name}" />
+                    <br></br>
+                
+                    <h:commandButton type="submit"  value="Save" action="#{playlistMb.editPlaylist()}"  />
+                </h:form>
+
+            </ui:define>
+            
+            <ui:define name="left">
+                <ul>
+                    <li><a href='principal.xhtml'><span>Home</span></a></li>
+                    <li><a href='createMusic.xhtml'><span>Insert Music</span></a></li>
+                    <li><a href='listAllMusic.xhtml'><span>View All Musics</span></a></li>
+                    <li class='last'><a href='createPlaylist.xhtml'><span>Insert Playlist</span></a></li>
+                </ul>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
