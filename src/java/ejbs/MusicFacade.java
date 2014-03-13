@@ -61,31 +61,6 @@ public class MusicFacade extends AbstractFacade<Music> {
         super(Music.class);
     }
     
-     /**
-     * Copy a file to a target file.
-     *
-     * @param source the path to the file to copy
-     * @param target
-     */
-    public void copy(String source, String target) {
-        try {
-            File f1 = new File(source);
-            File f2 = new File(target);
-            Files.copy(f1.toPath(), f2.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-        } catch (IOException ex) {
-            System.err.println("Exception occurred when copying a mp3 file. " + ex);
-        }
-    }//copia ficheiro
-    
-    public String createDir() {
-        String dirname = "c:\\APPGetPlayWeb\\MyPlaylist\\";
-        File d = new File(dirname);// Create directory now.
-        d.mkdirs();
-        
-        return d.getPath();
-    }
-    
     public List<Music> showAllMusics(){//Mostra todas as músicas da aplicação.
         try {
             List<Music> m =(List<Music>) em.createNamedQuery("Music.findAll").getResultList();

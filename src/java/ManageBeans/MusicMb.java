@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -63,7 +64,7 @@ public class MusicMb implements Serializable {
 
     public String addMusic() throws IOException {
 
-        //Apartir daqui foi o método encontrado
+        //try{
         InputStream inputStream = file1.getInputStream();
         FileOutputStream outputStream = new FileOutputStream("C:\\APPGetPlayWeb\\"+getFileName(file1));
 
@@ -80,11 +81,25 @@ public class MusicMb implements Serializable {
         outputStream.close();
         inputStream.close();
         
-        String musicPath = "C:\\APPGetPlayWeb\\" + getFileName(file1);
+        String fileName = getFileName(file1);
+        String musicPath = "C:\\APPGetPlayWeb\\" + fileName;
 
         music_ejb.addMusic(music, user.getUser(), musicPath);
-
+        
+        /*
+        FacesContext.getCurrentInstance().addMessage(null, 
+            new FacesMessage(String.format("File '%s' of type '%s' successfully uploaded!", fileName)));
+        */
         return "principal";
+        /*
+        }catch(IOException e){
+        
+            FacesMessage f = new FacesMessage("Please choose a file");
+            
+        }
+        return "createMusic";
+        */
+        
     }
 
     public List<Music> viewAllMusic() {
