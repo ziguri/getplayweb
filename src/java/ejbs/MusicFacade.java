@@ -29,10 +29,9 @@ public class MusicFacade extends AbstractFacade<Music> {
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
-    public void addMusic(Music m, AppUser u)  {
+    public void addMusic(Music m, AppUser u, String path)  {
         try{
-        String filePath = "C:\\APPGetPlayWeb\\";
-        m.setMusic_path(filePath);
+        m.setMusic_path(path);
         m.setUser(u);
         this.create(m);
         
