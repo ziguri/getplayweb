@@ -30,8 +30,13 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         this.create(p);
         
         }catch(Exception e){
-            System.err.println("Excepção " + e);
+            System.err.println("Excepcion " + e);
         }
+    }
+    
+    public void editPlaylist(Playlist p, AppUser u)  {
+        p.setUser(u);
+        this.edit(p);
     }
     
     @Override
@@ -49,6 +54,17 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
             
             List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.findPlaylistByUser").setParameter("user", u).getResultList();
             return pl;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<Music> showMusicPlaylist (Playlist p){
+    
+        try {
+            
+            List<Music> m =(List<Music>) em.createNamedQuery("Music.findMusicByPlaylist").setParameter("playlist", p).getResultList();
+            return m;
         } catch (Exception e) {
             return null;
         }

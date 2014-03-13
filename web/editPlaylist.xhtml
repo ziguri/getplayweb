@@ -37,22 +37,14 @@ and open the template in the editor.
                     <br></br>
                     <h:outputLabel value="Name"/>
                     <br></br>
-                    <h:inputText label="Name" value="#{playlistMb.playlist.playlist_name}" />
+                    <h:inputText label="Name" value="#{editPlaylistMb.playlist.playlist_name}" />
                     <br></br>
                 
-                    <h:commandButton type="submit"  value="Save" action="#{playlistMb.editPlaylist()}"  />
+                    <h:commandButton type="submit"  value="Save" action="#{editPlaylistMb.editPlaylist()}"  />
                 </h:form>
 
             </ui:define>
             
-            <ui:define name="left">
-                <ul>
-                    <li><a href='principal.xhtml'><span>Home</span></a></li>
-                    <li><a href='createMusic.xhtml'><span>Insert Music</span></a></li>
-                    <li><a href='listAllMusics.xhtml'><span>View All Musics</span></a></li>
-                    <li class='last'><a href='createPlaylist.xhtml'><span>Insert Playlist</span></a></li>
-                </ul>
-            </ui:define>
         </ui:composition>
     </h:body>
 </html>

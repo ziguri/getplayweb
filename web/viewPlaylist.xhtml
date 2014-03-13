@@ -12,7 +12,7 @@ and open the template in the editor.
 
 
     <h:head>
-        <title>List Playlist</title>
+        <title>Playlist</title>
     </h:head>
 
     <h:body>
@@ -39,39 +39,45 @@ and open the template in the editor.
                 <h:form>
                     <f:view>
                         <h:form>
-                            <h1><h:outputText value="My Playlist"/></h1>
-                            <h:dataTable value="#{requestPlaylistMb.myPlaylist}" var="playlist" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
+                            <h1>Playlist <h:outputText value="#{requestPlaylistMb.playlist.playlist_name}"/></h1>
+                            <h:dataTable value="#{requestPlaylistMb.viewMusicPlaylist()}" var="music" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
 
                                 <h:column>
                                     <f:facet name="header">TITLE</f:facet>
-                                    #{playlist.playlist_name}
+                                    #{music.title}
                                 </h:column>
 
                                 <h:column>
-                                    <f:facet name="header">CREATION DATE</f:facet>
-                                    #{playlist.creation_date}
+                                    <f:facet name="header">ARTIST</f:facet>
+                                    #{music.artist}
                                 </h:column>
 
                                 <h:column>
-                                    <f:facet name="header">SIZE</f:facet>
-                                    #{playlist.playlist_size}
+                                    <f:facet name="header">ALBUM</f:facet>
+                                    #{music.album}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">YEAR</f:facet>
+                                    #{music.music_year}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">PATH</f:facet>
+                                    #{music.music_path}
                                 </h:column>
                                 
                                 <h:column>
-                                    <f:facet name="header">VIEW/EDIT/DELETE</f:facet>
-                                    <h:commandButton type="submit"
-                                                     value="View" 
-                                                     action="#{requestPlaylistMb.prepareViewMusicPlaylist()}" />
-                                    
+                                    <f:facet name="header">EDIT/DELETE</f:facet>
                                     <h:commandButton type="submit"
                                                      value="Edit" 
-                                                     action="#{editPlaylistMb.prepareEdit()}" />
+                                                     action="#{musicMb.prepareEdit()}" />
                                     
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
-                                                      action="#{requestPlaylistMb.destroy()}" />
+                                                      action="#{musicMb.destroy()}" />
                                 </h:column>
-                                
+                                  
                             </h:dataTable>
                         </h:form>
                     </f:view>

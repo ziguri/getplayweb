@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ManageBeans;
 
 import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
+
 import entities.Music;
 import entities.Playlist;
-import java.util.GregorianCalendar;
+
 import javax.ejb.EJB;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -22,66 +24,42 @@ import javax.faces.model.ListDataModel;
  *
  * @author Elsa
  */
-@ManagedBean (name="playlistMb")
-@RequestScoped
-public class PlaylistMb {
+@ManagedBean(name = "editPlaylistMb")
+@SessionScoped
+public class EditPlaylistMb {
+
     @EJB
     private PlaylistFacade playlist_ejb;
+
     @EJB
     private MusicFacade musics_ejb;
-    private Playlist playlist;
-    @ManagedProperty(value="#{logged}")
+
+    @ManagedProperty(value = "#{logged}")
     private LoggedUserMb user;
-    private DataModel<Playlist> play = null;
+
+    private DataModel<Playlist> play;
+    private Playlist playlist;
 
     /**
      * Creates a new instance of PlaylistMB
      */
-    public PlaylistMb() {
+    public EditPlaylistMb() {
         this.playlist = new Playlist();
+        this.play = null;
     }
 
-    public String addPlaylist(){
-        
-        GregorianCalendar gc = new GregorianCalendar();
-
-        playlist.setPlaylist_size(0);
-        playlist.setCreation_date(gc.getTime());
-        playlist_ejb.addPlaylist(playlist, user.getUser());
-        return "principal";
-    }
-    
-    public DataModel<Playlist> getMyPlaylist() {
-        if (playlist_ejb!= null) {
-            DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
-            play = model;
-            return model;
-        }
-        return null;
-    }
-    
-     public String prepareEdit() {
-        playlist = (Playlist) getPlay().getRowData();
+    public String prepareEdit() {
+        DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
+        play = model;
+        playlist = (Playlist) this.play.getRowData();
         return "editPlaylist";
     }
-     
-    public String editPlaylist(){
-        playlist_ejb.edit(playlist);
-        return "listAllPlaylist";
+
+    public String editPlaylist() {
+        playlist_ejb.editPlaylist(playlist, user.getUser());
+        return "listMyPlaylist";
     }
-     
-    public String destroy() {
-        playlist = (Playlist) this.play.getRowData();
-        playlist_ejb.remove(playlist);
-        recreateModel();
-        getMyPlaylist();
-        return "listAllPlaylist";
-    }
-    
-    private void recreateModel() {
-        play = null;
-    }
-    
+
     public PlaylistFacade getPlaylist_ejb() {
         return playlist_ejb;
     }
@@ -121,5 +99,5 @@ public class PlaylistMb {
     public void setPlay(DataModel<Playlist> play) {
         this.play = play;
     }
-    
+
 }
