@@ -52,8 +52,9 @@ public class PlaylistMb {
     }
     
     public DataModel<Playlist> getMyPlaylist() {
-        if (playlist_ejb != null && playlist.getUser().equals(this.user.getUser())) {
-            DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.findAll());
+        if (playlist_ejb!= null) {
+            DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
+            play = model;
             return model;
         }
         return null;
@@ -70,7 +71,7 @@ public class PlaylistMb {
     }
      
     public String destroy() {
-        playlist = (Playlist) getPlay().getRowData();
+        playlist = (Playlist) this.play.getRowData();
         playlist_ejb.remove(playlist);
         recreateModel();
         getMyPlaylist();

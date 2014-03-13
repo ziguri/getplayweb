@@ -8,10 +8,12 @@ package ejbs;
 
 
 import entities.AppUser;
+import entities.Music;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import entities.Playlist;
+import java.util.List;
 
 /**
  *
@@ -41,4 +43,14 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         super(Playlist.class);
     }
     
+    public List<Playlist> showMyPlaylist (AppUser u){
+    
+        try {
+            
+            List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.findPlaylistByUser").setParameter("user", u).getResultList();
+            return pl;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
