@@ -8,12 +8,15 @@ package ManageBeans;
 
 import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
+import entities.Music;
 import entities.Playlist;
 import java.util.GregorianCalendar;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 
 /**
  *
@@ -29,6 +32,7 @@ public class PlaylistMb {
     private Playlist playlist;
     @ManagedProperty(value="#{logged}")
     private LoggedUserMb user;
+    private DataModel<Playlist> play = null;
 
     /**
      * Creates a new instance of PlaylistMB
@@ -46,6 +50,36 @@ public class PlaylistMb {
 //        playlist.setUser(user.getUser());
         playlist_ejb.addPlaylist(playlist);
         return "principal";
+    }
+    
+    public DataModel<Playlist> getMyPlaylist() {
+        if (playlist_ejb != null && playlist.getUser().equals(this.user.getUser())) {
+            DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.findAll());
+            return model;
+        }
+        return null;
+    }
+    
+     public String prepareEdit() {
+        playlist = (Playlist) getPlay().getRowData();
+        return "editPlaylist";
+    }
+     
+    public String editPlaylist(){
+        playlist_ejb.edit(playlist);
+        return "listAllPlaylist";
+    }
+     
+    public String destroy() {
+        playlist = (Playlist) getPlay().getRowData();
+        playlist_ejb.remove(playlist);
+        recreateModel();
+        getMyPlaylist();
+        return "listAllPlaylist";
+    }
+    
+    private void recreateModel() {
+        play = null;
     }
     
     public PlaylistFacade getPlaylist_ejb() {
@@ -78,6 +112,14 @@ public class PlaylistMb {
 
     public void setUser(LoggedUserMb user) {
         this.user = user;
+    }
+
+    public DataModel<Playlist> getPlay() {
+        return play;
+    }
+
+    public void setPlay(DataModel<Playlist> play) {
+        this.play = play;
     }
     
 }
