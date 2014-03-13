@@ -24,7 +24,7 @@ import javax.servlet.http.Part;
  *
  * @author Elsa
  */
-@ManagedBean(name = "musicMb")
+@ManagedBean(name = "requestMusicMb")
 @RequestScoped
 public class RequestMusicMb implements Serializable {
 
