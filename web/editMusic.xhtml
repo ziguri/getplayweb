@@ -36,25 +36,21 @@ and open the template in the editor.
                     <br></br>
                     <h:outputLabel value="Title"/>
                     <br></br>
-                    <h:inputText label="Title" value="#{musicMb.music.title}" />
+                    <h:inputText label="Title" value="#{editMusicMb.music.title}" />
                     <br></br>
                     <h:outputLabel value="Artist"/>
                     <br></br>
-                    <h:inputText label="Artist" value="#{musicMb.music.artist}"/>
+                    <h:inputText label="Artist" value="#{editMusicMb.music.artist}"/>
                     <br></br>
                     <h:outputLabel value="Album"/>
                     <br></br>
-                    <h:inputText label="Album" value="#{musicMb.music.album}"/>
+                    <h:inputText label="Album" value="#{editMusicMb.music.album}"/>
                     <br></br>
                     <h:outputLabel value="Year"/>
                     <br></br>
-                    <h:inputText label="Year" value="#{musicMb.music.music_year}"/>
+                    <h:inputText label="Year" value="#{editMusicMb.music.music_year}"/>
                     <br></br>
-                    <h:outputLabel value="Path"/>
-                    <br></br>
-                    <h:inputFile id="file"  value="#{musicMb.uploader.file}" />
-                    <br></br>
-                    <h:commandButton type="submit"  value="Save" action="#{musicMb.prepareEdit()}"  />
+                    <h:commandButton type="submit"  value="Save" action="#{EditMusicMb.prepareEdit()}"  />
                 </h:form>
 
             </ui:define>

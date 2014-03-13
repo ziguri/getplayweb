@@ -24,8 +24,6 @@ import javax.ejb.EJB;
 @Stateless
 public class MusicFacade extends AbstractFacade<Music> {
 
-    @EJB
-    Uploader uploader;
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
