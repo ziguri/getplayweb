@@ -7,6 +7,7 @@
 package ejbs;
 
 
+import entities.AppUser;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,9 +22,9 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
-    public void addPlaylist(Playlist p)  {
+    public void addPlaylist(Playlist p, AppUser u)  {
         try{
-         
+        p.setUser(u);
         this.create(p);
         
         }catch(Exception e){

@@ -61,7 +61,8 @@ and open the template in the editor.
                     <br></br>
                     <h:outputLabel value="Path"/>
                     <br></br>
-                    <h:inputFile id="file"  value="#{musicMb.uploader.file}" />
+                    <h:inputFile id="f" required="true" requiredMessage="Please choose a file" value="#{musicMb.file1}" />
+                    <h:message for="f" errorClass="errorMessage" />
                     <br></br>
                     <h:commandButton type="submit"  value="Save" action="#{musicMb.addMusic()}"  />
                 </h:form>
