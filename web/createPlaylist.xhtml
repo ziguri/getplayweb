@@ -37,10 +37,10 @@ and open the template in the editor.
                     <br></br>
                     <h:outputLabel value="Name"/>
                     <br></br>
-                    <h:inputText label="Name" value="#{playlistMb.playlist.playlist_name}" />
+                    <h:inputText label="Name" value="#{requestPlaylistMb.playlist.playlist_name}" />
                     <br></br>
                 
-                    <h:commandButton type="submit"  value="Save" action="#{playlistMb.addPlaylist()}"  />
+                    <h:commandButton type="submit"  value="Save" action="#{requestPlaylistMb.addPlaylist()}"  />
                 </h:form>
 
             </ui:define>
