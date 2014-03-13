@@ -64,7 +64,7 @@ public class Music implements Serializable {
     @Column(nullable =false, name = "MUSIC_PATH")
     private String music_path;
     
-    @ManyToOne
+    @ManyToOne()
     private AppUser user;
     
     @ManyToMany(mappedBy = "musics")

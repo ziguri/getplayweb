@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ManageBeans;
 
 import ejbs.AppUserFacade;
@@ -14,9 +13,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,13 +20,15 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean
 @RequestScoped
-public class LoginMb implements Serializable{
+public class LoginMb implements Serializable {
+
     @EJB
     private AppUserFacade user;
     private String email;
     private String password;
-    @ManagedProperty(value="#{logged}")
+    @ManagedProperty(value = "#{logged}")
     private LoggedUserMb logado;
+
     /**
      * Creates a new instance of LoginMb
      */
@@ -68,21 +66,21 @@ public class LoginMb implements Serializable{
     public void setLogado(LoggedUserMb logado) {
         this.logado = logado;
     }
-    
-    public String confirmaLogin(){
-        
+
+    public String confirmaLogin() {
+
         String pass = CodificarMD5.cryptWithMD5(this.password);
-        AppUser us =  user.validaPassword(this.email, pass);
-        
-        if(us!= null){
-     
+        AppUser us = user.validaPassword(this.email, pass);
+
+        if (us != null) {
+
             logado.setUser(us);
-            return"principal.xhtml";
-            
-        }else{
-        
-            return"index.xhtml";
+            return "principal.xhtml";
+
+        } else {
+
+            return "index.xhtml";
         }
     }
-    
+
 }
