@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:head>
+        <title>List Playlist</title>
+    </h:head>
+
+    <h:body>
+
+        <ui:composition template="Template/GetPlayTemp.xhtml">
+            <ui:define name="top">
+                <h:form class="logform">
+                    <h:outputLabel value="Welcome "/>
+                    <h:outputLabel value="#{logged.user.name}"/>
+                    <br></br>
+                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
+
+                    <h:commandButton value="Edit"  
+                                     action="editUser.xhtml"/>
+                    
+                    <h:commandButton value="Delete User"
+                                     action="#{logged.deleteUser()}"/>
+                    
+                </h:form>
+            </ui:define>
+            
+            <ui:define name="content">
+
+                <h:form>
+                    <f:view>
+                        <h:form>
+                            <h1><h:outputText value="My Playlist"/></h1>
+                            <h:dataTable value="#{musicMb.musicList}" var="music" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
+
+                                <h:column>
+                                    <f:facet name="header">MUSIC_ID</f:facet>
+                                    #{music.music_id}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">TITLE</f:facet>
+                                    #{music.title}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">ARTIST</f:facet>
+                                    #{music.artist}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">ALBUM</f:facet>
+                                    #{music.album}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">YEAR</f:facet>
+                                    #{music.music_year}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">PATH</f:facet>
+                                    #{music.music_path}
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">USER</f:facet>
+                                    #{music.user}
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">EDIT/DELETE</f:facet>
+                                    <h:commandButton type="submit"
+                                                     value="Edit" 
+                                                     action="#{musicMb.prepareEdit()}" />
+                                  
+                                    <h:commandButton type="submit"
+                                                     value="Add to Playlist" 
+                                                     action="" />
+                                    
+                                    <h:commandButton  type="submit"
+                                                      value="Delete" 
+                                                      action="#{musicMB.destroy()}" />
+                                </h:column>
+                                
+                            </h:dataTable>
+                        </h:form>
+                    </f:view>
+
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
