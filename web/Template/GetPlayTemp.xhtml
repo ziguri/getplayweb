@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -34,7 +35,17 @@
                     <li><a href='createPlaylist.xhtml'><span>Insert Playlist</span></a></li>
                     <li><a href='listMyPlaylist.xhtml'><span>My Playlists</span></a></li>
                     <p></p>
-                    <li><a href='search.xhtml'><span>Search</span></a></li>
+                    <h:form>
+                        <h:inputText id="search" value="#{searchMb.word}" />
+                        <br></br>
+                        <h:selectOneRadio value="#{searchMb.option}">
+                            <f:selectItem itemValue="Artist"  itemLabel="Artist"/>   
+                            <f:selectItem itemValue="Title"  itemLabel="Title"/>   
+                            <f:selectItem itemValue="ArTi" itemLabel="Artist/Title"/>   
+                        </h:selectOneRadio>
+                        <br></br>
+                        <h:commandButton value="OK" action="#{searchMb.searchForWord()}" />
+                    </h:form>
 
                 </ui:insert>
             </div>

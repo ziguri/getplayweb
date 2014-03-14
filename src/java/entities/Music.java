@@ -30,9 +30,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Music.findAll", query = "SELECT m FROM Music m"),
     @NamedQuery(name = "Music.findMusicById", query = "SELECT m FROM Music m WHERE m.music_id = :music_id"),
-    @NamedQuery(name = "Music.findMusicByTitle", query = "SELECT m FROM Music m WHERE m.title = :title"),
-    @NamedQuery(name = "Music.findMusicByArtist", query = "SELECT m FROM Music m WHERE m.artist = :artist"),
-    @NamedQuery(name = "Music.findMusicByUser", query = "SELECT m FROM Music m WHERE m.user = :user"),
+    @NamedQuery(name = "Music.findMusicByColumn", query = "SELECT m FROM Music m WHERE :column LIKE :word"),
     @NamedQuery(name = "Music.findMusicByPlaylist", query = "SELECT m FROM Music m WHERE m.playlists = :playlists"),
 })
 public class Music implements Serializable {

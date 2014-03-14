@@ -10,12 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import entities.Music;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
-import javax.ejb.EJB;
 
 /**
  *
@@ -68,12 +63,19 @@ public class MusicFacade extends AbstractFacade<Music> {
     }
 
     public List<Music> showMusicsPlaylist(String p) {//Mostra as músicas de uma determinada playlist.
+
         try {
             List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByPlaylist").setParameter("playlist", p).getResultList();
             return m;
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
 
+    public List<Music> searchByColumn(String column, String word) {//Mostra as músicas resultantes de uma pesquisa por título.
+
+        List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByColumn").setParameter("column", column).setParameter("word", "%" + word + "%").getResultList();
+        return m;
+    }
 }

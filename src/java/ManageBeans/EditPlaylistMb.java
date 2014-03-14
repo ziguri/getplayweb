@@ -49,9 +49,8 @@ public class EditPlaylistMb {
     }
 
     public String prepareEdit() {
-        DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
-        play = model;
-        playlist = (Playlist) this.play.getRowData();
+
+        playlist = this.play.getRowData();
         return "editPlaylist";
     }
 

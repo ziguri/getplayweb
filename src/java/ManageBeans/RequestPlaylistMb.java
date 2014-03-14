@@ -73,7 +73,7 @@ public class RequestPlaylistMb {
     }
     
     public String prepareViewMusicPlaylist(){
-        getMyPlaylist();
+//        getMyPlaylist();
         playlist = (Playlist) this.play.getRowData();
         return "viewPlaylist";
     }
