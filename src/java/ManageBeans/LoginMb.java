@@ -75,11 +75,11 @@ public class LoginMb implements Serializable {
         if (us != null) {
 
             logado.setUser(us);
-            return "principal.xhtml";
+            return "principal";
 
         } else {
 
-            return "index.xhtml";
+            return "index";
         }
     }
 
