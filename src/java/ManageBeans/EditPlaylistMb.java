@@ -38,24 +38,55 @@ public class EditPlaylistMb {
     private LoggedUserMb user;
 
     private DataModel<Playlist> play;
-    private Playlist playlist;
+    private Playlist selected;
 
     /**
      * Creates a new instance of PlaylistMB
      */
     public EditPlaylistMb() {
-        this.playlist = new Playlist();
+        this.selected = new Playlist();
         this.play = null;
+    }
+    
+    public Playlist[] myPlaylists(){
+    
+        DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
+        int size = model.getRowCount();
+        
+        Playlist[] playlists = new Playlist [size];
+        
+        for(int i=0; i<size; i++){
+        
+            model.setRowIndex(i);
+            playlists [i] = (Playlist) model.getRowData();
+        }
+        
+        return playlists;
     }
 
     public String prepareEdit() {
 
-        playlist = this.play.getRowData();
+        //selected = this.play.getRowData();
         return "editPlaylist";
+    }
+    
+    public String prepareViewMusicPlaylist(){
+        //getMyPlaylist();
+        //playlist = (Playlist) this.play.getRowData();
+        return "viewPlaylist";
+    }
+    
+    public DataModel<Music> viewMusicPlaylist(){
+        //playlist = (Playlist) this.play.getRowData();
+        if (playlist_ejb!= null) {
+            DataModel model = (DataModel<Music>) new ListDataModel(playlist_ejb.showMusicPlaylist(selected));
+            return model;
+        }
+        return null;
     }
 
     public String editPlaylist() {
-        playlist_ejb.editPlaylist(playlist, user.getUser());
+        playlist_ejb.editPlaylist(selected, user.getUser());
         return "listMyPlaylist";
     }
 
@@ -67,12 +98,12 @@ public class EditPlaylistMb {
         this.playlist_ejb = playlist_ejb;
     }
 
-    public Playlist getPlaylist() {
-        return playlist;
+    public Playlist getSelected() {
+        return selected;
     }
 
-    public void setPlaylist(Playlist playlist) {
-        this.playlist = playlist;
+    public void setSelected(Playlist selected) {
+        this.selected = selected;
     }
 
     public MusicFacade getMusics_ejb() {

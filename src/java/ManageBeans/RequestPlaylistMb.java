@@ -72,22 +72,6 @@ public class RequestPlaylistMb {
         return "listMyPlaylist";
     }
     
-    public String prepareViewMusicPlaylist(){
-//        getMyPlaylist();
-        playlist = (Playlist) this.play.getRowData();
-        return "viewPlaylist";
-    }
-    
-    public DataModel<Music> viewMusicPlaylist(){
-        playlist = (Playlist) this.play.getRowData();
-        if (playlist_ejb!= null) {
-            DataModel model = (DataModel<Music>) new ListDataModel(playlist_ejb.showMusicPlaylist(playlist));
-            play = model;
-            return model;
-        }
-        return null;
-    }
-    
     public PlaylistFacade getPlaylist_ejb() {
         return playlist_ejb;
     }

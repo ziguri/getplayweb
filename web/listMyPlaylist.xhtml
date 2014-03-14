@@ -61,11 +61,15 @@ and open the template in the editor.
                                     <f:facet name="header">VIEW/EDIT/DELETE</f:facet>
                                     <h:commandButton type="submit"
                                                      value="View" 
-                                                     action="#{requestPlaylistMb.prepareViewMusicPlaylist()}" />
+                                                     action="viewPlaylist" >
+                                    <f:setPropertyActionListener target="#{editPlaylistMb.selected}" value="#{playlist}" />
+                                    </h:commandButton>
                                     
                                     <h:commandButton type="submit"
                                                      value="Edit" 
-                                                     action="#{editPlaylistMb.prepareEdit()}" />
+                                                     action="#{editPlaylistMb.prepareEdit()}" >
+                                    <f:setPropertyActionListener target="#{editPlaylistMb.selected}" value="#{playlist}" />
+                                    </h:commandButton>
                                     
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
