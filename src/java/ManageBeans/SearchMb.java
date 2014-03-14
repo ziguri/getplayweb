@@ -71,14 +71,9 @@ public class SearchMb {
         this.option = opcion;
     }
     
-    public String searchForWord() {
-        resultSearch();
-        return "search";
-    }
-    
     public DataModel<Music> resultSearch() {
-        DataModel model_1 = (DataModel<Music>) new ListDataModel(musics_ejb.searchByColumn(option, word));
-        return model_1;
+        DataModel model = (DataModel<Music>) new ListDataModel(musics_ejb.searchByColumn(option, word));
+        return model;
     }
     
 }

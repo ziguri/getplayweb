@@ -9,19 +9,31 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
-        <title>Facelets Template</title>
+        <title>GetPlay Template</title>
     </h:head>
 
     <h:body>
 
         <div id="logo">
-            <img src="resources/images/logo_100.png" width="150" height="96" alt="logo_100"/>
+            <img src="resources/images/logo_branco.png" width="150" alt="logo_branco"/>
 
         </div>
 
         <div id="top">
             <ui:insert name="top" >
-                <ui:insert name="top">Topd</ui:insert>
+                <h:form class="logform">
+                    <h:outputLabel value="Welcome "/>
+                    <h:outputLabel value="#{logged.user.name}"/>
+                    <br></br>
+                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
+
+                    <h:commandButton value="Edit"  
+                                     action="editUser.xhtml"/>
+                    
+                    <h:commandButton value="Delete User"
+                                     action="#{logged.deleteUser()}"/>
+                    
+                </h:form>
             </ui:insert>
         </div>
 
@@ -41,10 +53,10 @@
                         <h:selectOneRadio value="#{searchMb.option}">
                             <f:selectItem itemValue="Artist"  itemLabel="Artist"/>   
                             <f:selectItem itemValue="Title"  itemLabel="Title"/>   
-                            <f:selectItem itemValue="ArTi" itemLabel="Artist/Title"/>   
+                            <f:selectItem itemValue="ArTi" itemLabel="Both"/>   
                         </h:selectOneRadio>
                         <br></br>
-                        <h:commandButton value="OK" action="#{searchMb.searchForWord()}" />
+                        <h:commandButton value="OK" action="search.xhtml" />
                     </h:form>
 
                 </ui:insert>
