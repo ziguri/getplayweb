@@ -73,14 +73,16 @@ and open the template in the editor.
                                 </h:column>
                                 
                                 <h:column>
-                                    <f:facet name="header">EDIT/DELETE</f:facet>
-                                    <h:commandButton type="submit"
+                                    <f:facet name="header" >EDIT/DELETE</f:facet>
+                                    <h:commandButton type="submit" 
                                                      value="Edit" 
-                                                     action="#{EditMusicMb.prepareEdit()}" />
+                                                     action="#{editMusicMb.prepareEdit()}" >
+                                        <f:setPropertyActionListener target="#{editMusicMb.selected}" value="#{music}" />
+                                    </h:commandButton>
                                     
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
-                                                      action="#{RequestMusicMb.destroy()}" />
+                                                      action="#{requestMusicMb.destroy()}" />
                                 </h:column>
                                 
                                 <h:column>      

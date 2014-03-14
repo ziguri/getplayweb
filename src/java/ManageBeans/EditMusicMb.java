@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ManageBeans;
 
 import ejbs.MusicFacade;
 import entities.Music;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 
 /**
  *
@@ -21,39 +20,47 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @SessionScoped
-public class EditMusicMb {
+public class EditMusicMb implements Serializable {
 
     @EJB
     private MusicFacade music_ejb;
     @ManagedProperty(value = "#{logged}")
     private LoggedUserMb user;
-    private DataModel <Music> musics;
-    private Music music;
+    private DataModel<Music> musics;
+    private Music selected;
+
     /**
      * Creates a new instance of EditMusicMb
      */
     public EditMusicMb() {
-        this.music = new Music();
-        musics=null;
+        musics = null;
     }
 
     public String prepareEdit() {
-        
-        musics = (DataModel<Music>) new ListDataModel(music_ejb.findAll());
-        music = (Music) this.musics.getRowData();
-        
-        if(music.getUser().equals(user.getUser())){
-            music_ejb.editMusic(music, user.getUser());
-            return "editMusic";
-        }
-        else{
-        
+
+        return "editMusic";
+
+    }
+
+    public String editMusic() {
+
+        if (selected.getUser().equals(user.getUser())) {
+            music_ejb.edit(selected);
+
+            return "listAllMusics";
+        } else {
             return "listAllMusics";
         }
-    }
-    
-    
 
+    }
+
+    /*
+     private void endSession(){
+    
+     FacesContext context = FacesContext.getCurrentInstance();
+     HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+     session.invalidate();
+     }*/
     public MusicFacade getMusic_ejb() {
         return music_ejb;
     }
@@ -78,14 +85,12 @@ public class EditMusicMb {
         this.musics = musics;
     }
 
-    public Music getMusic() {
-        return music;
+    public Music getSelected() {
+        return selected;
     }
 
-    public void setMusic(Music music) {
-        this.music = music;
+    public void setSelected(Music selected) {
+        this.selected = selected;
     }
-    
-    
-    
+
 }

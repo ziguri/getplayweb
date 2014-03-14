@@ -37,10 +37,9 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
 
+    //Método não utilizado. Apagar comentário se passar a ser
     public void editMusic(Music m, AppUser u) {
         try {
-            String filePath = "C:\\APPGetPlayWeb\\";
-            m.setMusic_path(filePath);
             m.setUser(u);
             this.edit(m);
 
