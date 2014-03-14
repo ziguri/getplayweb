@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entities;
 
 import java.io.Serializable;
@@ -30,41 +29,43 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Music.findAll", query = "SELECT m FROM Music m"),
     @NamedQuery(name = "Music.findMusicById", query = "SELECT m FROM Music m WHERE m.music_id = :music_id"),
-    @NamedQuery(name = "Music.findMusicByColumn", query = "SELECT m FROM Music m WHERE :column LIKE :word"),
-    @NamedQuery(name = "Music.findMusicByPlaylist", query = "SELECT m FROM Music m WHERE m.playlists = :playlists"),
-})
+    @NamedQuery(name = "Music.findMusicByTitle", query = "SELECT m FROM Music m WHERE m.title LIKE :word"),
+    @NamedQuery(name = "Music.findMusicByArtist", query = "SELECT m FROM Music m WHERE m.artist LIKE :word"),
+    @NamedQuery(name = "Music.findMusicByTitleOrArtist", query = "SELECT m FROM Music m WHERE m.artist LIKE :word OR m.title LIKE :word"),
+    @NamedQuery(name = "Music.findMusicByPlaylist", query = "SELECT m FROM Music m WHERE m.playlists = :playlists"),})
 public class Music implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer music_id;
-    
+
     @NotNull
-    @Size(max=40, message = "Max size 40char")
-    @Column(nullable =false,length =40, name = "TITLE")
+    @Size(max = 40, message = "Max size 40char")
+    @Column(nullable = false, length = 40, name = "TITLE")
     private String title;
-    
+
     @NotNull
-    @Size(max=40, message = "Max size 40char")
-    @Column(nullable =false,length =40, name = "ARTIST")
+    @Size(max = 40, message = "Max size 40char")
+    @Column(nullable = false, length = 40, name = "ARTIST")
     private String artist;
-    
+
     @NotNull
-    @Size(max=40, message = "Max size 40char")
-    @Column(nullable =false, length =40, name = "ALBUM")
+    @Size(max = 40, message = "Max size 40char")
+    @Column(nullable = false, length = 40, name = "ALBUM")
     private String album;
-    
-    @NotNull 
-    @Column(nullable =false, name = "MUSIC_YEAR")
-    private Integer music_year;
-    
+
     @NotNull
-    @Column(nullable =false, name = "MUSIC_PATH")
+    @Column(nullable = false, name = "MUSIC_YEAR")
+    private Integer music_year;
+
+    @NotNull
+    @Column(nullable = false, name = "MUSIC_PATH")
     private String music_path;
-    
+
     @ManyToOne()
     private AppUser user;
-    
+
     @ManyToMany(mappedBy = "musics")
     private List<Playlist> playlists;
 
@@ -143,7 +144,6 @@ public class Music implements Serializable {
         this.playlists = playlists;
     }
 
- 
     @Override
     public int hashCode() {
         int hash = 0;
@@ -168,5 +168,5 @@ public class Music implements Serializable {
     public String toString() {
         return "persistence.Music[ id=" + music_id + " ]";
     }
-    
+
 }

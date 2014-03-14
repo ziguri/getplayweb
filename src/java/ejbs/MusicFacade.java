@@ -72,9 +72,23 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
 
-    public List<Music> searchByColumn(String column, String word) {//Mostra as músicas resultantes de uma pesquisa por título.
-
-        List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByColumn").setParameter("column", column).setParameter("word", "%" + word + "%").getResultList();
+    public List<Music> searchByColumn(String column, String word) {//Mostra as músicas resultantes de uma pesquisa.
+        
+        if (column.equals("Title")){       
+        List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByTitle").setParameter("word", "%" + word + "%").getResultList();
         return m;
+        }
+        
+        if (column.equals("Artist")){       
+        List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByArtist").setParameter("word", "%" + word + "%").getResultList();
+        return m;
+        }
+        
+        if (column.equals("ArTi")){       
+        List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByTitleOrArtist").setParameter("word", "%" + word + "%").getResultList();
+        return m;
+        }
+        
+        return null;
     }
 }

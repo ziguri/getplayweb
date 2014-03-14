@@ -5,36 +5,38 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>User Register</title>
+        <h:outputStylesheet name="css/cssLayout.css"/>
     </h:head>
-    <h:body>
-        <ui:composition template="Template/GetPlayTemp.xhtml">
+    
+    <h:body class="center_content">
+        
+        <ui:composition template="Template/GetPlayStart.xhtml">
             
             <ui:define name="top">
-                <h:form class="logform">
-                    <h:outputLabel value="Welcome "/>
-                    <h:outputLabel value="#{logged.user.name}"/>
-                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
-                </h:form>
             </ui:define>
 
             <ui:define name="content">
                 
                  <h:form>
+                    <h:outputLabel value="Welcome to GetPlay" class="logtitulos"/>
                     <br></br>
-                    <h:outputLabel value="Nome"/>
+                    <h:outputLabel value="Nome" class="textLabel"/>
                     <br></br>
                     <h:inputText label="Nome" value="#{registerMb.user.name}" />
                     <br></br>
-                    <h:outputLabel value="Email"/>
+                    <p></p>
+                    <h:outputLabel value="Email" class="textLabel"/>
                     <br></br>
                     <h:inputText label="Email" value="#{registerMb.user.email}"/>
                     <br></br>
-                    <h:outputLabel value="Password"/>
+                    <p></p>
+                    <h:outputLabel value="Password" class="textLabel"/>
                     <br></br>
                     <h:inputSecret id="pass"  label="Password" value="#{registerMb.user.password}"/>
-                    <h:message for="pass" style="color: red"/>
+                    <h:message for="pass" class="message"/>
                     <br></br>
-                    <h:commandButton type="submit"  value="Save" action="#{registerMb.addUser}"  />
+                    <p></p>
+                    <h:commandButton type="submit"  value="Save" action="#{registerMb.addUser}"  class="button"/>
                 </h:form>
 
             </ui:define>
