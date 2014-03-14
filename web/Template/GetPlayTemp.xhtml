@@ -12,7 +12,7 @@
         <title>GetPlay Template</title>
     </h:head>
 
-    <h:body>
+    <h:body class="center_content">
 
         <div id="logo">
             <img src="resources/images/logo_branco.png" width="150" alt="logo_branco"/>
@@ -22,15 +22,17 @@
         <div id="top">
             <ui:insert name="top" >
                 <h:form class="logform">
-                    <h:outputLabel value="Welcome "/>
+                    <h:outputLabel value="Welcome " />
                     <h:outputLabel value="#{logged.user.name}"/>
-                    <br></br>
-                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
-
-                    <h:commandButton value="Edit"  
+                    <p></p>
+                    <h:commandButton class="button" value="Logout" action="#{logged.logout()}"/>
+                    <h:outputLabel value="  "/>
+                    <h:commandButton class="button"
+                                     value="Edit"  
                                      action="editUser.xhtml"/>
-                    
-                    <h:commandButton value="Delete User"
+                    <h:outputLabel value="  "/>
+                    <h:commandButton class="button"
+                                     value="Delete User"
                                      action="#{logged.deleteUser()}"/>
                     
                 </h:form>
@@ -39,35 +41,68 @@
 
         <div>
             <div id="left">
-                <ui:insert name="left">
-                    <li><a href='principal.xhtml'><span>Home</span></a></li>
-                    <li><a href='createMusic.xhtml'><span>Insert Music</span></a></li>
-                    <li><a href='listAllMusics.xhtml'><span>View All Musics</span></a></li>
-                    <li><a href='listMyMusics.xhtml'><span>View My Musics</span></a></li>
-                    <li><a href='createPlaylist.xhtml'><span>Insert Playlist</span></a></li>
-                    <li><a href='listMyPlaylist.xhtml'><span>My Playlists</span></a></li>
-                    <p></p>
+                <ui:insert name="left" >
                     <h:form>
+                    <h:commandButton type="submit"
+                                     action="principal.xhtml"
+                                     value="Home"
+                                     class="button_menu"/>
+                    <p></p>
+                    <h:commandButton type="submit"
+                                     action="createMusic.xhtml"
+                                     value="Insert Music"
+                                     class="button_menu"/>
+                    <p></p>
+                    <h:commandButton type="submit"
+                                     action="listAllMusics.xhtml"
+                                     value="View All Musics"
+                                     class="button_menu"/>
+                    <p></p>
+                    <h:commandButton type="submit"
+                                     action="listMyMusics.xhtml"
+                                     value="View My Musics"
+                                     class="button_menu"/>
+                    <p></p>
+                    <h:commandButton type="submit"
+                                     action="createPlaylist.xhtml"
+                                     value="Insert Playlist"
+                                     class="button_menu"/>
+                    <p></p>
+                    <h:commandButton type="submit"
+                                     action="listMyPlaylist.xhtml"
+                                     value="My Playlists"
+                                     class="button_menu"/>
+                    <p></p>
+                    
+                    
                         <h:inputText id="search" value="#{searchMb.word}" />
                         <br></br>
                         <h:selectOneRadio value="#{searchMb.option}">
-                            <f:selectItem itemValue="Artist"  itemLabel="Artist"/>   
-                            <f:selectItem itemValue="Title"  itemLabel="Title"/>   
-                            <f:selectItem itemValue="ArTi" itemLabel="Both"/>   
+                            <f:selectItem itemValue="Artist"  
+                                          itemLabel="Artist"
+                                          />   
+                            <f:selectItem itemValue="Title"  
+                                          itemLabel="Title"
+                                          />   
+                            <f:selectItem itemValue="ArTi" 
+                                          itemLabel="Both"
+                                          />   
                         </h:selectOneRadio>
                         <br></br>
-                        <h:commandButton value="OK" action="search.xhtml" />
+                        <h:commandButton value="OK" 
+                                         action="search.xhtml"
+                                         class="button_menu"/>
                     </h:form>
 
                 </ui:insert>
             </div>
             <div id="content" class="left_content">
+                <h:form>
                 <ui:insert name="content">Content</ui:insert>
+                </h:form>
             </div>
         </div>
-        <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
-        </div>
+        
 
     </h:body>
 

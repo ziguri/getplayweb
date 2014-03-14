@@ -7,11 +7,12 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -57,9 +58,12 @@ public class AppUser implements Serializable {
     private String password;
    
     
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Music> musics;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Playlist> playlists;
+    
     public AppUser() {
     }
 
@@ -101,6 +105,14 @@ public class AppUser implements Serializable {
         this.password = password;
     }
 
+    public List<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
     public List<Music> getMusics() {
         return musics;
     }
@@ -109,6 +121,7 @@ public class AppUser implements Serializable {
         this.musics = musics;
     }
 
+    
     @Override
     public int hashCode() {
         int hash = 0;

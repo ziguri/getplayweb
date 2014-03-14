@@ -63,7 +63,7 @@ public class Playlist implements Serializable {
     private List<Music> musics;
     
 //    @NotNull
-    @ManyToOne
+    @ManyToOne 
     private AppUser user;
 
     public Playlist() {
