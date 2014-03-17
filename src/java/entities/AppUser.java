@@ -59,6 +59,9 @@ public class AppUser implements Serializable {
     
     @OneToMany(mappedBy = "user")
     private List<Music> musics;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Playlist> playlists;
 
     public AppUser() {
     }
@@ -107,6 +110,14 @@ public class AppUser implements Serializable {
 
     public void setMusics(List<Music> musics) {
         this.musics = musics;
+    }
+
+    public List<Playlist> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
     }
 
     @Override

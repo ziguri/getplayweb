@@ -47,13 +47,13 @@ and open the template in the editor.
                                     <h:commandButton type="submit"
                                                      value="View" 
                                                      action="viewPlaylist" >
-                                    <f:setPropertyActionListener target="#{editPlaylistMb.selected}" value="#{playlist}" />
+                                    <f:setPropertyActionListener target="#{editPlaylistMb.selectedPlaylist}" value="#{playlist}" />
                                     </h:commandButton>
                                     
                                     <h:commandButton type="submit"
                                                      value="Edit" 
                                                      action="#{editPlaylistMb.prepareEdit()}" >
-                                    <f:setPropertyActionListener target="#{editPlaylistMb.selected}" value="#{playlist}" />
+                                    <f:setPropertyActionListener target="#{editPlaylistMb.selectedPlaylist}" value="#{playlist}" />
                                     </h:commandButton>
                                     
                                     <h:commandButton  type="submit"
