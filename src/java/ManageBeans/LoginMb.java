@@ -75,7 +75,7 @@ public class LoginMb implements Serializable {
         if (us != null) {
 
             logado.setUser(us);
-            return "principal";
+            return "listAllMusics";
 
         } else {
 
@@ -83,4 +83,8 @@ public class LoginMb implements Serializable {
         }
     }
 
+        public String deleteUser(){
+        user.remove(logado.getUser());
+        return "index.xhtml";
+    }
 }

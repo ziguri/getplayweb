@@ -76,7 +76,7 @@ private String password;
     
     public String deleteUser(){
         user_ejb.remove(user);
-        return "index";
+        return "index.xhtml";
     }
     
 }
