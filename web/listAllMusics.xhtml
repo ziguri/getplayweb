@@ -18,7 +18,7 @@ and open the template in the editor.
     <h:body>
 
         <ui:composition template="Template/GetPlayTemp.xhtml">
-            
+
             <ui:define name="content">
 
                 <h:form>
@@ -29,34 +29,34 @@ and open the template in the editor.
 
                                 <h:column>
                                     <f:facet name="header">TITLE</f:facet>
-                                    #{music.title}
+                                        #{music.title}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">ARTIST</f:facet>
-                                    #{music.artist}
+                                        #{music.artist}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">ALBUM</f:facet>
-                                    #{music.album}
+                                        #{music.album}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">YEAR</f:facet>
-                                    #{music.music_year}
+                                        #{music.music_year}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">PATH</f:facet>
-                                    #{music.music_path}
+                                        #{music.music_path}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">USER</f:facet>
-                                    #{music.user.name}
+                                        #{music.user.name}
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header" >EDIT/DELETE</f:facet>
                                     <h:commandButton type="submit" 
@@ -64,20 +64,25 @@ and open the template in the editor.
                                                      action="#{editMusicMb.prepareEdit()}" >
                                         <f:setPropertyActionListener target="#{editMusicMb.selected}" value="#{music}" />
                                     </h:commandButton>
-                                    
+
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
                                                       action="#{requestMusicMb.destroy()}" />
                                 </h:column>
-                                
+
                                 <h:column>      
                                     <f:facet name="header">ADD TO PLAYLIST</f:facet>
-                                    <h:selectOneMenu value="Teste">
-                                        <f:selectItems value="#{editPlaylistMb.myPlaylists()}" var="p" itemLabel="#{p.playlist_name}" itemValue="#{editPlaylistMb}" />
-                                                       
-                                        </h:selectOneMenu>
+                                    <h:commandButton type="submit" value="+" action="#{editPlaylistMb.addMusicToPlay()}" >
+                                        <f:setPropertyActionListener target="#{editPlaylistMb.musicSelected}" value="#{music}" />
+                                    </h:commandButton>
                                 </h:column>    
                             </h:dataTable>
+                            
+                            <h:outputLabel value="YOUR PLAYLIST´S:"/>
+                                    <h:selectOneMenu value="#{editPlaylistMb.selectedPlaylist}" converter="#{editPlaylistMb}">
+                                        <f:selectItems value="#{editPlaylistMb.myPlaylists()}" var="p" itemLabel="#{p.playlist_name}"/>
+                                    </h:selectOneMenu>
+                            
                         </h:form>
                     </f:view>
 

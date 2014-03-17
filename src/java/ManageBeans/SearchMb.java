@@ -8,6 +8,7 @@ package ManageBeans;
 import ejbs.MusicFacade;
 import entities.Music;
 import entities.Playlist;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -22,7 +23,7 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean(name = "searchMb")
 @SessionScoped
-public class SearchMb {
+public class SearchMb implements Serializable {
     
     @EJB
     private MusicFacade musics_ejb;

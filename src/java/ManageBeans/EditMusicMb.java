@@ -18,7 +18,7 @@ import javax.faces.model.DataModel;
  *
  * @author Zueb LDA
  */
-@ManagedBean
+@ManagedBean(name="editMusicMb")
 @SessionScoped
 public class EditMusicMb implements Serializable {
 
