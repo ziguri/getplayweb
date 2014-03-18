@@ -10,9 +10,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Stateless;
 
-@Stateless
+
 public class CodificarMD5 {
 
    private static MessageDigest md;

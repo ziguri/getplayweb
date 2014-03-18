@@ -9,10 +9,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="./css/styles.css"/>
+        <h:outputStylesheet name="./images/styles_1.css"/>
+        <h:outputScript library="js" name="jquery-latest.min.js" />
+        <h:outputScript library="js" name="menu_jquery.js" />
         <title>GetPlay Template</title>
     </h:head>
 
-    <h:body class="center_content">
+    <h:body>
 
         <div id="logo">
             <img src="resources/images/logo_branco.png" width="150" alt="logo_branco"/>
@@ -22,87 +26,76 @@
         <div id="top">
             <ui:insert name="top" >
                 <h:form class="logform">
-                    <h:outputLabel value="Welcome " />
+                    <h:outputLabel value="Welcome "/>
                     <h:outputLabel value="#{logged.user.name}"/>
-                    <p></p>
-                    <h:commandButton class="button" value="Logout" action="#{logged.logout()}"/>
-                    <h:outputLabel value="  "/>
-                    <h:commandButton class="button"
-                                     value="Edit"  
+                    <br></br>
+                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
+
+                    <h:commandButton value="Edit"  
                                      action="editUser.xhtml"/>
-                    <h:outputLabel value="  "/>
-                    <h:commandButton class="button"
-                                     value="Delete User"
+
+                    <h:commandButton value="Delete User"
                                      action="#{logged.deleteUser()}"/>
-                    
+
                 </h:form>
+
+                <div id="topmenu">
+                    <div id='cssmenutop'>
+                        <ul>
+                            <li><a href='listAllMusics.xhtml'><span>All Musics</span></a></li>
+                            <li><a href='listMyMusics.xhtml'><span>My Musics</span></a></li>
+                            <li><a href='listMyPlaylist.xhtml'><span>My Playlist´s</span></a></li>
+                            <li><a href='createPlaylist.xhtml'><span>Add Playlist</span></a></li>
+                            <li class='last'><a href='createMusic.xhtml'><span>Add Music</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h:form style="margin-left: 15px;" class="searchform">
+                        <h:inputText id="search" value="#{searchMb.word}" style="width: 140px;
+                                     -webkit-box-shadow:0 0 10px rgba(225, 225, 225, 1);
+                                     -moz-box-shadow:0 0 10px rgba(225, 225, 225, 1);
+                                     box-shadow:0 0 10px rgba(225, 225, 225, 1); margin-left: -17px;" />
+                        <h:commandButton image="resources/images/search.png" action="search.xhtml" style="margin-left: 10px; margin-bottom: -5px;"/>
+                        <br></br>
+                        <h:selectOneRadio value="#{searchMb.option}" style="color: #FFFFFF; text-align: center; margin-left: -20px;">
+                            <f:selectItem itemValue="Artist"  itemLabel="Artist" />   
+                            <f:selectItem itemValue="Title"  itemLabel="Title"/>   
+                            <f:selectItem itemValue="ArTi" itemLabel="Both"/>   
+                        </h:selectOneRadio>
+                        <br></br>
+                    </h:form>
+                    <p></p>
             </ui:insert>
         </div>
 
         <div>
             <div id="left">
-                <ui:insert name="left" >
-                    <h:form>
-                    <h:commandButton type="submit"
-                                     action="principal.xhtml"
-                                     value="Home"
-                                     class="button_menu"/>
-                    <p></p>
-                    <h:commandButton type="submit"
-                                     action="createMusic.xhtml"
-                                     value="Insert Music"
-                                     class="button_menu"/>
-                    <p></p>
-                    <h:commandButton type="submit"
-                                     action="listAllMusics.xhtml"
-                                     value="View All Musics"
-                                     class="button_menu"/>
-                    <p></p>
-                    <h:commandButton type="submit"
-                                     action="listMyMusics.xhtml"
-                                     value="View My Musics"
-                                     class="button_menu"/>
-                    <p></p>
-                    <h:commandButton type="submit"
-                                     action="createPlaylist.xhtml"
-                                     value="Insert Playlist"
-                                     class="button_menu"/>
-                    <p></p>
-                    <h:commandButton type="submit"
-                                     action="listMyPlaylist.xhtml"
-                                     value="My Playlists"
-                                     class="button_menu"/>
-                    <p></p>
-                    
-                    
-                        <h:inputText id="search" value="#{searchMb.word}" />
-                        <br></br>
-                        <h:selectOneRadio value="#{searchMb.option}">
-                            <f:selectItem itemValue="Artist"  
-                                          itemLabel="Artist"
-                                          />   
-                            <f:selectItem itemValue="Title"  
-                                          itemLabel="Title"
-                                          />   
-                            <f:selectItem itemValue="ArTi" 
-                                          itemLabel="Both"
-                                          />   
-                        </h:selectOneRadio>
-                        <br></br>
-                        <h:commandButton value="OK" 
-                                         action="search.xhtml"
-                                         class="button_menu"/>
-                    </h:form>
+                <ui:insert name="left">
+                    <div id='cssmenu'>
+                        <ul>
+                            <li class='active'><a href='principal.xhtml'><span>Home</span></a></li>
+                            <li><a href='createMusic.xhtml'><span>Insert Music</span></a></li>
+                            <li><a href='createPlaylist.xhtml'><span>Insert Playlist</span></a></li>
+                            <li class='has-sub'><a href='#'><span>Musics</span></a>
+                                <ul>
+                                    <li><a href='listMyMusics.xhtml'><span>My Musics</span></a></li>
+                                    <li class='last'><a href='listAllMusics.xhtml'><span>All Musics</span></a></li>
+                                </ul>
+                            </li>
+                            <li class='last'><a href='listMyPlaylist.xhtml'><span>My Playlists</span></a></li>
+                        </ul>
+                    </div>
 
                 </ui:insert>
             </div>
             <div id="content" class="left_content">
-                <h:form>
                 <ui:insert name="content">Content</ui:insert>
-                </h:form>
             </div>
         </div>
-        
+        <div id="bottom">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
 
     </h:body>
 

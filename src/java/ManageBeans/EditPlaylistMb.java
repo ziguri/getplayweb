@@ -44,7 +44,7 @@ public class EditPlaylistMb implements Serializable, Converter {
     private LoggedUserMb user;
     private Music musicSelected;
 
-    private DataModel<Playlist> play;
+//    private DataModel<Playlist> play;
     private Playlist selectedPlaylist=null;
     private List<Playlist> itemsPlays = null;
 
@@ -52,7 +52,7 @@ public class EditPlaylistMb implements Serializable, Converter {
      * Creates a new instance of PlaylistMB
      */
     public EditPlaylistMb() {
-        //this.play = null;
+
     }
     /*
     public Playlist[] myPlaylists(){
@@ -157,13 +157,13 @@ public class EditPlaylistMb implements Serializable, Converter {
         this.user = user;
     }
 
-    public DataModel<Playlist> getPlay() {
-        return play;
-    }
-
-    public void setPlay(DataModel<Playlist> play) {
-        this.play = play;
-    }
+//    public DataModel<Playlist> getPlay() {
+//        return play;
+//    }
+//
+//    public void setPlay(DataModel<Playlist> play) {
+//        this.play = play;
+//    }
 
     public Music getMusicSelected() {
         return musicSelected;

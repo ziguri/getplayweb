@@ -13,9 +13,11 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.Part;
@@ -68,6 +70,8 @@ public class RequestMusicMb implements Serializable {
         inputStream.close();
 
         music_ejb.addMusic(music, user.getUser(), musicPath);
+        
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Music inserted successfully"));
 
         return "principal";
 
