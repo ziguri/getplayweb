@@ -18,60 +18,70 @@ and open the template in the editor.
     <h:body>
 
         <ui:composition template="Template/GetPlayTemp.xhtml">
-            
+
             <ui:define name="content">
 
                 <h:form>
                     <f:view>
                         <h:form>
-                            <h1><h:outputText value="All Musics"/></h1>
-                            <h:dataTable value="#{musicMb.myMusicList}" var="music" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
+                            <h1><h:outputText value="My Musics"/></h1>
+                            <h:outputLabel value="YOUR PLAYLIST´S:"/>
+                            <h:selectOneMenu value="#{editPlaylistMb.selectedPlaylist}" converter="#{editPlaylistMb}">
+                                <f:selectItems value="#{editPlaylistMb.myPlaylists()}" var="p" itemLabel="#{p.playlist_name}"/>
+                            </h:selectOneMenu>
+                            <h:dataTable value="#{requestMusicMb.myMusicList}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" styleClass="dataTable"
+                                         headerClass="dataTableTitle">
 
                                 <h:column>
                                     <f:facet name="header">TITLE</f:facet>
-                                    #{music.title}
+                                        #{music.title}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">ARTIST</f:facet>
-                                    #{music.artist}
+                                        #{music.artist}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">ALBUM</f:facet>
-                                    #{music.album}
+                                        #{music.album}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">YEAR</f:facet>
-                                    #{music.music_year}
+                                        #{music.music_year}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">PATH</f:facet>
-                                    #{music.music_path}
+                                        #{music.music_path}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">USER</f:facet>
-                                    #{music.user}
+                                        #{music.user.name}
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header">EDIT/DELETE</f:facet>
-                                    <h:commandButton type="submit"
+                                    <h:commandButton type="submit" 
                                                      value="Edit" 
-                                                     action="#{musicMb.prepareEdit()}" />
-                                  
-                                    <h:commandButton type="submit"
-                                                     value="Add to Playlist" 
-                                                     action="" />
-                                    
+                                                     action="editMusic" >
+                                        <f:setPropertyActionListener target="#{editMusicMb.selected}" value="#{music}" />
+                                    </h:commandButton>
+
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
-                                                      action="#{musicMb.destroy()}" />
+                                                      action="#{requestMusicMb.destroy()}" />
                                 </h:column>
-                                
+
+                                <h:column>
+                                    <f:facet name="header">ADD TO PLAYLIST</f:facet>
+                                    <h:commandButton type="submit" value="+" action="#{editPlaylistMb.addMusicToPlay()}" >
+                                        <f:setPropertyActionListener target="#{editPlaylistMb.musicSelected}" value="#{music}" />
+                                    </h:commandButton>
+                                </h:column>
+
                             </h:dataTable>
                         </h:form>
                     </f:view>
