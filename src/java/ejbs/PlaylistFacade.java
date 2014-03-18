@@ -9,11 +9,11 @@ package ejbs;
 
 import entities.AppUser;
 import entities.Music;
+import entities.Playlist;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import entities.Playlist;
-import java.util.List;
 
 /**
  *
@@ -69,4 +69,39 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
             return null;
         }
     }
+    
+    public List<Playlist> orderPlaylist (String atribute, String order){
+            
+            if (atribute.equals("Title") && order.equals("Asc")){
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByNameAsc").getResultList();
+                return pl;
+            }
+            
+            if (atribute.equals("Creation") && order.equals("Asc")){
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByCreationAsc").getResultList();
+                return pl;
+            }
+            
+            if (atribute.equals("Size") && order.equals("Asc")){
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderBySizeAsc").getResultList();
+                return pl;
+            }
+            
+            if (atribute.equals("Title") && order.equals("Desc")){
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByNameDesc").getResultList();
+                return pl;
+            }
+            
+            if (atribute.equals("Creation") && order.equals("Desc")){
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByCreationDesc").getResultList();
+                return pl;
+            }
+            
+            if (atribute.equals("Size") && order.equals("Desc")){
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderBySizeDesc").getResultList();
+                return pl;
+            }
+            
+            else return null;
+        }
 }
