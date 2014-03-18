@@ -25,7 +25,8 @@ and open the template in the editor.
                     <f:view>
                         <h:form>
                             <h1><h:outputText value="My Playlist"/></h1>
-                            <h:dataTable value="#{requestPlaylistMb.myPlaylist}" var="playlist" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
+                            <h:dataTable value="#{requestPlaylistMb.myPlaylist}" var="playlist" border="1" cellpadding="2" cellspacing="2" rules="all" styleClass="dataTable"
+                                         headerClass="dataTableTitle">
 
                                 <h:column>
                                     <f:facet name="header">TITLE</f:facet>
