@@ -23,7 +23,8 @@ import javax.faces.bean.RequestScoped;
 public class LoginMb implements Serializable {
 
     @EJB
-    private AppUserFacade user;
+    private AppUserFacade user_ejb;
+    private AppUser user;
     private String email;
     private String password;
     @ManagedProperty(value = "#{logged}")
@@ -35,12 +36,12 @@ public class LoginMb implements Serializable {
     public LoginMb() {
     }
 
-    public AppUserFacade getUser() {
-        return user;
+    public AppUserFacade getUser_ejb() {
+        return user_ejb;
     }
 
-    public void setUser(AppUserFacade user) {
-        this.user = user;
+    public void setUser_ejb(AppUserFacade user_ejb) {
+        this.user_ejb = user_ejb;
     }
 
     public String getEmail() {
@@ -66,11 +67,22 @@ public class LoginMb implements Serializable {
     public void setLogado(LoggedUserMb logado) {
         this.logado = logado;
     }
+    
+    public AppUser getUser() {
+        if(user == null) {
+            user = new AppUser();
+        }
+        return user;
+    }
+
+    public void setUser(AppUser user) { 
+        this.user = user;
+    }
 
     public String confirmaLogin() {
 
         String pass = CodificarMD5.cryptWithMD5(this.password);
-        AppUser us = user.validaPassword(this.email, pass);
+        AppUser us = user_ejb.validaPassword(this.email, pass);
 
         if (us != null) {
 
@@ -83,8 +95,16 @@ public class LoginMb implements Serializable {
         }
     }
 
-        public String deleteUser(){
-        user.remove(logado.getUser());
+    public String deleteUser() {
+        user_ejb.remove(logado.getUser());
+        return "index.xhtml";
+    }
+
+    //Começa aqui a parte que estava em "RegisterMb
+    
+    public String addUser(){
+    
+        user_ejb.addUser(user);
         return "index.xhtml";
     }
 }

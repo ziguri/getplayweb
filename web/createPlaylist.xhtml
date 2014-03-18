@@ -18,12 +18,12 @@ and open the template in the editor.
             <ui:define name="content">
                 
                  <h:form>
+                     <h1><h:outputText value="Insert New Playlist"/></h1>
                     <br></br>
-                    <h:outputLabel value="Name"/>
+                    <h:outputLabel value="Playlist Name"/>
                     <br></br>
                     <h:inputText label="Name" value="#{requestPlaylistMb.playlist.playlist_name}" />
                     <br></br>
-                
                     <h:commandButton type="submit"  value="Save" action="#{requestPlaylistMb.addPlaylist()}"  />
                 </h:form>
 

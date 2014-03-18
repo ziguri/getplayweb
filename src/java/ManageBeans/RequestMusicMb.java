@@ -110,7 +110,7 @@ public class RequestMusicMb implements Serializable {
     }
 
     public String destroy() {
-        music = (Music) this.musics.getRowData();
+        //music = (Music) this.musics.getRowData();
          if(music.getUser().equals(user.getUser())){
             music_ejb.remove(music);
             //recreateModel();

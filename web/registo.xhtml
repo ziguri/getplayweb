@@ -28,21 +28,21 @@
                     <br></br>
                     <h:outputLabel value="Nome" class="textLabel"/>
                     <br></br>
-                    <h:inputText label="Nome" value="#{registerMb.user.name}" />
+                    <h:inputText label="Nome" value="#{loginMb.user.name}" />
                     <br></br>
                     <p></p>
                     <h:outputLabel value="Email" class="textLabel"/>
                     <br></br>
-                    <h:inputText label="Email" value="#{registerMb.user.email}"/>
+                    <h:inputText label="Email" value="#{loginMb.user.email}"/>
                     <br></br>
                     <p></p>
                     <h:outputLabel value="Password" class="textLabel"/>
                     <br></br>
-                    <h:inputSecret id="pass"  label="Password" value="#{registerMb.user.password}"/>
+                    <h:inputSecret id="pass"  label="Password" value="#{loginMb.user.password}"/>
                     <h:message for="pass" class="message"/>
                     <br></br>
                     <p></p>
-                    <h:commandButton type="submit"  value="Save" action="#{registerMb.addUser}"  class="button"/>
+                    <h:commandButton type="submit"  value="Save" action="#{loginMb.addUser}"  class="button"/>
                 </h:form>
 
             </ui:define>

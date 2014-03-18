@@ -52,7 +52,7 @@ public class AppUser implements Serializable {
     @Column (name = "EMAIL", nullable = false)
     private String email;
     
-    //@NotNull
+    @NotNull(message = "Please insert password")
     //@Pattern(regexp ="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})", message="Invalid Password. You need between 6-12 characteres, at least 1 lower case, 1 upper case and 1 numeric")
     @Column (name = "PASSWORD", nullable = false)
     private String password;

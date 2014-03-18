@@ -115,7 +115,6 @@ public class EditPlaylistMb implements Serializable, Converter {
     public String addMusicToPlay() {
         
         selectedPlaylist.getMusics().add(musicSelected);
-        selectedPlaylist.setPlaylist_size(selectedPlaylist.getPlaylist_size()+1);
         playlist_ejb.edit(selectedPlaylist);
         selectedPlaylist=null;
         return "principal";

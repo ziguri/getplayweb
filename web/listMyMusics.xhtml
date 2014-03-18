@@ -72,7 +72,9 @@ and open the template in the editor.
 
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
-                                                      action="#{requestMusicMb.destroy()}" />
+                                                      action="#{editMusicMb.destroy()}" >
+                                        <f:setPropertyActionListener target="#{editMusicMb.selected}" value="#{music}" />
+                                    </h:commandButton>
                                 </h:column>
 
                                 <h:column>

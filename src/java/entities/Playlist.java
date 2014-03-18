@@ -105,7 +105,7 @@ public class Playlist implements Serializable {
     }
 
     public Integer getPlaylist_size() {
-        return playlist_size;
+        return musics.size();
     }
 
     public void setPlaylist_size(Integer playlist_size) {

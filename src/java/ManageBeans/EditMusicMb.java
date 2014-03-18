@@ -18,7 +18,7 @@ import javax.faces.model.DataModel;
  *
  * @author Zueb LDA
  */
-@ManagedBean(name="editMusicMb")
+@ManagedBean(name = "editMusicMb")
 @SessionScoped
 public class EditMusicMb implements Serializable {
 
@@ -91,6 +91,17 @@ public class EditMusicMb implements Serializable {
 
     public void setSelected(Music selected) {
         this.selected = selected;
+    }
+
+    public String destroy() {
+
+        if (selected.getUser().equals(user.getUser())) {
+            music_ejb.remove(selected);
+
+            return "listAllMusics";
+        }
+        return "listAllMusics";
+
     }
 
 }
