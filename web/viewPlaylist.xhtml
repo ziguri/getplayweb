@@ -24,8 +24,10 @@ and open the template in the editor.
                 <h:form>
                     <f:view>
                         <h:form>
-                            <h1>Playlist <h:outputText value="#{requestPlaylistMb.playlist.playlist_name}"/></h1>
-                            <h:dataTable value="#{editPlaylistMb.viewMusicPlaylist()}" var="music" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
+                            <h1>Playlist name: <h:outputText value="#{editPlaylistMb.selectedPlaylist.playlist_name}"/></h1>
+                            
+                            <h:dataTable value="#{editPlaylistMb.getPlaylistMusics()}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" styleClass="dataTable"
+                                         headerClass="dataTableTitle">
 
                                 <h:column>
                                     <f:facet name="header">TITLE</f:facet>
@@ -53,14 +55,7 @@ and open the template in the editor.
                                 </h:column>
                                 
                                 <h:column>
-                                    <f:facet name="header">EDIT/DELETE</f:facet>
-                                    <h:commandButton type="submit"
-                                                     value="Edit" 
-                                                     action="#{musicMb.prepareEdit()}" />
-                                    
-                                    <h:commandButton  type="submit"
-                                                      value="Delete" 
-                                                      action="#{musicMb.destroy()}" />
+                                    <h:commandButton image="resources/images/play.png" action="search.xhtml"/>
                                 </h:column>
                                   
                             </h:dataTable>

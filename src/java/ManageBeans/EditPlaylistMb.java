@@ -102,6 +102,7 @@ public class EditPlaylistMb implements Serializable, Converter {
         return "viewPlaylist";
     }
     
+    /*
     public DataModel<Music> viewMusicPlaylist(){
         //playlist = (Playlist) this.play.getRowData();
         if (playlist_ejb!= null) {
@@ -109,7 +110,7 @@ public class EditPlaylistMb implements Serializable, Converter {
             return model;
         }
         return null;
-    }
+    }*/
     
     public String addMusicToPlay() {
         
@@ -181,6 +182,13 @@ public class EditPlaylistMb implements Serializable, Converter {
         this.itemsPlays = itemsPlays;
     }
     
+    
+    public DataModel<Music> getPlaylistMusics(){
+    
+        DataModel model = (DataModel<Music>) new ListDataModel(musics_ejb.showMusicsPlaylist(selectedPlaylist));
+        return model;
+        
+    }
     
     
 
