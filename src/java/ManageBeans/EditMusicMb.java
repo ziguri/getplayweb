@@ -54,13 +54,6 @@ public class EditMusicMb implements Serializable {
 
     }
 
-    /*
-     private void endSession(){
-    
-     FacesContext context = FacesContext.getCurrentInstance();
-     HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-     session.invalidate();
-     }*/
     public MusicFacade getMusic_ejb() {
         return music_ejb;
     }

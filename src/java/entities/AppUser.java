@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
 @Table(name = "appuser")
 @NamedQueries({
     @NamedQuery(name = "appuser.findAll", query = "SELECT u FROM AppUser u"),
-    @NamedQuery(name ="appuser.findByEmail", query = "SELECT u FROM AppUser u WHERE u.email = :email")
+    @NamedQuery(name ="appuser.findByEmail", query = "SELECT u FROM AppUser u WHERE u.email = :email"),
 })
 public class AppUser implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class AppUser implements Serializable {
     private Integer user_id;
     
     //@NotNull
-    @Pattern (regexp = "^[\\p{L} .'-]+$", message = "{invalid.name}")
+    @Pattern (regexp = "^[\\p{L} .'-]+$", message = "Invalid Name")
     @Column (name = "NAME", nullable = false)
     private String name;
     

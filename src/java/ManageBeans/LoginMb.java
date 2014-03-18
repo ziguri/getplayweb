@@ -10,9 +10,11 @@ import ejbs.CodificarMD5;
 import entities.AppUser;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -67,15 +69,15 @@ public class LoginMb implements Serializable {
     public void setLogado(LoggedUserMb logado) {
         this.logado = logado;
     }
-    
+
     public AppUser getUser() {
-        if(user == null) {
+        if (user == null) {
             user = new AppUser();
         }
         return user;
     }
 
-    public void setUser(AppUser user) { 
+    public void setUser(AppUser user) {
         this.user = user;
     }
 
@@ -101,10 +103,14 @@ public class LoginMb implements Serializable {
     }
 
     //Começa aqui a parte que estava em "RegisterMb
-    
-    public String addUser(){
-    
-        user_ejb.addUser(user);
-        return "index.xhtml";
+    public String addUser() {
+
+        if (user_ejb.existUser(user.getEmail()) == null) {
+            user_ejb.addUser(user);
+            return "index.xhtml";
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("User already registered"));
+            return "registo";
+        }
     }
 }

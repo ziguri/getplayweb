@@ -46,7 +46,8 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
         }
     }
     
-    private AppUser existUser(String email) {
+    
+    public AppUser existUser(String email) {
 
         try {
             AppUser u = (AppUser) em.createNamedQuery("appuser.findByEmail").setParameter("email", email).getSingleResult();
