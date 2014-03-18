@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import entities.Music;
+import entities.Playlist;
 import java.util.List;
 
 /**
@@ -90,5 +91,16 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
         
         return null;
+    }
+    
+    public List<Music> showUserMusics (AppUser u){
+    
+        try {
+            
+            List<Music> mus =(List<Music>) em.createNamedQuery("Music.findAllFromUser").setParameter("user", u).getResultList();
+            return mus;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

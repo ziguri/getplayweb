@@ -33,7 +33,7 @@ and open the template in the editor.
 
                                          styleClass="dataTable"
                                          headerClass="dataTableTitle"
-                                         
+
                                          >
 
                                 <h:column>
@@ -65,19 +65,6 @@ and open the template in the editor.
                                 <h:column>
                                     <f:facet name="header" class="dataTableTitle">USER</f:facet>
                                         #{music.user.name}
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header" class="dataTableTitle" >EDIT/DELETE</f:facet>
-                                    <h:commandButton type="submit" 
-                                                     value="Edit" 
-                                                     action="editMusic" >
-                                        <f:setPropertyActionListener target="#{editMusicMb.selected}" value="#{music}" />
-                                    </h:commandButton>
-
-                                    <h:commandButton  type="submit"
-                                                      value="Delete" 
-                                                      action="#{requestMusicMb.destroy()}" />
                                 </h:column>
 
                                 <h:column>      

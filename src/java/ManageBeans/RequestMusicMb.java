@@ -90,6 +90,12 @@ public class RequestMusicMb implements Serializable {
         }
         return null;
     }
+    
+    public DataModel<Music> getMyMusicList(){
+    
+        DataModel model = (DataModel<Music>) new ListDataModel(music_ejb.showUserMusics(user.getUser()));
+        return model;
+    }
 
     public int countAllItens() {
         return music_ejb.count();
