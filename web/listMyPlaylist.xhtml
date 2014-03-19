@@ -18,31 +18,46 @@ and open the template in the editor.
     <h:body>
 
         <ui:composition template="Template/GetPlayTemp.xhtml">
-            
+
             <ui:define name="content">
 
                 <h:form>
                     <f:view>
                         <h:form>
-                            <h1><h:outputText value="My Playlist"/></h1>
-                            <h:dataTable value="#{requestPlaylistMb.myPlaylist}" var="playlist" border="1" cellpadding="2" cellspacing="2" rules="all" styleClass="dataTable"
+                            <h1><h:outputText value="My Playlist's"/></h1>
+                            <h:dataTable value="#{requestPlaylistMb.play}" var="playlist" border="1" cellpadding="2" cellspacing="2" rules="all" styleClass="dataTable"
                                          headerClass="dataTableTitle">
 
                                 <h:column>
-                                    <f:facet name="header">TITLE</f:facet>
+                                    <f:facet name="header">TITLE
+
+                                        <h:commandButton image="resources/images/arrow_top.png" action="#{requestPlaylistMb.sortTable('Title','Asc')}" style="width: 15px" />
+                                        <h:commandButton image="resources/images/arrow_down.png" action="#{requestPlaylistMb.sortTable('Title','Desc')}" style="width: 15px"/>
+
+                                    </f:facet>
                                     #{playlist.playlist_name}
                                 </h:column>
 
                                 <h:column>
-                                    <f:facet name="header">CREATION DATE</f:facet>
+                                    <f:facet name="header">CREATION DATE
+
+                                        <h:commandButton image="resources/images/arrow_top.png" action="#{requestPlaylistMb.sortTable('Creation','Asc')}" style="width: 15px" />
+                                        <h:commandButton image="resources/images/arrow_down.png" action="#{requestPlaylistMb.sortTable('Creation','Desc')}" style="width: 15px"/>
+
+                                    </f:facet>
                                     #{playlist.creation_date}
                                 </h:column>
 
                                 <h:column>
-                                    <f:facet name="header">SIZE</f:facet>
+                                    <f:facet name="header">SIZE
+
+                                        <h:commandButton image="resources/images/arrow_top.png" action="#{requestPlaylistMb.sortTable('Size','Asc')}" style="width: 15px" />
+                                        <h:commandButton image="resources/images/arrow_down.png" action="#{requestPlaylistMb.sortTable('Size','Desc')}" style="width: 15px"/>
+
+                                    </f:facet>
                                     #{playlist.playlist_size}
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header">VIEW/EDIT/DELETE</f:facet>
                                     <h:commandButton type="submit"
@@ -50,18 +65,18 @@ and open the template in the editor.
                                                      action="viewPlaylist" >
                                         <f:setPropertyActionListener target="#{editPlaylistMb.selectedPlaylist}" value="#{playlist}" />
                                     </h:commandButton>
-                                    
+
                                     <h:commandButton type="submit"
                                                      value="Edit" 
                                                      action="#{editPlaylistMb.prepareEdit()}" >
-                                    <f:setPropertyActionListener target="#{editPlaylistMb.selectedPlaylist}" value="#{playlist}" />
+                                        <f:setPropertyActionListener target="#{editPlaylistMb.selectedPlaylist}" value="#{playlist}" />
                                     </h:commandButton>
-                                    
+
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
                                                       action="#{requestPlaylistMb.destroy()}" />
                                 </h:column>
-                                
+
                             </h:dataTable>
                         </h:form>
                     </f:view>

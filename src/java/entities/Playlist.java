@@ -36,12 +36,12 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Playlist.findAll", query = "SELECT p FROM Playlist p"),
     @NamedQuery(name = "Playlist.findPlaylistById", query = "SELECT p FROM Playlist p WHERE p.playlist_id = :playlist_id"),
     @NamedQuery(name = "Playlist.findPlaylistByUser", query = "SELECT p FROM Playlist p WHERE p.user = :user"),
-    @NamedQuery(name = "Playlist.OrderByNameDesc", query = "SELECT p FROM Playlist p ORDER BY p.playlist_name DESC"),
-    @NamedQuery(name = "Playlist.OrderByCreationDesc", query = "SELECT p FROM Playlist p ORDER BY p.creation_date DESC"),
-    @NamedQuery(name = "Playlist.OrderBySizeDesc", query = "SELECT p FROM Playlist p ORDER BY p.playlist_size DESC"),
-    @NamedQuery(name = "Playlist.OrderByNameAsc", query = "SELECT p FROM Playlist p ORDER BY p.playlist_name ASC"),
-    @NamedQuery(name = "Playlist.OrderByCreationAsc", query = "SELECT p FROM Playlist p ORDER BY p.creation_date ASC"),
-    @NamedQuery(name = "Playlist.OrderBySizeAsc", query = "SELECT p FROM Playlist p ORDER BY p.playlist_size ASC"),
+    @NamedQuery(name = "Playlist.OrderByNameDesc", query = "SELECT p FROM Playlist p WHERE p.user = :user ORDER BY p.playlist_name DESC"),
+    @NamedQuery(name = "Playlist.OrderByCreationDesc", query = "SELECT p FROM Playlist p WHERE p.user = :user ORDER BY p.creation_date DESC"),
+    @NamedQuery(name = "Playlist.OrderBySizeDesc", query = "SELECT p FROM Playlist p WHERE p.user = :user ORDER BY p.playlist_size DESC"),
+    @NamedQuery(name = "Playlist.OrderByNameAsc", query = "SELECT p FROM Playlist p WHERE p.user = :user ORDER BY p.playlist_name ASC"),
+    @NamedQuery(name = "Playlist.OrderByCreationAsc", query = "SELECT p FROM Playlist p WHERE p.user = :user ORDER BY p.creation_date ASC"),
+    @NamedQuery(name = "Playlist.OrderBySizeAsc", query = "SELECT p FROM Playlist p WHERE p.user = :user ORDER BY p.playlist_size ASC"),
 })
 public class Playlist implements Serializable {
     private static final long serialVersionUID = 1L;

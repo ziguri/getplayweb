@@ -70,35 +70,35 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         }
     }
     
-    public List<Playlist> orderPlaylist (String atribute, String order){
+    public List<Playlist> orderPlaylist (String atribute, String order, AppUser u){
             
             if (atribute.equals("Title") && order.equals("Asc")){
-                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByNameAsc").getResultList();
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByNameAsc").setParameter("user", u).getResultList();
                 return pl;
             }
             
             if (atribute.equals("Creation") && order.equals("Asc")){
-                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByCreationAsc").getResultList();
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByCreationAsc").setParameter("user", u).getResultList();
                 return pl;
             }
             
             if (atribute.equals("Size") && order.equals("Asc")){
-                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderBySizeAsc").getResultList();
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderBySizeAsc").setParameter("user", u).getResultList();
                 return pl;
             }
             
             if (atribute.equals("Title") && order.equals("Desc")){
-                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByNameDesc").getResultList();
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByNameDesc").setParameter("user", u).getResultList();
                 return pl;
             }
             
             if (atribute.equals("Creation") && order.equals("Desc")){
-                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByCreationDesc").getResultList();
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderByCreationDesc").setParameter("user", u).getResultList();
                 return pl;
             }
             
             if (atribute.equals("Size") && order.equals("Desc")){
-                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderBySizeDesc").getResultList();
+                List<Playlist> pl =(List<Playlist>) em.createNamedQuery("Playlist.OrderBySizeDesc").setParameter("user", u).getResultList();
                 return pl;
             }
             
