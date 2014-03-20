@@ -87,32 +87,18 @@ public class EditPlaylistMb implements Serializable, Converter {
      }
      */
     public String prepareEdit() {
-
-        //selected = this.play.getRowData();
         return "editPlaylist";
     }
 
     public String prepareViewMusicPlaylist() {
-        //getMyPlaylist();
-        //playlist = (Playlist) this.play.getRowData();
         return "viewPlaylist";
     }
 
-    /*
-     public DataModel<Music> viewMusicPlaylist(){
-     //playlist = (Playlist) this.play.getRowData();
-     if (playlist_ejb!= null) {
-     DataModel model = (DataModel<Music>) new ListDataModel(playlist_ejb.showMusicPlaylist(selectedPlaylist));
-     return model;
-     }
-     return null;
-     }*/
     public String addMusicToPlay() {
-
         selectedPlaylist.getMusics().add(musicSelected);
         playlist_ejb.edit(selectedPlaylist);
         selectedPlaylist = null;
-        return "principal";
+        return "listAllMusics";
     }
 
     public String editPlaylist() {

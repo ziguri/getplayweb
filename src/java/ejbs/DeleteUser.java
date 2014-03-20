@@ -8,6 +8,7 @@ package ejbs;
 import entities.AppUser;
 import entities.Playlist;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
 
@@ -22,7 +23,7 @@ public class DeleteUser {
     MusicFacade musics;
     @Inject
     PlaylistFacade playlists;
-    @Inject
+    @EJB
     AppUserFacade users;
     
     public void userRemove(AppUser user) {

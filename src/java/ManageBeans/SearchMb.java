@@ -5,7 +5,7 @@
  */
 package ManageBeans;
 
-import Exception.SearchNullException;
+import Exceptions.SearchNullException;
 import ejbs.MusicFacade;
 import entities.Music;
 import java.io.Serializable;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -24,7 +24,7 @@ import javax.faces.model.ListDataModel;
  * @author Elsa
  */
 @ManagedBean(name = "searchMb")
-@SessionScoped
+@RequestScoped
 public class SearchMb implements Serializable {
 
     @EJB

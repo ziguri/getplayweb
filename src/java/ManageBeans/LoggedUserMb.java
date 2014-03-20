@@ -77,7 +77,7 @@ public class LoggedUserMb implements Serializable {
     }
 
     public String deleteUser() {
-        user_ejb.remove(user);
+        delUser.userRemove(user);
         return "index.xhtml";
     }
 
