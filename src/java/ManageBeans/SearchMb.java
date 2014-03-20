@@ -9,6 +9,7 @@ import Exception.SearchNullException;
 import ejbs.MusicFacade;
 import entities.Music;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -25,14 +26,14 @@ import javax.faces.model.ListDataModel;
 @ManagedBean(name = "searchMb")
 @SessionScoped
 public class SearchMb implements Serializable {
-    
+
     @EJB
     private MusicFacade musics_ejb;
     private String word;
     private String option;
     private DataModel<Music> musics;
     private FacesMessage message;
-    
+
     private String errorMessage;
 
     /**
@@ -42,35 +43,35 @@ public class SearchMb implements Serializable {
         this.musics = null;
         this.message = new FacesMessage();
     }
-    
+
     public MusicFacade getMusics_ejb() {
         return musics_ejb;
     }
-    
+
     public void setMusics_ejb(MusicFacade musics_ejb) {
         this.musics_ejb = musics_ejb;
     }
-    
+
     public String getWord() {
         return word;
     }
-    
+
     public void setWord(String word) {
         this.word = word;
     }
-    
+
     public DataModel<Music> getMusics() {
         return musics;
     }
-    
+
     public void setMusics(DataModel<Music> musics) {
         this.musics = musics;
     }
-    
+
     public String getOption() {
         return option;
     }
-    
+
     public void setOption(String opcion) {
         this.option = opcion;
     }
@@ -90,18 +91,18 @@ public class SearchMb implements Serializable {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-    
+
     public DataModel<Music> resultSearch() {
         DataModel model;
         try {
-            model = (DataModel<Music>) new ListDataModel(musics_ejb.searchByColumn(option, word));
+            List<Music> results = musics_ejb.searchByColumn(option, word);
+            model = (DataModel<Music>) new ListDataModel(results);
             return model;
         } catch (SearchNullException ex) {
             Logger.getLogger(SearchMb.class.getName()).log(Level.SEVERE, null, ex);
-            this.errorMessage = ex.getMessage();
+            errorMessage = ex.getMessage();
             return null;
         }
-        
     }
-    
+
 }

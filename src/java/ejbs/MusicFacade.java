@@ -7,12 +7,12 @@ package ejbs;
 
 import Exception.SearchNullException;
 import entities.AppUser;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import entities.Music;
 import entities.Playlist;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -74,36 +74,36 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
 
-    public List<Music> searchByColumn(String column, String word) throws SearchNullException {//Mostra as músicas resultantes de uma pesquisa.
+    public List<Music> searchByColumn(String column, String word) throws SearchNullException{//Mostra as músicas resultantes de uma pesquisa.
+            
+        List<Music> m = null;
         
         if (column.equals("Title")){       
-        List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByTitle").setParameter("word", "%" + word + "%").getResultList();
-        return m;
+        m = (List<Music>) em.createNamedQuery("Music.findMusicByTitle").setParameter("word", "%" + word + "%").getResultList(); 
         }
         
         if (column.equals("Artist")){       
-        List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByArtist").setParameter("word", "%" + word + "%").getResultList();
-        return m;
+        m = (List<Music>) em.createNamedQuery("Music.findMusicByArtist").setParameter("word", "%" + word + "%").getResultList();
         }
         
         if (column.equals("ArTi")){       
-        List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByTitleOrArtist").setParameter("word", "%" + word + "%").getResultList();
-        return m;
+        m = (List<Music>) em.createNamedQuery("Music.findMusicByTitleOrArtist").setParameter("word", "%" + word + "%").getResultList();
         }
         
-        else{
+        if (m == null){
             throw new SearchNullException();
         }
+        return m;
     }
     
     public List<Music> showUserMusics (AppUser u){
     
-        try {
-            
+        try {            
             List<Music> mus =(List<Music>) em.createNamedQuery("Music.findAllFromUser").setParameter("user", u).getResultList();
             return mus;
         } catch (Exception e) {
             return null;
         }
     }
+
 }
