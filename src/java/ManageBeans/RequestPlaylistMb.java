@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ManageBeans;
 
 import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Playlist;
-import java.util.GregorianCalendar;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -22,18 +20,19 @@ import javax.faces.model.ListDataModel;
  *
  * @author Elsa
  */
-@ManagedBean (name="requestPlaylistMb")
+@ManagedBean(name = "requestPlaylistMb")
 @RequestScoped
 public class RequestPlaylistMb {
+
     @EJB
     private PlaylistFacade playlist_ejb;
-    
+
     @EJB
     private MusicFacade musics_ejb;
-    
-    @ManagedProperty(value="#{logged}")
+
+    @ManagedProperty(value = "#{logged}")
     private LoggedUserMb user;
-    
+
     private DataModel<Playlist> play;
     private Playlist playlist;
 
@@ -41,28 +40,25 @@ public class RequestPlaylistMb {
      * Creates a new instance of PlaylistMB
      */
     public RequestPlaylistMb() {
-        
+
     }
-    
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         this.playlist = new Playlist();
         this.play = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
     }
 
-    public String addPlaylist(){
-        
-        GregorianCalendar gc = new GregorianCalendar();
+    public String addPlaylist() {
 
-        playlist.setPlaylist_size(0);
-        playlist.setCreation_date(gc.getTime());
+        
+        
         playlist_ejb.addPlaylist(playlist, user.getUser());
         return "principal";
-    } 
-      
+    }
+
     public DataModel<Playlist> getMyPlaylist() {
-        if (playlist_ejb!= null) {
+        if (playlist_ejb != null) {
             DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
             play = model;
             return model;
@@ -70,21 +66,21 @@ public class RequestPlaylistMb {
         return null;
     }
 
-    public String sortTable(String column, String order){
-        
+    public String sortTable(String column, String order) {
+
         DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.orderPlaylist(column, order, user.getUser()));
         play = model;
         return null;
-        
+
     }
-      
+
     public String destroy() {
         playlist = (Playlist) this.play.getRowData();
         playlist_ejb.remove(playlist);
         getMyPlaylist();
         return "listMyPlaylist";
     }
-    
+
     public PlaylistFacade getPlaylist_ejb() {
         return playlist_ejb;
     }
@@ -124,5 +120,5 @@ public class RequestPlaylistMb {
     public void setPlay(DataModel<Playlist> play) {
         this.play = play;
     }
-    
+
 }

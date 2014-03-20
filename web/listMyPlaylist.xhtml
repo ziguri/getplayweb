@@ -35,7 +35,7 @@ and open the template in the editor.
                                         <h:commandButton image="resources/images/arrow_down.png" action="#{requestPlaylistMb.sortTable('Title','Desc')}" style="width: 15px"/>
 
                                     </f:facet>
-                                    #{playlist.playlist_name}
+                                    #{playlist.name}
                                 </h:column>
 
                                 <h:column>
@@ -45,7 +45,7 @@ and open the template in the editor.
                                         <h:commandButton image="resources/images/arrow_down.png" action="#{requestPlaylistMb.sortTable('Creation','Desc')}" style="width: 15px"/>
 
                                     </f:facet>
-                                    #{playlist.creation_date}
+                                    #{playlist.creationDate}
                                 </h:column>
 
                                 <h:column>
@@ -55,7 +55,7 @@ and open the template in the editor.
                                         <h:commandButton image="resources/images/arrow_down.png" action="#{requestPlaylistMb.sortTable('Size','Desc')}" style="width: 15px"/>
 
                                     </f:facet>
-                                    #{playlist.playlist_size}
+                                    #{playlist.size}
                                 </h:column>
 
                                 <h:column>

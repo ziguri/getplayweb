@@ -27,7 +27,7 @@ and open the template in the editor.
                             <h1><h:outputText value="All Musics"/></h1>
                             <h:outputLabel value="YOUR PLAYLIST´S:"/>
                             <h:selectOneMenu value="#{editPlaylistMb.selectedPlaylist}" converter="#{editPlaylistMb}">
-                                <f:selectItems value="#{editPlaylistMb.myPlaylists()}" var="p" itemLabel="#{p.playlist_name}"/>
+                                <f:selectItems value="#{editPlaylistMb.myPlaylists()}" var="p" itemLabel="#{p.name}"/>
                             </h:selectOneMenu>
                             <h:dataTable value="#{requestMusicMb.musicList}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" 
 
