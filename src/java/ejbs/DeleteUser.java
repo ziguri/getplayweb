@@ -6,7 +6,7 @@
 package ejbs;
 
 import entities.AppUser;
-import entities.Music;
+import entities.Playlist;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
@@ -22,12 +22,20 @@ public class DeleteUser {
     MusicFacade musics;
     @Inject
     PlaylistFacade playlists;
+    @Inject
+    AppUserFacade users;
+    
+    public void userRemove(AppUser user) {
 
-    public boolean userRemove(AppUser user) {
-
-        List<Music> userMusics = musics.showUserMusics(user);
-
-        return true;
+        List<Playlist> p = playlists.findAll();
+        
+        for (int i = 0; i<p.size(); i++){
+            for (int j=0; j<p.get(i).getMusics().size(); j++){
+                if(p.get(i).getMusics().get(j).getUser().equals(user)){
+                    p.get(i).getMusics().remove(p.get(i).getMusics().get(j));
+                }
+            }
+        }
+        users.remove(user);
     }
-
 }
