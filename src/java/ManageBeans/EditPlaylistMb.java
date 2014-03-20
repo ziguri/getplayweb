@@ -7,14 +7,11 @@ package ManageBeans;
 
 import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
-
 import entities.Music;
 import entities.Playlist;
 import java.io.Serializable;
 import java.util.List;
-
 import javax.ejb.EJB;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -23,7 +20,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.event.ActionEvent;
-
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -45,7 +41,7 @@ public class EditPlaylistMb implements Serializable, Converter {
     private Music musicSelected;
 
 //    private DataModel<Playlist> play;
-    private Playlist selectedPlaylist=null;
+    private Playlist selectedPlaylist = null;
     private List<Playlist> itemsPlays = null;
 
     /**
@@ -55,68 +51,67 @@ public class EditPlaylistMb implements Serializable, Converter {
 
     }
     /*
-    public Playlist[] myPlaylists(){
+     public Playlist[] myPlaylists(){
     
-        DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
-        int size = model.getRowCount();
+     DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
+     int size = model.getRowCount();
         
-        Playlist[] playlists = new Playlist [size];
+     Playlist[] playlists = new Playlist [size];
         
-        for(int i=0; i<size; i++){
+     for(int i=0; i<size; i++){
         
-            model.setRowIndex(i);
-            playlists [i] = (Playlist) model.getRowData();
-        }
+     model.setRowIndex(i);
+     playlists [i] = (Playlist) model.getRowData();
+     }
         
-        return playlists;
-    }
-    */
-    
-    public void pickAction(ActionEvent ev){
-    
+     return playlists;
+     }
+     */
+
+    public void pickAction(ActionEvent ev) {
+
         selectedPlaylist = (Playlist) ev.getSource();
     }
-    
-    public List<Playlist> myPlaylists(){
- 
-        //itemsPlays= playlist_ejb.showMyPlaylist(user.getUser());
-        itemsPlays= user.getUser().getPlaylists();
+
+    public List<Playlist> myPlaylists() {
+
+        itemsPlays = playlist_ejb.showMyPlaylist(user.getUser());
+        //itemsPlays= user.getUser().getPlaylists();
         return itemsPlays;
     }
-    
+
     /*
-    public List<Playlist> getUserPlaylists() {
-        play = user.getUser().getPlaylists();
-        return play;
-    }
-*/
+     public List<Playlist> getUserPlaylists() {
+     play = user.getUser().getPlaylists();
+     return play;
+     }
+     */
     public String prepareEdit() {
 
         //selected = this.play.getRowData();
         return "editPlaylist";
     }
-    
-    public String prepareViewMusicPlaylist(){
+
+    public String prepareViewMusicPlaylist() {
         //getMyPlaylist();
         //playlist = (Playlist) this.play.getRowData();
         return "viewPlaylist";
     }
-    
+
     /*
-    public DataModel<Music> viewMusicPlaylist(){
-        //playlist = (Playlist) this.play.getRowData();
-        if (playlist_ejb!= null) {
-            DataModel model = (DataModel<Music>) new ListDataModel(playlist_ejb.showMusicPlaylist(selectedPlaylist));
-            return model;
-        }
-        return null;
-    }*/
-    
+     public DataModel<Music> viewMusicPlaylist(){
+     //playlist = (Playlist) this.play.getRowData();
+     if (playlist_ejb!= null) {
+     DataModel model = (DataModel<Music>) new ListDataModel(playlist_ejb.showMusicPlaylist(selectedPlaylist));
+     return model;
+     }
+     return null;
+     }*/
     public String addMusicToPlay() {
-        
+
         selectedPlaylist.getMusics().add(musicSelected);
         playlist_ejb.edit(selectedPlaylist);
-        selectedPlaylist=null;
+        selectedPlaylist = null;
         return "principal";
     }
 
@@ -164,7 +159,6 @@ public class EditPlaylistMb implements Serializable, Converter {
 //    public void setPlay(DataModel<Playlist> play) {
 //        this.play = play;
 //    }
-
     public Music getMusicSelected() {
         return musicSelected;
     }
@@ -180,16 +174,13 @@ public class EditPlaylistMb implements Serializable, Converter {
     public void setItemsPlays(List<Playlist> itemsPlays) {
         this.itemsPlays = itemsPlays;
     }
-    
-    
-    public DataModel<Music> getPlaylistMusics(){
-    
+
+    public DataModel<Music> getPlaylistMusics() {
+
         DataModel model = (DataModel<Music>) new ListDataModel(musics_ejb.showMusicsPlaylist(selectedPlaylist));
         return model;
-        
+
     }
-    
-    
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -206,7 +197,7 @@ public class EditPlaylistMb implements Serializable, Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        
+
         if (value == null) {
             return null;
         }
@@ -218,7 +209,5 @@ public class EditPlaylistMb implements Serializable, Converter {
         String id = ((Playlist) value).getId().toString();
         return (id != null) ? id.toString() : null;
     }
-    
-    
 
 }
