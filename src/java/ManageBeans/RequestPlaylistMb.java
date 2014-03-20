@@ -51,8 +51,6 @@ public class RequestPlaylistMb {
 
     public String addPlaylist() {
 
-        
-        
         playlist_ejb.addPlaylist(playlist, user.getUser());
         return "principal";
     }

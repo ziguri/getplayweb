@@ -26,8 +26,8 @@ and open the template in the editor.
                         <h:form>
                             <h1><h:outputText value="My Musics"/></h1>
                             <h:outputLabel value="YOUR PLAYLIST´S:"/>
-                            <h:selectOneMenu value="#{editPlaylistMb.selectedPlaylist}" converter="#{editPlaylistMb}">
-                                <f:selectItems value="#{editPlaylistMb.myPlaylists()}" var="p" itemLabel="#{p.name}"/>
+                            <h:selectOneMenu value="#{sessionMb.selectedPlaylist}" converter="#{sessionMb}">
+                                <f:selectItems value="#{sessionMb.myPlaylists()}" var="p" itemLabel="#{p.name}"/>
                             </h:selectOneMenu>
                             <h:dataTable value="#{requestMusicMb.myMusicList}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" styleClass="dataTable"
                                          headerClass="dataTableTitle">
@@ -67,24 +67,24 @@ and open the template in the editor.
                                     <h:commandButton type="submit" 
                                                      value="Edit" 
                                                      action="editMusic" >
-                                        <f:setPropertyActionListener target="#{editMusicMb.selected}" value="#{music}" />
+                                        <f:setPropertyActionListener target="#{sessionMb.musicSelected}" value="#{music}" />
                                     </h:commandButton>
 
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
-                                                      action="#{editMusicMb.destroy()}" >
-                                        <f:setPropertyActionListener target="#{editMusicMb.selected}" value="#{music}" />
+                                                      action="#{sessionMb.destroy()}" >
+                                        <f:setPropertyActionListener target="#{sessionMb.musicSelected}" value="#{music}" />
                                     </h:commandButton>
-                                    
+
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">ADD TO PLAYLIST</f:facet>
-                                    <h:commandButton type="submit" value="+" action="#{editPlaylistMb.addMusicToPlay()}" >
-                                        <f:setPropertyActionListener target="#{editPlaylistMb.musicSelected}" value="#{music}" />
+                                    <h:commandButton type="submit" value="+" action="#{sessionMb.addMusicToPlay()}" >
+                                        <f:setPropertyActionListener target="#{sessionMb.musicSelected}" value="#{music}" />
                                     </h:commandButton>
                                 </h:column>
-                                
+
                                 <h:column>
                                     <h:commandButton image="resources/images/play.png" action="search.xhtml"/>
                                 </h:column>

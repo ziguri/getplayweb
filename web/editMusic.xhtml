@@ -15,26 +15,26 @@ and open the template in the editor.
         <ui:composition template="Template/GetPlayTemp.xhtml">
 
             <ui:define name="content">
-                
-                 <h:form>
+
+                <h:form>
                     <br></br>
                     <h:outputLabel value="Title"/>
                     <br></br>
-                    <h:inputText label="Title" value="#{editMusicMb.selected.title}" />
+                    <h:inputText label="Title" value="#{sessionMb.musicSelected.title}" />
                     <br></br>
                     <h:outputLabel value="Artist"/>
                     <br></br>
-                    <h:inputText label="Artist" value="#{editMusicMb.selected.artist}"/>
+                    <h:inputText label="Artist" value="#{sessionMb.musicSelected.artist}"/>
                     <br></br>
                     <h:outputLabel value="Album"/>
                     <br></br>
-                    <h:inputText label="Album" value="#{editMusicMb.selected.album}"/>
+                    <h:inputText label="Album" value="#{sessionMb.musicSelected.album}"/>
                     <br></br>
                     <h:outputLabel value="Year"/>
                     <br></br>
-                    <h:inputText label="Year" value="#{editMusicMb.selected.music_year}"/>
+                    <h:inputText label="Year" value="#{sessionMb.musicSelected.music_year}"/>
                     <br></br>
-                    <h:commandButton type="submit"  value="Save" action="#{editMusicMb.editMusic()}"  />
+                    <h:commandButton type="submit"  value="Save" action="#{sessionMb.editMusic()}"  />
                 </h:form>
 
             </ui:define>

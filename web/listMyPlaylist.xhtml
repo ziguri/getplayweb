@@ -63,18 +63,18 @@ and open the template in the editor.
                                     <h:commandButton type="submit"
                                                      value="View" 
                                                      action="viewPlaylist" >
-                                        <f:setPropertyActionListener target="#{editPlaylistMb.selectedPlaylist}" value="#{playlist}" />
+                                        <f:setPropertyActionListener target="#{sessionMb.selectedPlaylist}" value="#{playlist}" />
                                     </h:commandButton>
 
                                     <h:commandButton type="submit"
                                                      value="Edit" 
-                                                     action="#{editPlaylistMb.prepareEdit()}" >
-                                        <f:setPropertyActionListener target="#{editPlaylistMb.selectedPlaylist}" value="#{playlist}" />
+                                                     action="editPlaylist" >
+                                        <f:setPropertyActionListener target="#{sessionMb.selectedPlaylist}" value="#{playlist}" />
                                     </h:commandButton>
 
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
-                                                      action="#{requestPlaylistMb.destroy()}" />
+                                                      action="#{requestPlaylistMb.destroy}" />
                                 </h:column>
 
                             </h:dataTable>

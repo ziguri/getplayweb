@@ -27,46 +27,28 @@ import javax.faces.model.ListDataModel;
  *
  * @author Elsa
  */
-@ManagedBean(name = "editPlaylistMb")
+@ManagedBean(name = "sessionMb")
 @SessionScoped
-public class EditPlaylistMb implements Serializable, Converter {
+public class SessionMb implements Serializable, Converter {
 
     private static final long serialVersionUID = 1L;
     @EJB
     private PlaylistFacade playlist_ejb;
     @EJB
-    private MusicFacade musics_ejb;
+    private MusicFacade music_ejb;
     @ManagedProperty(value = "#{logged}")
     private LoggedUserMb user;
     private Music musicSelected;
-
-//    private DataModel<Playlist> play;
     private Playlist selectedPlaylist = null;
     private List<Playlist> itemsPlays = null;
+    private DataModel<Music> musics;
 
     /**
      * Creates a new instance of PlaylistMB
      */
-    public EditPlaylistMb() {
+    public SessionMb() {
 
     }
-    /*
-     public Playlist[] myPlaylists(){
-    
-     DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
-     int size = model.getRowCount();
-        
-     Playlist[] playlists = new Playlist [size];
-        
-     for(int i=0; i<size; i++){
-        
-     model.setRowIndex(i);
-     playlists [i] = (Playlist) model.getRowData();
-     }
-        
-     return playlists;
-     }
-     */
 
     public void pickAction(ActionEvent ev) {
 
@@ -76,18 +58,7 @@ public class EditPlaylistMb implements Serializable, Converter {
     public List<Playlist> myPlaylists() {
 
         itemsPlays = playlist_ejb.showMyPlaylist(user.getUser());
-        //itemsPlays= user.getUser().getPlaylists();
         return itemsPlays;
-    }
-
-    /*
-     public List<Playlist> getUserPlaylists() {
-     play = user.getUser().getPlaylists();
-     return play;
-     }
-     */
-    public String prepareEdit() {
-        return "editPlaylist";
     }
 
     public String prepareViewMusicPlaylist() {
@@ -95,10 +66,11 @@ public class EditPlaylistMb implements Serializable, Converter {
     }
 
     public String addMusicToPlay() {
+
         selectedPlaylist.getMusics().add(musicSelected);
         playlist_ejb.edit(selectedPlaylist);
         selectedPlaylist = null;
-        return "listAllMusics";
+        return "principal";
     }
 
     public String editPlaylist() {
@@ -122,12 +94,12 @@ public class EditPlaylistMb implements Serializable, Converter {
         this.selectedPlaylist = selected;
     }
 
-    public MusicFacade getMusics_ejb() {
-        return musics_ejb;
+    public MusicFacade getMusic_ejb() {
+        return music_ejb;
     }
 
-    public void setMusics_ejb(MusicFacade musics_ejb) {
-        this.musics_ejb = musics_ejb;
+    public void setMusic_ejb(MusicFacade music_ejb) {
+        this.music_ejb = music_ejb;
     }
 
     public LoggedUserMb getUser() {
@@ -138,13 +110,6 @@ public class EditPlaylistMb implements Serializable, Converter {
         this.user = user;
     }
 
-//    public DataModel<Playlist> getPlay() {
-//        return play;
-//    }
-//
-//    public void setPlay(DataModel<Playlist> play) {
-//        this.play = play;
-//    }
     public Music getMusicSelected() {
         return musicSelected;
     }
@@ -163,11 +128,51 @@ public class EditPlaylistMb implements Serializable, Converter {
 
     public DataModel<Music> getPlaylistMusics() {
 
-        DataModel model = (DataModel<Music>) new ListDataModel(musics_ejb.showMusicsPlaylist(selectedPlaylist));
+        DataModel model = (DataModel<Music>) new ListDataModel(music_ejb.showMusicsPlaylist(selectedPlaylist));
         return model;
 
     }
 
+    public DataModel<Music> getMusics() {
+        return musics;
+    }
+
+    public void setMusics(DataModel<Music> musics) {
+        this.musics = musics;
+    }
+
+    public String removeMusicPlaylist() {
+
+        selectedPlaylist.getMusics().remove(musicSelected);
+        playlist_ejb.edit(selectedPlaylist);
+        return "viewPlaylist";
+    }
+
+    //Começa aqui a transferência desde o EditMusicMb
+    public String destroy() {
+
+        if (musicSelected.getUser().equals(user.getUser())) {
+            music_ejb.remove(musicSelected);
+
+            return "listAllMusics";
+        }
+        return "listAllMusics";
+
+    }
+
+    public String editMusic() {
+
+        if (musicSelected.getUser().equals(user.getUser())) {
+            music_ejb.edit(musicSelected);
+
+            return "listAllMusics";
+        } else {
+            return "listAllMusics";
+        }
+
+    }
+
+    //Acaba aqui a transferência desde o EditMusciMb
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if (value == null || value.isEmpty()) {
