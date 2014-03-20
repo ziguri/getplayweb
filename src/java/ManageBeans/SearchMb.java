@@ -5,15 +5,16 @@
  */
 package ManageBeans;
 
+import Exception.SearchNullException;
 import ejbs.MusicFacade;
 import entities.Music;
-import entities.Playlist;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -31,6 +32,8 @@ public class SearchMb implements Serializable {
     private String option;
     private DataModel<Music> musics;
     private FacesMessage message;
+    
+    private String errorMessage;
 
     /**
      * Creates a new instance of SearchMb
@@ -71,10 +74,34 @@ public class SearchMb implements Serializable {
     public void setOption(String opcion) {
         this.option = opcion;
     }
+
+    public FacesMessage getMessage() {
+        return message;
+    }
+
+    public void setMessage(FacesMessage message) {
+        this.message = message;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
     
     public DataModel<Music> resultSearch() {
-        DataModel model = (DataModel<Music>) new ListDataModel(musics_ejb.searchByColumn(option, word));
-        return model;
+        DataModel model;
+        try {
+            model = (DataModel<Music>) new ListDataModel(musics_ejb.searchByColumn(option, word));
+            return model;
+        } catch (SearchNullException ex) {
+            Logger.getLogger(SearchMb.class.getName()).log(Level.SEVERE, null, ex);
+            this.errorMessage = ex.getMessage();
+            return null;
+        }
+        
     }
     
 }

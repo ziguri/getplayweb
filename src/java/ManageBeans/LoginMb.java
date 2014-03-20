@@ -5,10 +5,13 @@
  */
 package ManageBeans;
 
+import Exception.DuplicateEmailException;
 import ejbs.AppUserFacade;
 import ejbs.CodificarMD5;
 import entities.AppUser;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -31,6 +34,8 @@ public class LoginMb implements Serializable {
     private String password;
     @ManagedProperty(value = "#{logged}")
     private LoggedUserMb logado;
+    
+    private String errorMessageExperience;
 
     /**
      * Creates a new instance of LoginMb
@@ -113,4 +118,25 @@ public class LoginMb implements Serializable {
             return "registo";
         }
     }
+    
+    public String addUser2() {
+        try {
+            user_ejb.addUser2(user);
+            return "index.xhtml";
+        } catch (DuplicateEmailException ex) {
+            Logger.getLogger(LoginMb.class.getName()).log(Level.SEVERE, null, ex);
+            errorMessageExperience = ex.getMessage();
+            return null;
+        }
+    }
+
+    public String getErrorMessageExperience() {
+        return errorMessageExperience;
+    }
+
+    public void setErrorMessageExperience(String errorMessageExperience) {
+        this.errorMessageExperience = errorMessageExperience;
+    }
+    
+    
 }

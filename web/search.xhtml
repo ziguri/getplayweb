@@ -18,7 +18,7 @@ and open the template in the editor.
     <h:body>
 
         <ui:composition template="Template/GetPlayTemp.xhtml">
-            
+
             <ui:define name="content">
 
                 <h:form>
@@ -29,45 +29,45 @@ and open the template in the editor.
 
                                 <h:column>
                                     <f:facet name="header">TITLE</f:facet>
-                                    #{music.title}
+                                        #{music.title}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">ARTIST</f:facet>
-                                    #{music.artist}
+                                        #{music.artist}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">ALBUM</f:facet>
-                                    #{music.album}
+                                        #{music.album}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">YEAR</f:facet>
-                                    #{music.music_year}
+                                        #{music.music_year}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">PATH</f:facet>
-                                    #{music.music_path}
+                                        #{music.music_path}
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">USER</f:facet>
-                                    #{music.user}
+                                        #{music.user}
                                 </h:column>
-                                
+
                                 <h:column>
                                     <f:facet name="header">EDIT/DELETE</f:facet>
                                     <h:commandButton type="submit"
                                                      value="Edit" 
                                                      action="#{EditMusicMb.prepareEdit()}" />
-                                    
+
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
                                                       action="#{RequestMusicMb.destroy()}" />
                                 </h:column>
-                                
+
                                 <h:column>      
                                     <f:facet name="header">ADD TO PLAYLIST</f:facet>
                                     <h:commandButton type="submit"
@@ -75,6 +75,9 @@ and open the template in the editor.
                                                      action="#{musicMb}" />
                                 </h:column>    
                             </h:dataTable>
+                            <br/>
+                            <p></p>
+                            <h:outputLabel value="#{searchMb.errorMessage}" style="color: #e33b06; font-weight: bold"/>
                         </h:form>
                     </f:view>
 

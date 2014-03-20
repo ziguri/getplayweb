@@ -44,7 +44,10 @@
                     <h:message for="pass" class="message"/>
                     <br></br>
                     <p></p>
-                    <h:commandButton type="submit"  value="Save" action="#{loginMb.addUser}"  class="button"/>
+                    <h:commandButton type="submit"  value="Save" action="#{loginMb.addUser2()}"  class="button"/>
+                    <br/>
+                    <p></p>
+                    <h:outputLabel value="#{loginMb.errorMessageExperience}" style="color: #e33b06; font-weight: bold"/>
                 </h:form>
 
             </ui:define>

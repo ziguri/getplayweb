@@ -5,6 +5,7 @@
  */
 package ejbs;
 
+import Exception.SearchNullException;
 import entities.AppUser;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -73,7 +74,7 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
 
-    public List<Music> searchByColumn(String column, String word) {//Mostra as músicas resultantes de uma pesquisa.
+    public List<Music> searchByColumn(String column, String word) throws SearchNullException {//Mostra as músicas resultantes de uma pesquisa.
         
         if (column.equals("Title")){       
         List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByTitle").setParameter("word", "%" + word + "%").getResultList();
@@ -90,7 +91,9 @@ public class MusicFacade extends AbstractFacade<Music> {
         return m;
         }
         
-        return null;
+        else{
+            throw new SearchNullException();
+        }
     }
     
     public List<Music> showUserMusics (AppUser u){

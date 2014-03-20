@@ -5,11 +5,14 @@
  */
 package ejbs;
 
+import Exception.DuplicateEmailException;
+import entities.AppUser;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import entities.AppUser;
-
 
 /**
  *
@@ -31,9 +34,22 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
     }
 
     public void addUser(AppUser u) {
-            String pass = CodificarMD5.cryptWithMD5(u.getPassword());
-            u.setPassword(pass);
+        String pass = CodificarMD5.cryptWithMD5(u.getPassword());
+        u.setPassword(pass);
+        this.create(u);
+    }
+
+    public void addUser2(AppUser u) throws DuplicateEmailException {
+        String pass = CodificarMD5.cryptWithMD5(u.getPassword());
+        u.setPassword(pass);
+        try {
+            this.existUser2(u.getEmail());
             this.create(u);
+        } catch (DuplicateEmailException ex) {
+            Logger.getLogger(AppUserFacade.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DuplicateEmailException();
+        }
+
     }
 
     public void editUserLogado(AppUser u) {
@@ -45,8 +61,7 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
             System.err.println("Excepção " + e);
         }
     }
-    
-    
+
     public AppUser existUser(String email) {
 
         try {
@@ -56,6 +71,16 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
 
             return null;
         }
+    }
+
+    public boolean existUser2(String email) throws DuplicateEmailException {
+        try {
+            AppUser u = (AppUser) em.createNamedQuery("appuser.findByEmail").setParameter("email", email).getSingleResult();
+            throw new DuplicateEmailException();
+        } catch (NoResultException ex) {
+            return true;
+        }
+
     }
 
     public AppUser validaPassword(String email, String password) {
