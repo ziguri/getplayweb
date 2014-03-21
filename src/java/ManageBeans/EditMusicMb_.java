@@ -9,11 +9,10 @@ import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Music;
 import java.io.Serializable;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
+import javax.inject.Inject;
 
 /**
  *
@@ -23,12 +22,12 @@ import javax.faces.model.DataModel;
 @SessionScoped
 public class EditMusicMb_ implements Serializable {
 
-    @EJB
+    @Inject
     private MusicFacade music_ejb;
-    @EJB
+    @Inject
     private PlaylistFacade playlist_ejb;
-    @ManagedProperty(value = "#{logged}")
-    private LoggedUserMb user;
+    @Inject
+    private LoggedUserEjb user;
     private DataModel<Music> musics;
     private Music musicSelected;
 

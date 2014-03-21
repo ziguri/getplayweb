@@ -27,15 +27,15 @@
             <ui:insert name="top" >
                 <h:form class="logform">
                     <h:outputLabel value="Welcome "/>
-                    <h:outputLabel value="#{logged.user.name}"/>
+                    <h:outputLabel value="#{sessionMb.loggedUser.user.name}"/>
                     <br></br>
-                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
+                    <h:commandButton value="Logout" action="#{sessionMb.loggedUser.logout()}"/>
 
                     <h:commandButton value="Edit"  
                                      action="editUser.xhtml"/>
 
                     <h:commandButton value="Delete User"
-                                     action="#{logged.deleteUser()}"/>
+                                     action="#{sessionMb.loggedUser.deleteUser()}"/>
 
                 </h:form>
 
@@ -50,22 +50,22 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <h:form style="margin-left: 15px;" class="searchform">
-                        <h:inputText id="search" value="#{searchMb.word}" style="width: 140px;
-                                     -webkit-box-shadow:0 0 10px rgba(225, 225, 225, 1);
-                                     -moz-box-shadow:0 0 10px rgba(225, 225, 225, 1);
-                                     box-shadow:0 0 10px rgba(225, 225, 225, 1); margin-left: -17px;" />
-                        <h:commandButton image="resources/images/search.png" action="search.xhtml" style="margin-left: 10px; margin-bottom: -5px;"/>
-                        <br></br>
-                        <h:selectOneRadio value="#{searchMb.option}" style="color: #FFFFFF; text-align: center; margin-left: -20px;">
-                            <f:selectItem itemValue="Artist"  itemLabel="Artist" />   
-                            <f:selectItem itemValue="Title"  itemLabel="Title"/>   
-                            <f:selectItem itemValue="ArTi" itemLabel="Both"/>   
-                        </h:selectOneRadio>
-                        <br></br>
-                    </h:form>
-                    <p></p>
+                    <h:inputText id="search" value="#{searchMb.word}" style="width: 140px;
+                                 -webkit-box-shadow:0 0 10px rgba(225, 225, 225, 1);
+                                 -moz-box-shadow:0 0 10px rgba(225, 225, 225, 1);
+                                 box-shadow:0 0 10px rgba(225, 225, 225, 1); margin-left: -17px;" />
+                    <h:commandButton image="resources/images/search.png" action="search.xhtml" style="margin-left: 10px; margin-bottom: -5px;"/>
+                    <br></br>
+                    <h:selectOneRadio value="#{searchMb.option}" style="color: #FFFFFF; text-align: center; margin-left: -20px;">
+                        <f:selectItem itemValue="Artist"  itemLabel="Artist" />   
+                        <f:selectItem itemValue="Title"  itemLabel="Title"/>   
+                        <f:selectItem itemValue="ArTi" itemLabel="Both"/>   
+                    </h:selectOneRadio>
+                    <br></br>
+                </h:form>
+                <p></p>
             </ui:insert>
         </div>
 
@@ -93,9 +93,9 @@
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
-<!--        <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
-        </div>-->
+        <!--        <div id="bottom">
+                    <ui:insert name="bottom">Bottom</ui:insert>
+                </div>-->
 
     </h:body>
 

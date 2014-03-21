@@ -9,29 +9,28 @@ import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Playlist;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author Elsa
  */
-@ManagedBean(name = "requestPlaylistMb")
+@Named("requestPlaylistMb")
 @RequestScoped
 public class RequestPlaylistMb {
 
-    @EJB
+    @Inject
     private PlaylistFacade playlist_ejb;
 
-    @EJB
+    @Inject
     private MusicFacade musics_ejb;
 
-    @ManagedProperty(value = "#{logged}")
-    private LoggedUserMb user;
+    @Inject
+    private LoggedUserEjb user;
 
     private DataModel<Playlist> play;
     private Playlist playlist;
@@ -103,11 +102,11 @@ public class RequestPlaylistMb {
         this.musics_ejb = musics_ejb;
     }
 
-    public LoggedUserMb getUser() {
+    public LoggedUserEjb getUser() {
         return user;
     }
 
-    public void setUser(LoggedUserMb user) {
+    public void setUser(LoggedUserEjb user) {
         this.user = user;
     }
 

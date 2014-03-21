@@ -9,9 +9,8 @@ import ejbs.AppUserFacade;
 import ejbs.DeleteUser;
 import entities.AppUser;
 import java.io.Serializable;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -20,12 +19,13 @@ import javax.servlet.http.HttpSession;
  *
  * @author Zueb LDA
  */
-@ManagedBean(name = "logged")
+//@ManagedBean(name = "logged")
 @SessionScoped
-public class LoggedUserMb implements Serializable {
+@Stateful(name = "logged")
+public class LoggedUserEjb implements Serializable {
 
     private AppUser user;
-    @EJB
+    @Inject
     private AppUserFacade user_ejb;
     private String password;
     @Inject
@@ -34,7 +34,7 @@ public class LoggedUserMb implements Serializable {
     /**
      * Creates a new instance of LoggedUser
      */
-    public LoggedUserMb() {
+    public LoggedUserEjb() {
 
     }
 
