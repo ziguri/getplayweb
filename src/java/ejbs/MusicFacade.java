@@ -74,32 +74,32 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
 
-    public List<Music> searchByColumn(String column, String word) throws SearchNullException{//Mostra as músicas resultantes de uma pesquisa.
-            
+    public List<Music> searchByColumn(String column, String word) throws SearchNullException {//Mostra as músicas resultantes de uma pesquisa.
+
         List<Music> m = null;
-        
-        if (column.equals("Title")){       
-        m = (List<Music>) em.createNamedQuery("Music.findMusicByTitle").setParameter("word", "%" + word + "%").getResultList(); 
+
+        if (column.equals("Title")) {
+            m = (List<Music>) em.createNamedQuery("Music.findMusicByTitle").setParameter("word", "%" + word + "%").getResultList();
         }
-        
-        if (column.equals("Artist")){       
-        m = (List<Music>) em.createNamedQuery("Music.findMusicByArtist").setParameter("word", "%" + word + "%").getResultList();
+
+        if (column.equals("Artist")) {
+            m = (List<Music>) em.createNamedQuery("Music.findMusicByArtist").setParameter("word", "%" + word + "%").getResultList();
         }
-        
-        if (column.equals("ArTi")){       
-        m = (List<Music>) em.createNamedQuery("Music.findMusicByTitleOrArtist").setParameter("word", "%" + word + "%").getResultList();
+
+        if (column.equals("ArTi")) {
+            m = (List<Music>) em.createNamedQuery("Music.findMusicByTitleOrArtist").setParameter("word", "%" + word + "%").getResultList();
         }
-        
-        if (m == null){
+
+        if (m.isEmpty()) {
             throw new SearchNullException();
         }
         return m;
     }
-    
-    public List<Music> showUserMusics (AppUser u){
-    
-        try {            
-            List<Music> mus =(List<Music>) em.createNamedQuery("Music.findAllFromUser").setParameter("user", u).getResultList();
+
+    public List<Music> showUserMusics(AppUser u) {
+
+        try {
+            List<Music> mus = (List<Music>) em.createNamedQuery("Music.findAllFromUser").setParameter("user", u).getResultList();
             return mus;
         } catch (Exception e) {
             return null;

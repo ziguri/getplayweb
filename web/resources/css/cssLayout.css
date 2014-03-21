@@ -315,3 +315,11 @@ html, body {
     border-collapse: collapse;
     color: #e33b06;
 }
+
+.playBtn{
+    width: 35%;
+}
+
+.playBtn:hover{
+    width: 42%
+}
