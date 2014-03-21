@@ -12,29 +12,28 @@ import entities.AppUser;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author Elsa
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class LoginMb implements Serializable {
 
-    @EJB
+    @Inject
     private AppUserFacade user_ejb;
     private AppUser user;
     private String email;
     private String password;
-    @ManagedProperty(value = "#{logged}")
-    private LoggedUserMb logado;
-    
+    @Inject
+    private LoggedUserEjb logado;
+
     private String errorMessageExperience;
 
     /**
@@ -67,11 +66,11 @@ public class LoginMb implements Serializable {
         this.password = password;
     }
 
-    public LoggedUserMb getLogado() {
+    public LoggedUserEjb getLogado() {
         return logado;
     }
 
-    public void setLogado(LoggedUserMb logado) {
+    public void setLogado(LoggedUserEjb logado) {
         this.logado = logado;
     }
 
@@ -94,6 +93,7 @@ public class LoginMb implements Serializable {
         if (us != null) {
 
             logado.setUser(us);
+            logado.getUser().getName();
             return "listAllMusics";
 
         } else {
@@ -118,7 +118,7 @@ public class LoginMb implements Serializable {
             return "registo";
         }
     }
-    
+
     public String addUser2() {
         try {
             user_ejb.addUser2(user);
@@ -137,6 +137,5 @@ public class LoginMb implements Serializable {
     public void setErrorMessageExperience(String errorMessageExperience) {
         this.errorMessageExperience = errorMessageExperience;
     }
-    
-    
+
 }

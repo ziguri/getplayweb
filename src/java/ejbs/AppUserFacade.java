@@ -52,16 +52,11 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
 
     }
 
-    public boolean editUserLogado(AppUser u, String email) throws DuplicateEmailException {
-        try {
-            u = (AppUser) em.createNamedQuery("appuser.findByEmail").setParameter("email", email).getSingleResult();
+    public void editUserLogado(AppUser u) {
+ 
             String pass = CodificarMD5.cryptWithMD5(u.getPassword());
             u.setPassword(pass);
             this.edit(u);
-            throw new DuplicateEmailException();
-        } catch (NoResultException ex) {
-            return true;
-        }
     }
 
     public AppUser existUser(String email) {

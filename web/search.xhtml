@@ -25,7 +25,14 @@ and open the template in the editor.
                     <f:view>
                         <h:form>
                             <h1>Search for <h:outputText value="#{searchMb.word}"/></h1>
-                            <h:dataTable value="#{searchMb.resultSearch()}" var="music" border="1" cellpadding="2" cellspacing="2" style="border:solid 1px" rules="all">
+                            <h:outputLabel value="YOUR PLAYLIST´S:"/>
+                            <h:selectOneMenu value="#{sessionMb.selectedPlaylist}" converter="#{sessionMb}">
+                                <f:selectItems value="#{sessionMb.myPlaylists()}" var="p" itemLabel="#{p.name}"/>
+                            </h:selectOneMenu>
+                            <h:dataTable value="#{searchMb.resultSearch()}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" 
+                                         styleClass="dataTable"
+                                         headerClass="dataTableTitle"
+                                         >
 
                                 <h:column>
                                     <f:facet name="header">TITLE</f:facet>
@@ -54,13 +61,17 @@ and open the template in the editor.
 
                                 <h:column>
                                     <f:facet name="header">USER</f:facet>
-                                        #{music.user}
+                                        #{music.user.name}
                                 </h:column>
                                 <h:column>      
-                                    <f:facet name="header">ADD TO PLAYLIST</f:facet>
+                                    <f:facet name="header" class="dataTableTitle">ADD TO PLAYLIST</f:facet>
                                     <h:commandButton type="submit" value="+" action="#{sessionMb.addMusicToPlay()}" >
                                         <f:setPropertyActionListener target="#{sessionMb.musicSelected}" value="#{music}" />
                                     </h:commandButton>
+                                </h:column>
+
+                                <h:column>
+                                    <h:commandButton image="resources/images/play.png" action="search.xhtml" style="width: 42%;"/>
                                 </h:column>    
                             </h:dataTable>
                             <br/>

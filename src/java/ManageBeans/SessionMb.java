@@ -14,10 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -25,22 +22,25 @@ import javax.faces.convert.ConverterException;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author Elsa
  */
-@ManagedBean(name = "sessionMb")
+@Named("sessionMb")
 @SessionScoped
 public class SessionMb implements Serializable, Converter {
 
     private static final long serialVersionUID = 1L;
-    @EJB
+    @Inject
     private PlaylistFacade playlist_ejb;
-    @EJB
+    @Inject
     private MusicFacade music_ejb;
-    @ManagedProperty(value = "#{logged}")
-    private LoggedUserMb user;
+    @Inject
+    private LoggedUserEjb loggedUser;
+
     private Music musicSelected;
     private Playlist selectedPlaylist = null;
     private List<Playlist> itemsPlays = null;
@@ -61,7 +61,7 @@ public class SessionMb implements Serializable, Converter {
 
     public List<Playlist> myPlaylists() {
 
-        itemsPlays = playlist_ejb.showMyPlaylist(user.getUser());
+        itemsPlays = playlist_ejb.showMyPlaylist(loggedUser.getUser());
         return itemsPlays;
     }
 
@@ -84,7 +84,7 @@ public class SessionMb implements Serializable, Converter {
     }
 
     public String editPlaylist() {
-        playlist_ejb.editPlaylist(selectedPlaylist, user.getUser());
+        playlist_ejb.editPlaylist(selectedPlaylist, loggedUser.getUser());
         return "listMyPlaylist";
     }
 
@@ -112,12 +112,12 @@ public class SessionMb implements Serializable, Converter {
         this.music_ejb = music_ejb;
     }
 
-    public LoggedUserMb getUser() {
-        return user;
+    public LoggedUserEjb getLoggedUser() {
+        return loggedUser;
     }
 
-    public void setUser(LoggedUserMb user) {
-        this.user = user;
+    public void setLoggedUser(LoggedUserEjb loggedUser) {
+        this.loggedUser = loggedUser;
     }
 
     public Music getMusicSelected() {
@@ -169,7 +169,7 @@ public class SessionMb implements Serializable, Converter {
     //Começa aqui a transferência desde o EditMusicMb
     public String destroy() {
 
-        if (musicSelected.getUser().equals(user.getUser())) {
+        if (musicSelected.getUser().equals(loggedUser.getUser())) {
             music_ejb.remove(musicSelected);
 
             return "listAllMusics";
@@ -180,7 +180,7 @@ public class SessionMb implements Serializable, Converter {
 
     public String editMusic() {
 
-        if (musicSelected.getUser().equals(user.getUser())) {
+        if (musicSelected.getUser().equals(loggedUser.getUser())) {
             music_ejb.edit(musicSelected);
 
             return "listAllMusics";

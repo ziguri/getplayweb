@@ -12,33 +12,32 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
-import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.Part;
 
 /**
  *
  * @author Elsa
  */
-@ManagedBean(name = "requestMusicMb")
+@Named("requestMusicMb")
 @RequestScoped
 public class RequestMusicMb implements Serializable {
 
-    @EJB
+    @Inject
     private MusicFacade music_ejb;
     private DataModel<Music> items = null;
     private Music music;
     private String pathToSave;
-    @ManagedProperty(value = "#{logged}")
-    private LoggedUserMb user;
+    @Inject
+    private LoggedUserEjb user;
     private int selectedItemIndex;
-    private DataModel <Music> musics;
+    private DataModel<Music> musics;
     private String musicPath;
     private Part file1;
 
@@ -47,7 +46,7 @@ public class RequestMusicMb implements Serializable {
      */
     public RequestMusicMb() {
         this.music = new Music();
-        musics=null;
+        musics = null;
     }
 
     public String addMusic() throws IOException {
@@ -70,7 +69,7 @@ public class RequestMusicMb implements Serializable {
         inputStream.close();
 
         music_ejb.addMusic(music, user.getUser(), musicPath);
-        
+
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Music inserted successfully"));
 
         return "principal";
@@ -90,9 +89,9 @@ public class RequestMusicMb implements Serializable {
         }
         return null;
     }
-    
-    public DataModel<Music> getMyMusicList(){
-    
+
+    public DataModel<Music> getMyMusicList() {
+
         DataModel model = (DataModel<Music>) new ListDataModel(music_ejb.showUserMusics(user.getUser()));
         return model;
     }
@@ -111,14 +110,14 @@ public class RequestMusicMb implements Serializable {
 
     public String destroy() {
         //music = (Music) this.musics.getRowData();
-         if(music.getUser().equals(user.getUser())){
+        if (music.getUser().equals(user.getUser())) {
             music_ejb.remove(music);
             //recreateModel();
             getMusicList();
             return "listAllMusics";
         }
         return "listAllMusics";
-        
+
     }
 
     private void recreateModel() {
@@ -161,11 +160,11 @@ public class RequestMusicMb implements Serializable {
         this.pathToSave = pathToSave;
     }
 
-    public LoggedUserMb getUser() {
+    public LoggedUserEjb getUser() {
         return user;
     }
 
-    public void setUser(LoggedUserMb user) {
+    public void setUser(LoggedUserEjb user) {
         this.user = user;
     }
 

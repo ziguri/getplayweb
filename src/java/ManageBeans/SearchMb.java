@@ -12,22 +12,22 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author Elsa
  */
-@ManagedBean(name = "searchMb")
+@Named("searchMb")
 @RequestScoped
 public class SearchMb implements Serializable {
 
-    @EJB
+    @Inject
     private MusicFacade musics_ejb;
     private String word;
     private String option;

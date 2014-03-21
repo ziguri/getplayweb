@@ -5,16 +5,12 @@
  */
 package ManageBeans;
 
-import Exceptions.DuplicateEmailException;
 import ejbs.AppUserFacade;
 import ejbs.DeleteUser;
 import entities.AppUser;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -23,12 +19,13 @@ import javax.servlet.http.HttpSession;
  *
  * @author Zueb LDA
  */
-@ManagedBean(name = "logged")
+//@ManagedBean(name = "logged")
 @SessionScoped
-public class LoggedUserMb implements Serializable {
+@Stateful(name = "logged")
+public class LoggedUserEjb implements Serializable {
 
     private AppUser user;
-    @EJB
+    @Inject
     private AppUserFacade user_ejb;
     private String password;
     @Inject
@@ -38,7 +35,7 @@ public class LoggedUserMb implements Serializable {
     /**
      * Creates a new instance of LoggedUser
      */
-    public LoggedUserMb() {
+    public LoggedUserEjb() {
 
     }
 
@@ -92,19 +89,13 @@ public class LoggedUserMb implements Serializable {
     }
 
     public String editUser() {
-        try {
-            user_ejb.editUserLogado(user, user.getEmail());
+            user_ejb.editUserLogado(user);
             return "principal";
-        } catch (DuplicateEmailException ex) {
-            Logger.getLogger(LoggedUserMb.class.getName()).log(Level.SEVERE, null, ex);
-            errorMessage = ex.getMessage();
-            return null;
-        }
         
     }
 
     public String deleteUser() {
-        delUser.userRemove(user);
+        user_ejb.remove(user);
         return "index.xhtml";
     }
 
