@@ -5,12 +5,15 @@
  */
 package ManageBeans;
 
+import Exceptions.MusicsAlreadyExistInPlaylist;
 import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Music;
 import entities.Playlist;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -42,6 +45,7 @@ public class SessionMb implements Serializable, Converter {
     private Playlist selectedPlaylist = null;
     private List<Playlist> itemsPlays = null;
     private DataModel<Music> musics;
+    private String messageErrorMusic;
 
     /**
      * Creates a new instance of PlaylistMB
@@ -65,12 +69,18 @@ public class SessionMb implements Serializable, Converter {
         return "viewPlaylist";
     }
 
-    public String addMusicToPlay() {
+    public String addMusicToPlay() throws MusicsAlreadyExistInPlaylist {
+        try {
+            selectedPlaylist.getMusics().add(musicSelected);
+            playlist_ejb.edit(selectedPlaylist);
+            selectedPlaylist = null;
+            throw new MusicsAlreadyExistInPlaylist();
+        } catch (MusicsAlreadyExistInPlaylist m) {
+            Logger.getLogger(SessionMb.class.getName()).log(Level.SEVERE, null, m);
+            messageErrorMusic = m.getMessage();
+            return null;
+        }
 
-        selectedPlaylist.getMusics().add(musicSelected);
-        playlist_ejb.edit(selectedPlaylist);
-        selectedPlaylist = null;
-        return "principal";
     }
 
     public String editPlaylist() {
@@ -139,6 +149,14 @@ public class SessionMb implements Serializable, Converter {
 
     public void setMusics(DataModel<Music> musics) {
         this.musics = musics;
+    }
+
+    public String getMessageErrorMusic() {
+        return messageErrorMusic;
+    }
+
+    public void setMessageErrorMusic(String messageErrorMusic) {
+        this.messageErrorMusic = messageErrorMusic;
     }
 
     public String removeMusicPlaylist() {

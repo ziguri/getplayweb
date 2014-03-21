@@ -5,10 +5,13 @@
  */
 package ManageBeans;
 
+import Exceptions.DuplicateEmailException;
 import ejbs.AppUserFacade;
 import ejbs.DeleteUser;
 import entities.AppUser;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -30,6 +33,7 @@ public class LoggedUserMb implements Serializable {
     private String password;
     @Inject
     private DeleteUser delUser;
+    private String errorMessage;
 
     /**
      * Creates a new instance of LoggedUser
@@ -62,6 +66,22 @@ public class LoggedUserMb implements Serializable {
         this.password = password;
     }
 
+    public DeleteUser getDelUser() {
+        return delUser;
+    }
+
+    public void setDelUser(DeleteUser delUser) {
+        this.delUser = delUser;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
     public String logout() {
 
         FacesContext context = FacesContext.getCurrentInstance();
@@ -72,8 +92,15 @@ public class LoggedUserMb implements Serializable {
     }
 
     public String editUser() {
-        user_ejb.editUserLogado(user);
-        return "principal";
+        try {
+            user_ejb.editUserLogado(user, user.getEmail());
+            return "principal";
+        } catch (DuplicateEmailException ex) {
+            Logger.getLogger(LoggedUserMb.class.getName()).log(Level.SEVERE, null, ex);
+            errorMessage = ex.getMessage();
+            return null;
+        }
+        
     }
 
     public String deleteUser() {
