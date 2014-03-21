@@ -5,7 +5,7 @@
  */
 package ManageBeans;
 
-import Exception.DuplicateEmailException;
+import Exceptions.DuplicateEmailException;
 import ejbs.AppUserFacade;
 import ejbs.CodificarMD5;
 import entities.AppUser;

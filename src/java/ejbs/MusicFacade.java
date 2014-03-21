@@ -5,7 +5,7 @@
  */
 package ejbs;
 
-import Exception.SearchNullException;
+import Exceptions.SearchNullException;
 import entities.AppUser;
 import entities.Music;
 import entities.Playlist;

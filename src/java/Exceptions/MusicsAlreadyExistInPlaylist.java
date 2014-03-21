@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 
-package Exception;
+package Exceptions;
 
 /**
  *
  * @author Elsa
  */
-public class MusicsExistsInPlaylist extends Exception{
-    
+public class MusicsAlreadyExistInPlaylist extends Exception{
+    public MusicsAlreadyExistInPlaylist(){
+        super("This music already exist in the select playlist.");
+    }
 }

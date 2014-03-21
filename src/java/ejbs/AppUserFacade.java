@@ -5,7 +5,7 @@
  */
 package ejbs;
 
-import Exception.DuplicateEmailException;
+import Exceptions.DuplicateEmailException;
 import entities.AppUser;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -5,7 +5,7 @@
  */
 package ManageBeans;
 
-import Exception.SearchNullException;
+import Exceptions.SearchNullException;
 import ejbs.MusicFacade;
 import entities.Music;
 import java.io.Serializable;
