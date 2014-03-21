@@ -35,6 +35,7 @@ public class LoginMb implements Serializable {
     private LoggedUserEjb logado;
 
     private String errorMessageExperience;
+    private String successfullyRegistered;
 
     /**
      * Creates a new instance of LoginMb
@@ -85,6 +86,15 @@ public class LoginMb implements Serializable {
         this.user = user;
     }
 
+    public String getSuccessfullyRegistered() {
+        return successfullyRegistered;
+    }
+
+    public void setSuccessfullyRegistered(String successfullyRegistered) {
+        this.successfullyRegistered = successfullyRegistered;
+    }
+      
+
     public String confirmaLogin() {
 
         String pass = CodificarMD5.cryptWithMD5(this.password);
@@ -119,14 +129,15 @@ public class LoginMb implements Serializable {
         }
     }
 
-    public String addUser2() {
+    public void addUser2() {
         try {
             user_ejb.addUser2(user);
-            return "index.xhtml";
+            successfullyRegistered="Successfully Registered!!!!";
+//            return "index.xhtml";
         } catch (DuplicateEmailException ex) {
             Logger.getLogger(LoginMb.class.getName()).log(Level.SEVERE, null, ex);
             errorMessageExperience = ex.getMessage();
-            return null;
+//            return null;
         }
     }
 
