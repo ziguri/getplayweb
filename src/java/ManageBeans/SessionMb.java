@@ -69,13 +69,14 @@ public class SessionMb implements Serializable, Converter {
     public String prepareViewMusicPlaylist() {
         return "viewPlaylist";
     }
-
-    public String addMusicToPlay() throws MusicsAlreadyExistInPlaylist {
+    
+    public String addMusicToPlay2(){
         try {
-            selectedPlaylist.getMusics().add(musicSelected);
+            playlist_ejb.addMusicToPlaylist(selectedPlaylist, musicSelected);
             playlist_ejb.edit(selectedPlaylist);
+            messageErrorMusic = null;
             selectedPlaylist = null;
-            throw new MusicsAlreadyExistInPlaylist();
+            return null;
         } catch (MusicsAlreadyExistInPlaylist m) {
             Logger.getLogger(SessionMb.class.getName()).log(Level.SEVERE, null, m);
             messageErrorMusic = m.getMessage();
