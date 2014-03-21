@@ -10,6 +10,7 @@ import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Music;
 import entities.Playlist;
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -170,6 +171,9 @@ public class SessionMb implements Serializable, Converter {
     public String destroy() {
 
         if (musicSelected.getUser().equals(loggedUser.getUser())) {
+
+            File file = new File(musicSelected.getMusic_path());
+            file.delete();
             music_ejb.remove(musicSelected);
 
             return "listAllMusics";
