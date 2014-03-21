@@ -10,23 +10,26 @@
         <ui:composition template="Template/GetPlayTemp.xhtml">
 
             <ui:define name="content">
-                
-                 <h:form>
+
+                <h:form>
                     <br></br>
                     <h:outputLabel value="Nome"/>
                     <br></br>
-                    <h:inputText label="Nome" value="#{logged.user.name}" />
+                    <h:inputText label="Nome" value="#{sessionMb.loggedUser.user.name}" />
                     <br></br>
                     <h:outputLabel value="Email"/>
                     <br></br>
-                    <h:inputText label="Email" value="#{logged.user.email}"/>
+                    <h:outputLabel value="#{sessionMb.loggedUser.user.email}"/>
                     <br></br>
                     <h:outputLabel value="Password"/>
                     <br></br>
-                    <h:inputSecret id="pass"  label="Password" value="#{logged.user.password}"/>
+                    <h:inputSecret id="pass"  label="Password" value="#{sessionMb.loggedUser.user.password}"/>
                     <h:message for="pass" style="color: red"/>
                     <br></br>
-                    <h:commandButton type="submit"  value="Save" action="#{logged.editUser()}"  />
+                    <h:commandButton type="submit"  value="Save" action="#{sessionMb.loggedUser.editUser()}"  />
+                    <br/>
+                    <p></p>
+                    <h:outputLabel value="#{sessionMb.loggedUser.errorMessage}" style="color: #e33b06; font-weight: bold"/>
                 </h:form>
 
             </ui:define>

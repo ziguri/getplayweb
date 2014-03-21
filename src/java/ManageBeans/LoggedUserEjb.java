@@ -30,6 +30,7 @@ public class LoggedUserEjb implements Serializable {
     private String password;
     @Inject
     private DeleteUser delUser;
+    private String errorMessage;
 
     /**
      * Creates a new instance of LoggedUser
@@ -62,6 +63,22 @@ public class LoggedUserEjb implements Serializable {
         this.password = password;
     }
 
+    public DeleteUser getDelUser() {
+        return delUser;
+    }
+
+    public void setDelUser(DeleteUser delUser) {
+        this.delUser = delUser;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
     public String logout() {
 
         FacesContext context = FacesContext.getCurrentInstance();
@@ -72,8 +89,9 @@ public class LoggedUserEjb implements Serializable {
     }
 
     public String editUser() {
-        user_ejb.editUserLogado(user);
-        return "principal";
+            user_ejb.editUserLogado(user);
+            return "principal";
+        
     }
 
     public String deleteUser() {
