@@ -5,7 +5,7 @@
  */
 package ejbs;
 
-import Exceptions.MusicsAlreadyExistInPlaylist;
+import Exceptions.MusicsAlreadyExistInPlaylistException;
 import entities.AppUser;
 import entities.Music;
 import entities.Playlist;
@@ -50,10 +50,10 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         return igual;
     }
 
-    public void addMusicToPlaylist(Playlist p, Music m) throws MusicsAlreadyExistInPlaylist {
+    public void addMusicToPlaylist(Playlist p, Music m) throws MusicsAlreadyExistInPlaylistException {
         boolean igual = musicExistInPlaylist(p, m);
         if (igual) {
-            throw new MusicsAlreadyExistInPlaylist();
+            throw new MusicsAlreadyExistInPlaylistException();
         } else {
             p.getMusics().add(m);
         }

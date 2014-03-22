@@ -10,8 +10,8 @@ package Exceptions;
  *
  * @author Elsa
  */
-public class MusicsAlreadyExistInPlaylist extends Exception{
-    public MusicsAlreadyExistInPlaylist(){
+public class MusicsAlreadyExistInPlaylistException extends Exception{
+    public MusicsAlreadyExistInPlaylistException(){
         super("This music already exist in the select playlist.");
     }
 }

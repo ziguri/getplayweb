@@ -12,6 +12,7 @@ import entities.AppUser;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -41,6 +42,12 @@ public class LoginMb implements Serializable {
      * Creates a new instance of LoginMb
      */
     public LoginMb() {
+    }
+    
+    @PostConstruct
+    public void init() {
+        this.errorMessageExperience = null;
+        this.successfullyRegistered = null;
     }
 
     public AppUserFacade getUser_ejb() {
@@ -107,7 +114,7 @@ public class LoginMb implements Serializable {
             return "listAllMusics";
 
         } else {
-
+            errorMessageExperience = "Login or Password Invalid. Please try again.";
             return "index";
         }
     }

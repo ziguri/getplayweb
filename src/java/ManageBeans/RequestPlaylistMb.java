@@ -34,24 +34,31 @@ public class RequestPlaylistMb {
 
     private DataModel<Playlist> play;
     private Playlist playlist;
+    private String message;
 
     /**
      * Creates a new instance of PlaylistMB
      */
     public RequestPlaylistMb() {
-
     }
 
     @PostConstruct
     public void init() {
         this.playlist = new Playlist();
         this.play = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
+        this.message = null;
     }
 
-    public String addPlaylist() {
-
-        playlist_ejb.addPlaylist(playlist, user.getUser());
-        return "principal";
+    public void addPlaylist() {
+        if (!this.playlist.getName().equals("")){
+            playlist_ejb.addPlaylist(playlist, user.getUser());
+            this.message = "Playlist " + playlist.getName() + " create with success.";
+            
+        }
+        else {
+            this.message = "Invalid Name. Please insert a name for your playlist.";
+            
+        }
     }
 
     public DataModel<Playlist> getMyPlaylist() {
@@ -116,6 +123,14 @@ public class RequestPlaylistMb {
 
     public void setPlay(DataModel<Playlist> play) {
         this.play = play;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }

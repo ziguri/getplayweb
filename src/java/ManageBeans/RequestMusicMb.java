@@ -7,14 +7,14 @@ package ManageBeans;
 
 import ejbs.MusicFacade;
 import entities.Music;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Inject;
@@ -40,40 +40,51 @@ public class RequestMusicMb implements Serializable {
     private DataModel<Music> musics;
     private String musicPath;
     private Part file1;
+    private String message;
 
     /**
      * Creates a new instance of MusicMb
      */
     public RequestMusicMb() {
-        this.music = new Music();
-        musics = null;
+
     }
 
-    public String addMusic() throws IOException {
+    @PostConstruct
+    public void init() {
+        this.music = new Music();
+        this.musics = null;
+        this.message = null;
+    }
 
-        musicPath = "C:\\APPGetPlayWeb\\" + file1.getSubmittedFileName();
-        InputStream inputStream = file1.getInputStream();
-        FileOutputStream outputStream = new FileOutputStream(musicPath);
+    public void addMusic() throws FileNotFoundException, IOException {
+        try {
+ 
+                musicPath = "C:\\APPGetPlayWeb\\" + file1.getSubmittedFileName();
+                InputStream inputStream = file1.getInputStream();
+                FileOutputStream outputStream = new FileOutputStream(musicPath);
 
-        byte[] buffer = new byte[4096];
-        int bytesRead = 0;
-        while (true) {
-            bytesRead = inputStream.read(buffer);
-            if (bytesRead > 0) {
-                outputStream.write(buffer, 0, bytesRead);
-            } else {
-                break;
-            }
+                byte[] buffer = new byte[4096];
+                int bytesRead = 0;
+                while (true) {
+                    bytesRead = inputStream.read(buffer);
+                    if (bytesRead > 0) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    } else {
+                        break;
+                    }
+                }
+                outputStream.close();
+                inputStream.close();
+                music_ejb.addMusic(music, user.getUser(), musicPath);
+                message = "Music " + music.getTitle() + " create with success.";
+
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex.getMessage());
+            message = "File not found. Please try again";
+
+        } catch (IOException ex2) {
+            System.err.println(ex2.getMessage());
         }
-        outputStream.close();
-        inputStream.close();
-
-        music_ejb.addMusic(music, user.getUser(), musicPath);
-
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Music inserted successfully"));
-
-        return "principal";
-
     }
 
     public List<Music> viewAllMusic() {
@@ -182,6 +193,30 @@ public class RequestMusicMb implements Serializable {
 
     public void setFile1(Part file1) {
         this.file1 = file1;
+    }
+
+    public DataModel<Music> getMusics() {
+        return musics;
+    }
+
+    public void setMusics(DataModel<Music> musics) {
+        this.musics = musics;
+    }
+
+    public String getMusicPath() {
+        return musicPath;
+    }
+
+    public void setMusicPath(String musicPath) {
+        this.musicPath = musicPath;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }
