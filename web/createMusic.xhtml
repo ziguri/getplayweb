@@ -16,34 +16,38 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <ui:composition template="Template/GetPlayTemp.xhtml">
-           
+
             <ui:define name="content">
 
                 <h:form id="form" enctype="multipart/form-data" >
                     <h1><h:outputText value="Insert New Music"/></h1>
                     <br></br>
-                    <h:outputLabel value="Title"/>
-                    <br></br>
-                    <h:inputText label="Title" value="#{requestMusicMb.music.title}" />
-                    <br></br>
-                    <h:outputLabel value="Artist"/>
-                    <br></br>
-                    <h:inputText label="Artist" value="#{requestMusicMb.music.artist}"/>
-                    <br></br>
-                    <h:outputLabel value="Album"/>
-                    <br></br>
-                    <h:inputText label="Album" value="#{requestMusicMb.music.album}"/>
-                    <br></br>
-                    <h:outputLabel value="Year"/>
-                    <br></br>
-                    <h:inputText label="Year" value="#{requestMusicMb.music.music_year}"/>
-                    <br></br>
-                    <h:outputLabel value="Path"/>
-                    <br></br>
-                    <h:inputFile id="f" required="true" requiredMessage="Please choose a file" value="#{requestMusicMb.file1}" />
-                    <h:message for="f" errorClass="errorMessage" />
-                    <br></br>
-                    <h:commandButton type="submit"  value="Save" action="#{requestMusicMb.addMusic()}"  />
+                    <h:panelGrid columns="2" cellspacing="10">
+                        <h:outputLabel value="Title"/>
+                        <h:inputText label="Title" value="#{requestMusicMb.music.title}" />
+
+                        <h:outputLabel value="Artist"/>
+                        <h:inputText label="Artist" value="#{requestMusicMb.music.artist}"/>
+
+                        <h:outputLabel value="Album"/>
+                        <h:inputText label="Album" value="#{requestMusicMb.music.album}"/>
+
+                        <h:outputLabel value="Year"/>
+                        <h:inputText label="Year" value="#{requestMusicMb.music.music_year}"/>
+
+                        <h:outputLabel value="Path"/>
+                        <h:inputFile id="f" required="true" requiredMessage="Please choose a file" value="#{requestMusicMb.file1}" />
+                        <h:message for="f" errorClass="errorMessage" />
+                        <p></p>
+
+                        <h:commandButton type="submit"  value="Save" action="#{requestMusicMb.addMusic()}"  />
+                        
+
+                    </h:panelGrid>
+
+                    <p></p>
+                    <h:outputLabel value="#{requestMusicMb.message}" style="color: #e33b06; font-weight: bold"/>
+
                 </h:form>
 
             </ui:define>

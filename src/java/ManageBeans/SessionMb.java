@@ -43,15 +43,18 @@ public class SessionMb implements Serializable, Converter {
     private Playlist selectedPlaylist = null;
     private List<Playlist> itemsPlays = null;
     private DataModel<Music> musics;
-    private String messageErrorMusic;
+    private String message;
 
     /**
      * Creates a new instance of PlaylistMB
      */
     public SessionMb() {
-
     }
-
+    
+    @PostConstruct
+    public void init() {
+        this.message = null;
+    }
     public void pickAction(ActionEvent ev) {
 
         selectedPlaylist = (Playlist) ev.getSource();
@@ -151,12 +154,12 @@ public class SessionMb implements Serializable, Converter {
         this.musics = musics;
     }
 
-    public String getMessageErrorMusic() {
-        return messageErrorMusic;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMessageErrorMusic(String messageErrorMusic) {
-        this.messageErrorMusic = messageErrorMusic;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String removeMusicPlaylist() {
@@ -175,9 +178,9 @@ public class SessionMb implements Serializable, Converter {
             file.delete();
             music_ejb.remove(musicSelected);
 
-            return "listAllMusics";
+            return "listMyMusics";
         }
-        return "listAllMusics";
+        return "listMyMusics";
 
     }
 
@@ -186,9 +189,9 @@ public class SessionMb implements Serializable, Converter {
         if (musicSelected.getUser().equals(loggedUser.getUser())) {
             music_ejb.edit(musicSelected);
 
-            return "listAllMusics";
+            return "listMyMusics";
         } else {
-            return "listAllMusics";
+            return "listMyMusics";
         }
 
     }

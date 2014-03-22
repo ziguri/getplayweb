@@ -5,7 +5,7 @@
  */
 package ejbs;
 
-import Exceptions.MusicsAlreadyExistInPlaylist;
+import Exceptions.MusicsAlreadyExistInPlaylistException;
 import entities.AppUser;
 import entities.Music;
 import entities.Playlist;

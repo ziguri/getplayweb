@@ -29,8 +29,9 @@ public class MusicFacade extends AbstractFacade<Music> {
             m.setMusic_path(path);
             m.setUser(u);
             this.create(m);
+            
         } catch (Exception e) {
-            System.out.println("Excepção " + e);
+            System.err.println("Exception " + e);
         }
     }
 
@@ -41,7 +42,7 @@ public class MusicFacade extends AbstractFacade<Music> {
             this.edit(m);
 
         } catch (Exception e) {
-            System.out.println("Excepção " + e);
+            System.out.println("Exception " + e);
         }
     }
 

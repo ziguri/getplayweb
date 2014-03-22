@@ -7,18 +7,18 @@
         <title>User Register</title>
         <h:outputStylesheet name="css/cssLayout.css"/>
     </h:head>
-    
+
     <h:body class="center_content">
-        
+
         <ui:composition template="Template/GetPlayStart.xhtml">
-            
+
             <ui:define name="top">
             </ui:define>
 
             <ui:define name="content">
-                
-                 <h:form>
-                    
+
+                <h:form>
+
                     <h:outputLabel class="logtitulos" value="Welcome to"/>
                     <p></p>
                     <img src="resources/images/logo_branco.png" width="200" alt="logo_branco"/>
@@ -28,26 +28,23 @@
                     <p></p>
                     <h:messages id="messages" layout="table" infoClass="info" errorClass="error" style="color: #e33b06;" />
                     <br></br>
-                    <h:outputLabel value="Nome" class="textLabel"/>
-                    <br></br>
-                    <h:inputText label="Nome" value="#{loginMb.user.name}" />
-                    <br></br>
-                    <p></p>
-                    <h:outputLabel value="Email" class="textLabel"/>
-                    <br></br>
-                    <h:inputText label="Email" value="#{loginMb.user.email}"/>
-                    <br></br>
-                    <p></p>
-                    <h:outputLabel value="Password" class="textLabel"/>
-                    <br></br>
-                    <h:inputSecret id="pass"  label="Password" value="#{loginMb.user.password}"/>
-                    <h:message for="pass" class="message"/>
-                    <br></br>
-                    <p></p>
-                    <h:commandButton type="submit"  value="Save" action="#{loginMb.addUser2()}"  class="button"/>
                     
-                    <h:button value="Return"  outcome="index.xhtml"  class="button"/>
-                    <br></br>
+                    <h:panelGrid columns="2" cellspacing="10">
+                        
+                        <h:outputLabel value="Nome" class="textLabel"/>
+                        <h:inputText label="Nome" value="#{loginMb.user.name}" />
+                        
+                        <h:outputLabel value="Email" class="textLabel"/>
+                        <h:inputText label="Email" value="#{loginMb.user.email}"/>
+
+                        <h:outputLabel value="Password" class="textLabel"/>
+                        <h:inputSecret id="pass"  label="Password" value="#{loginMb.user.password}"/>
+
+                        <h:commandButton type="submit"  value="Save" action="#{loginMb.addUser2()}"  class="button"/>
+
+                        <h:button value="Return"  outcome="index.xhtml"  class="button"/>
+                        
+                    </h:panelGrid>
                     <h:outputLabel value="#{loginMb.successfullyRegistered}" style="color: #e33b06; font-weight: bold"/>
                     <br/>
                     <p></p>

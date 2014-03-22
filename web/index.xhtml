@@ -5,7 +5,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
-        <title>Facelet Title</title>
+        <title>GetPlayWeb</title>
         <h:outputStylesheet name="css/cssLayout.css"/>
     </h:head>
 
@@ -20,25 +20,28 @@
                     <img src="resources/images/logo_branco.png" width="400" alt="logo_branco"/>
                     <p></p>
 
-                    <h:outputLabel class="textLabel" value="Email "/>
-                    <h:inputText label="Email" value="#{loginMb.email}"/>
+                    <h:panelGrid columns="2" cellspacing="10">
+
+                        <h:outputLabel class="textLabel" value="Email "/>
+                        <h:inputText label="Email" value="#{loginMb.email}"/>
+
+                        <h:outputLabel class="textLabel" value="Password "/>
+                        <h:inputSecret label="Password" value="#{loginMb.password}"/>
+
+                        <h:commandButton type="submit"  
+                                         value="Login"
+                                         class="button"
+                                         action="#{loginMb.confirmaLogin}"/>
+
+                        <h:commandButton type="submit"  
+                                         value="Register" 
+                                         class="button"
+                                         action="registo.xhtml"/>
+
+                    </h:panelGrid>
+
                     <p></p>
-                    
-                    <h:outputLabel class="textLabel" value="Password "/>
-                    <h:inputSecret label="Password" value="#{loginMb.password}"/>
-                    <p></p>
-                   
-                    <h:commandButton type="submit"  
-                                     value="Login"
-                                     class="button"
-                                     action="#{loginMb.confirmaLogin}"/>
-                    
-                    <h:outputLabel value="  "/>
-                    
-                    <h:commandButton type="submit"  
-                                     value="Register" 
-                                     class="button"
-                                     action="registo.xhtml"/>
+                    <h:outputLabel value="#{loginMb.errorMessageExperience}" style="color: #e33b06; font-weight: bold"/>
 
                 </h:form>
             </ui:define>

@@ -9,6 +9,7 @@ import ejbs.AppUserFacade;
 import ejbs.DeleteUser;
 import entities.AppUser;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Zueb LDA
  */
+
 //@ManagedBean(name = "logged")
 @SessionScoped
 @Stateful(name = "logged")
@@ -36,7 +38,11 @@ public class LoggedUserEjb implements Serializable {
      * Creates a new instance of LoggedUser
      */
     public LoggedUserEjb() {
-
+    }
+    
+    @PostConstruct
+    public void init() {
+        this.errorMessage = null;
     }
 
     public AppUser getUser() {
