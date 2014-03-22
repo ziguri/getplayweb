@@ -5,7 +5,6 @@
  */
 package ManageBeans;
 
-import Exceptions.MusicsAlreadyExistInPlaylist;
 import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Music;
@@ -13,8 +12,6 @@ import entities.Playlist;
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -69,21 +66,22 @@ public class SessionMb implements Serializable, Converter {
     public String prepareViewMusicPlaylist() {
         return "viewPlaylist";
     }
-    
-    public String addMusicToPlay2(){
-        try {
-            playlist_ejb.addMusicToPlaylist(selectedPlaylist, musicSelected);
-            playlist_ejb.edit(selectedPlaylist);
-            messageErrorMusic = null;
-            selectedPlaylist = null;
-            return null;
-        } catch (MusicsAlreadyExistInPlaylist m) {
-            Logger.getLogger(SessionMb.class.getName()).log(Level.SEVERE, null, m);
-            messageErrorMusic = m.getMessage();
-            return null;
-        }
+    /*
+     public String addMusicToPlay() {
+     try {
+     playlist_ejb.addMusicToPlaylist(selectedPlaylist.getId(), musicSelected.getId());
+     //playlist_ejb.edit(selectedPlaylist);
+     messageErrorMusic = null;
+     selectedPlaylist = null;
+     return null;
+     } catch (MusicsAlreadyExistInPlaylist m) {
+     Logger.getLogger(SessionMb.class.getName()).log(Level.SEVERE, null, m);
+     messageErrorMusic = m.getMessage();
+     return null;
+     }
 
-    }
+     }
+     */
 
     public String editPlaylist() {
         playlist_ejb.editPlaylist(selectedPlaylist, loggedUser.getUser());

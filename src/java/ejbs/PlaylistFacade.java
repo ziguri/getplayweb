@@ -11,6 +11,7 @@ import entities.Music;
 import entities.Playlist;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -23,6 +24,9 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
 
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
+
+    @Inject
+    private MusicFacade musicBean;
 
     public void addPlaylist(Playlist p, AppUser u) {
         try {
@@ -38,8 +42,8 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         p.setUser(u);
         this.edit(p);
     }
-    
-    public boolean musicExistInPlaylist(Playlist p, Music m){
+
+    public boolean musicExistInPlaylist(Playlist p, Music m) {
         boolean igual = false;
 
         for (int i = 0; i < p.getMusics().size() && !igual; i++) {
@@ -50,13 +54,34 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         return igual;
     }
 
-    public void addMusicToPlaylist(Playlist p, Music m) throws MusicsAlreadyExistInPlaylist {
-        boolean igual = musicExistInPlaylist(p, m);
-        if (igual) {
+//    public void addMusicToPlaylist(Integer playlistId, Integer musicId) throws MusicsAlreadyExistInPlaylist {
+//
+//        // TODO retrieve entities
+//        Music music = musicBean.find(musicId);
+//        Playlist playlist = this.find(playlistId);
+//
+//        boolean equal = musicExistInPlaylist(playlist, music);
+//
+//        if (equal) {
+//            throw new MusicsAlreadyExistInPlaylist();
+//        } else {
+//            playlist.getMusics().add(music);
+//        }
+//
+//        edit(playlist);
+//    }
+    public void addMusicToPlaylist(Playlist playlist, Music music) throws MusicsAlreadyExistInPlaylist {
+
+        // TODO retrieve entities
+        boolean equal = musicExistInPlaylist(playlist, music);
+
+        if (equal) {
             throw new MusicsAlreadyExistInPlaylist();
         } else {
-            p.getMusics().add(m);
+            playlist.getMusics().add(music);
         }
+
+        edit(playlist);
     }
 
     @Override

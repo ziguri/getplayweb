@@ -56,12 +56,12 @@
                                  -webkit-box-shadow:0 0 10px rgba(225, 225, 225, 1);
                                  -moz-box-shadow:0 0 10px rgba(225, 225, 225, 1);
                                  box-shadow:0 0 10px rgba(225, 225, 225, 1); margin-left: -17px;" />
-                    <h:commandButton image="resources/images/search.png" action="search.xhtml" style="margin-left: 10px; margin-bottom: -5px;"/>
+                    <h:commandButton image="resources/images/search.png" action="#{searchMb.search}" style="margin-left: 10px; margin-bottom: -5px;"/>
                     <br></br>
                     <h:selectOneRadio value="#{searchMb.option}" style="color: #FFFFFF; text-align: center; margin-left: -20px;">
                         <f:selectItem itemValue="Artist"  itemLabel="Artist" />   
-                        <f:selectItem itemValue="Title"  itemLabel="Title"/>   
-                        <f:selectItem itemValue="ArTi" itemLabel="Both"/>   
+                        <f:selectItem itemValue="Title"  itemLabel="Title" />   
+                        <f:selectItem itemValue="ArTi" itemLabel="Both" />   
                     </h:selectOneRadio>
                     <br></br>
                 </h:form>

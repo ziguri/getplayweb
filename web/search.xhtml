@@ -27,9 +27,9 @@ and open the template in the editor.
                             <h1>Search for <h:outputText value="#{searchMb.word}"/></h1>
                             <h:outputLabel value="YOUR PLAYLIST´S:"/>
                             <h:selectOneMenu value="#{sessionMb.selectedPlaylist}" converter="#{sessionMb}">
-                                <f:selectItems value="#{sessionMb.myPlaylists()}" var="p" itemLabel="#{p.name}"/>
+                                <f:selectItems value="#{sessionMb.myPlaylists()}" var="playlist" itemLabel="#{playlist.name}"/>
                             </h:selectOneMenu>
-                            <h:dataTable value="#{searchMb.resultSearch()}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" 
+                            <h:dataTable value="#{searchMb.model}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" 
                                          styleClass="dataTable"
                                          headerClass="dataTableTitle"
                                          >
@@ -65,8 +65,9 @@ and open the template in the editor.
                                 </h:column>
                                 <h:column>      
                                     <f:facet name="header" class="dataTableTitle">ADD TO PLAYLIST</f:facet>
-                                    <h:commandButton type="submit" value="+" action="#{sessionMb.addMusicToPlay()}" >
-                                        <f:setPropertyActionListener target="#{sessionMb.musicSelected}" value="#{music}" />
+                                    <h:commandButton value="+" action="#{saveMusicController.saveMusic()}" >
+                                        <f:setPropertyActionListener target="#{saveMusicController.musicIdSelected}" value="#{music.id}" />
+                                        <f:setPropertyActionListener target="#{saveMusicController.playlistIdSelected}" value="#{playlist.id}" />
                                     </h:commandButton>
                                 </h:column>
 

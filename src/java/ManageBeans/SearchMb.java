@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.model.DataModel;
@@ -34,12 +35,18 @@ public class SearchMb implements Serializable {
     private DataModel<Music> musics;
     private FacesMessage message;
 
+    private DataModel<Music> model;
+
     private String errorMessage;
 
     /**
      * Creates a new instance of SearchMb
      */
     public SearchMb() {
+    }
+
+    @PostConstruct
+    public void init() {
         this.musics = null;
         this.message = new FacesMessage();
     }
@@ -92,17 +99,40 @@ public class SearchMb implements Serializable {
         this.errorMessage = errorMessage;
     }
 
-    public DataModel<Music> resultSearch() {
-        DataModel model;
+    /*
+     public DataModel<Music> resultSearch() {
+     DataModel model;
+     try {
+     List<Music> results = musics_ejb.searchByColumn(option, word);
+     model = (DataModel<Music>) new ListDataModel(results);
+     return model;
+     } catch (SearchNullException ex) {
+     Logger.getLogger(SearchMb.class.getName()).log(Level.SEVERE, null, ex);
+     errorMessage = ex.getMessage();
+     return null;
+     }
+     }
+     */
+    public String search() {
+
         try {
             List<Music> results = musics_ejb.searchByColumn(option, word);
-            model = (DataModel<Music>) new ListDataModel(results);
-            return model;
+            this.model = (DataModel<Music>) new ListDataModel(results);
+
         } catch (SearchNullException ex) {
             Logger.getLogger(SearchMb.class.getName()).log(Level.SEVERE, null, ex);
             errorMessage = ex.getMessage();
             return null;
         }
+
+        return "search";
     }
 
+    public DataModel<Music> getModel() {
+        return model;
+    }
+
+    public void setModel(DataModel<Music> model) {
+        this.model = model;
+    }
 }
