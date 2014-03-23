@@ -158,18 +158,30 @@ public class RequestMusicMb implements Serializable {
         return music;
     }
 
-    private void recreateModel() {
-        items = null;
-    }
-
+//Getter and Setter
+    /**
+     * Get Music EJB
+     *
+     * @return
+     */
     public MusicFacade getMusic_ejb() {
         return music_ejb;
     }
 
+    /**
+     * Set Get Music EJB
+     *
+     * @param music_ejb
+     */
     public void setMusic_ejb(MusicFacade music_ejb) {
         this.music_ejb = music_ejb;
     }
 
+    /**
+     * Get Music
+     *
+     * @return
+     */
     public Music getMusic() {
         if (music == null) {
             music = new Music();
@@ -178,70 +190,155 @@ public class RequestMusicMb implements Serializable {
         return music;
     }
 
+    /**
+     * Set Music
+     *
+     * @param music
+     */
     public void setMusic(Music music) {
         this.music = music;
     }
 
+    /**
+     * Get DataModel
+     *
+     * @return
+     */
     public DataModel getItems() {
         return items;
     }
 
+    /**
+     * Set DataModel
+     *
+     * @param items
+     */
     public void setItems(DataModel items) {
         this.items = items;
     }
 
+    /**
+     * Get Path to save
+     *
+     * @return
+     */
     public String getPathToSave() {
         return pathToSave;
     }
 
+    /**
+     * Set Path to save
+     *
+     * @param pathToSave
+     */
     public void setPathToSave(String pathToSave) {
         this.pathToSave = pathToSave;
     }
 
+    /**
+     * Get logged user
+     *
+     * @return
+     */
     public LoggedUserMb getUser() {
         return user;
     }
 
+    /**
+     * Set logged user
+     *
+     * @param user
+     */
     public void setUser(LoggedUserMb user) {
         this.user = user;
     }
 
+    /**
+     * Get selected item index
+     *
+     * @return
+     */
     public int getSelectedItemIndex() {
         return selectedItemIndex;
     }
 
+    /**
+     * Set selected item index
+     *
+     * @param selectedItemIndex
+     */
     public void setSelectedItemIndex(int selectedItemIndex) {
         this.selectedItemIndex = selectedItemIndex;
     }
 
+    /**
+     * Get File1
+     *
+     * @return
+     */
     public Part getFile1() {
         return file1;
     }
 
+    /**
+     * Set File1
+     *
+     * @param file1
+     */
     public void setFile1(Part file1) {
         this.file1 = file1;
     }
 
+    /**
+     * Get DataModel<Music> musics
+     *
+     * @return
+     */
     public DataModel<Music> getMusics() {
         return musics;
     }
 
+    /**
+     * Set DataModel<Music> musics
+     *
+     * @param musics
+     */
     public void setMusics(DataModel<Music> musics) {
         this.musics = musics;
     }
 
+    /**
+     * Get Music Path
+     *
+     * @return
+     */
     public String getMusicPath() {
         return musicPath;
     }
 
+    /**
+     * Set Music Path
+     *
+     * @param musicPath
+     */
     public void setMusicPath(String musicPath) {
         this.musicPath = musicPath;
     }
 
+    /**
+     * Get Message
+     *
+     * @return
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Set Message
+     *
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
     }

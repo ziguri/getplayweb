@@ -5,7 +5,6 @@
  */
 package ManageBeans;
 
-import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Playlist;
 import javax.annotation.PostConstruct;
@@ -19,15 +18,12 @@ import javax.inject.Named;
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 @Named("requestPlaylistMb")
 @RequestScoped
 public class RequestPlaylistMb {
 
     @Inject
     private PlaylistFacade playlist_ejb;
-    @Inject
-    private MusicFacade musics_ejb;
     @Inject
     private LoggedUserMb user;
     private DataModel<Playlist> play;
@@ -46,6 +42,10 @@ public class RequestPlaylistMb {
         this.message = null;
     }
 
+    /**
+     * Invokes the method addPlaylist from Playlist EJB in order to add a new
+     * playlist.
+     */
     public void addPlaylist() {
         if (!this.playlist.getName().equals("")) {
             playlist_ejb.addPlaylist(playlist, user.getUser());
@@ -57,6 +57,12 @@ public class RequestPlaylistMb {
         }
     }
 
+    /**
+     * Invokes the method showMyPlaylist from PLaylist EJB in order to return
+     * DataModel with logged user playlists.
+     *
+     * @return
+     */
     public DataModel<Playlist> getMyPlaylist() {
         if (playlist_ejb != null) {
             DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
@@ -65,58 +71,94 @@ public class RequestPlaylistMb {
         }
         return null;
     }
+    //Getter and Setter
 
-    public String destroy() {
-        playlist = (Playlist) this.play.getRowData();
-        playlist_ejb.remove(playlist);
-        getMyPlaylist();
-        return "listMyPlaylist";
-    }
-
+    /**
+     * Get Playlist EJB
+     *
+     * @return
+     */
     public PlaylistFacade getPlaylist_ejb() {
         return playlist_ejb;
     }
 
+    /**
+     * Set Playlist EJB
+     *
+     * @param playlist_ejb
+     */
     public void setPlaylist_ejb(PlaylistFacade playlist_ejb) {
         this.playlist_ejb = playlist_ejb;
     }
 
+    /**
+     * Get Playlist
+     *
+     * @return
+     */
     public Playlist getPlaylist() {
         return playlist;
     }
 
+    /**
+     * Set Playlist
+     *
+     * @param playlist
+     */
     public void setPlaylist(Playlist playlist) {
         this.playlist = playlist;
     }
 
-    public MusicFacade getMusics_ejb() {
-        return musics_ejb;
-    }
-
-    public void setMusics_ejb(MusicFacade musics_ejb) {
-        this.musics_ejb = musics_ejb;
-    }
-
+    /**
+     * Get logged user
+     *
+     * @return
+     */
     public LoggedUserMb getUser() {
         return user;
     }
 
+    /**
+     * Set logged user
+     *
+     * @param user
+     */
     public void setUser(LoggedUserMb user) {
         this.user = user;
     }
 
+    /**
+     * Get DataModel<Playlist>
+     *
+     * @return
+     */
     public DataModel<Playlist> getPlay() {
         return play;
     }
 
+    /**
+     * Set DataModel<Playlist>
+     *
+     * @param play
+     */
     public void setPlay(DataModel<Playlist> play) {
         this.play = play;
     }
 
+    /**
+     * Get message
+     *
+     * @return
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Set message
+     *
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
     }
