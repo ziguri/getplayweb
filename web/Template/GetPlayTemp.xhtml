@@ -27,15 +27,15 @@
             <ui:insert name="top" >
                 <h:form class="logform">
                     <h:outputLabel value="Welcome "/>
-                    <h:outputLabel value="#{sessionMb.loggedUser.user.name}"/>
+                    <h:outputLabel value="#{logged.user.name}"/>
                     <br></br>
-                    <h:commandButton value="Logout" action="#{sessionMb.loggedUser.logout()}"/>
+                    <h:commandButton value="Logout" action="#{logged.logout()}"/>
 
                     <h:commandButton value="Edit"  
                                      action="editUser.xhtml"/>
 
                     <h:commandButton value="Delete User"
-                                     action="#{sessionMb.loggedUser.deleteUser()}"/>
+                                     action="#{logged.deleteUser()}"/>
 
                 </h:form>
 

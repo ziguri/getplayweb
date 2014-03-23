@@ -83,6 +83,22 @@ public class EditPlaylistController {
 
     }
 
+    public DataModel<Playlist> getMyPlaylist() {
+        if (playlistEjb != null) {
+            DataModel model = (DataModel<Playlist>) new ListDataModel(playlistEjb.showMyPlaylist(loggedUser.getUser()));
+            play = model;
+            return model;
+        }
+        return null;
+    }
+
+    public String destroy() {
+        Playlist playlist = (Playlist) this.play.getRowData();
+        playlistEjb.remove(playlist);
+        getMyPlaylist();
+        return null;
+    }
+
     //Getter and Setter
     public PlaylistFacade getPlaylistEjb() {
         return playlistEjb;

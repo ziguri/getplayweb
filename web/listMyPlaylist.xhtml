@@ -70,11 +70,15 @@ and open the template in the editor.
 
                                     <h:commandButton type="submit"
                                                      value="Edit" 
-                                                     action="#{generalController.editSelectedPlaylist()}" />
+                                                     action="#{generalController.editSelectedPlaylist()}" >
+                                        <f:setPropertyActionListener target="#{generalController.playlistSelected}" value="#{playlist}" />
+
+
+                                    </h:commandButton>
 
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
-                                                      action="#{requestPlaylistMb.destroy}" />
+                                                      action="#{editPlaylistController.destroy}" />
 
                                 </h:column>
 

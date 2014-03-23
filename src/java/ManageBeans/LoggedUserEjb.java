@@ -10,10 +10,10 @@ import ejbs.DeleteUser;
 import entities.AppUser;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  * @author Zueb LDA
  */
 //@ManagedBean(name = "logged")
+@Named("logged")
 @SessionScoped
-@Stateful(name = "logged")
 public class LoggedUserEjb implements Serializable {
 
     private AppUser user;
