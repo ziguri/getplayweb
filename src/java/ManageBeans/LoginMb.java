@@ -20,7 +20,6 @@ import javax.inject.Named;
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 @Named
 @RequestScoped
 public class LoginMb {
@@ -66,8 +65,8 @@ public class LoginMb {
             logado.setUser(us);
             return "listAllMusics";
 
-        } catch (NullPointerException e) {
-
+        } catch (NullPointerException ex) {
+            Logger.getLogger(LoginMb.class.getName()).log(Level.SEVERE, null, ex);
             errorMessageExperience = "Login or Password Invalid. Please try again.";
             return "index";
         }

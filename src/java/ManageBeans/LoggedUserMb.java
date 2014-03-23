@@ -9,6 +9,8 @@ import ejbs.AppUserFacade;
 import ejbs.DeleteUser;
 import entities.AppUser;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -20,7 +22,6 @@ import javax.servlet.http.HttpSession;
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 @Named("logged")
 @SessionScoped
 public class LoggedUserMb implements Serializable {
@@ -50,12 +51,16 @@ public class LoggedUserMb implements Serializable {
      * @return String
      */
     public String logout() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+            session.invalidate();
 
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-        session.invalidate();
-
-        return "index.xhtml";
+            return "index.xhtml";
+        } catch (IllegalStateException ex) {
+            Logger.getLogger(LoggedUserMb.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 
     /**
