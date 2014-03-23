@@ -5,6 +5,7 @@
  */
 package ejbs;
 
+import Classes.EncryptMD5;
 import Exceptions.DuplicateEmailException;
 import entities.AppUser;
 import java.util.logging.Level;

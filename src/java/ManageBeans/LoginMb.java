@@ -7,7 +7,7 @@ package ManageBeans;
 
 import Exceptions.DuplicateEmailException;
 import ejbs.AppUserFacade;
-import ejbs.EncryptMD5;
+import Classes.EncryptMD5;
 import entities.AppUser;
 import java.util.logging.Level;
 import java.util.logging.Logger;

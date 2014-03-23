@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejbs;
+package Classes;
 
+import ejbs.PlaylistFacade;
 import entities.Playlist;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
