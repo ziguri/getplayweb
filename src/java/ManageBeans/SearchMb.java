@@ -26,7 +26,6 @@ import javax.inject.Named;
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 @Named("searchMb")
 @RequestScoped
 public class SearchMb implements Serializable {
@@ -54,67 +53,11 @@ public class SearchMb implements Serializable {
         this.message = new FacesMessage();
     }
 
-    public MusicFacade getMusics_ejb() {
-        return musics_ejb;
-    }
-
-    public void setMusics_ejb(MusicFacade musics_ejb) {
-        this.musics_ejb = musics_ejb;
-    }
-
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    public DataModel<Music> getMusics() {
-        return musics;
-    }
-
-    public void setMusics(DataModel<Music> musics) {
-        this.musics = musics;
-    }
-
-    public String getOption() {
-        return option;
-    }
-
-    public void setOption(String opcion) {
-        this.option = opcion;
-    }
-
-    public FacesMessage getMessage() {
-        return message;
-    }
-
-    public void setMessage(FacesMessage message) {
-        this.message = message;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    /*
-     public DataModel<Music> resultSearch() {
-     DataModel model;
-     try {
-     List<Music> results = musics_ejb.searchByColumn(option, word);
-     model = (DataModel<Music>) new ListDataModel(results);
-     return model;
-     } catch (SearchNullException ex) {
-     Logger.getLogger(SearchMb.class.getName()).log(Level.SEVERE, null, ex);
-     errorMessage = ex.getMessage();
-     return null;
-     }
-     }
+    /**
+     * Receives words and search criteria and invoke Music EJB to fulfill the
+     * complete search returnig DataModel<Music>
+     *
+     * @return DataModel<Music>
      */
     public String search() {
 
@@ -134,11 +77,130 @@ public class SearchMb implements Serializable {
         return "search";
     }
 
+    //Getter and Setter
+    /**
+     * Get DataModel<Music>
+     *
+     * @return
+     */
     public DataModel<Music> getModel() {
         return model;
     }
 
+    /**
+     * Set DataModel<Music>
+     *
+     * @param model
+     */
     public void setModel(DataModel<Music> model) {
         this.model = model;
+    }
+
+    /**
+     * Get MusicFacade
+     *
+     * @return
+     */
+    public MusicFacade getMusics_ejb() {
+        return musics_ejb;
+    }
+
+    /**
+     * Set MusicFacade
+     *
+     * @param musics_ejb
+     */
+    public void setMusics_ejb(MusicFacade musics_ejb) {
+        this.musics_ejb = musics_ejb;
+    }
+
+    /**
+     * Get word
+     *
+     * @return
+     */
+    public String getWord() {
+        return word;
+    }
+
+    /**
+     * Set word
+     *
+     * @param word
+     */
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    /**
+     * Get DataModel<Music>
+     *
+     * @return
+     */
+    public DataModel<Music> getMusics() {
+        return musics;
+    }
+
+    /**
+     * Set DataModel<Music>
+     *
+     * @param musics
+     */
+    public void setMusics(DataModel<Music> musics) {
+        this.musics = musics;
+    }
+
+    /**
+     * Get Option
+     *
+     * @return
+     */
+    public String getOption() {
+        return option;
+    }
+
+    /**
+     * Set Option
+     *
+     * @param opcion
+     */
+    public void setOption(String opcion) {
+        this.option = opcion;
+    }
+
+    /**
+     * Get message
+     *
+     * @return
+     */
+    public FacesMessage getMessage() {
+        return message;
+    }
+
+    /**
+     * Set message
+     *
+     * @param message
+     */
+    public void setMessage(FacesMessage message) {
+        this.message = message;
+    }
+
+    /**
+     * Get error message
+     *
+     * @return
+     */
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    /**
+     * Set error message
+     *
+     * @param errorMessage
+     */
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

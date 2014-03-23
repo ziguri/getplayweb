@@ -20,7 +20,6 @@ import javax.persistence.PersistenceContext;
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 @Stateless
 public class AppUserFacade extends AbstractFacade<AppUser> {
 
@@ -36,27 +35,59 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
         super(AppUser.class);
     }
 
+    /**
+     * Receives User as parameter in order to verify if there is another user
+     * with the same e-mail. If not, creates a new user, else
+     *
+     * @param u
+     * @throws DuplicateEmailException
+     */
     public void addUser(AppUser u) throws DuplicateEmailException {
-        String pass = CodificarMD5.cryptWithMD5(u.getPassword());
+        String pass = EncryptMD5.cryptWithMD5(u.getPassword());
         u.setPassword(pass);
-        try {
-            this.existUser(u.getEmail());
-            this.create(u);
-        } catch (DuplicateEmailException ex) {
-            Logger.getLogger(AppUserFacade.class.getName()).log(Level.SEVERE, null, ex);
-            throw new DuplicateEmailException();
-        }
+        this.existUser(u.getEmail());
+        this.create(u);
 
     }
 
+    /**
+     * Receives logged user in order to edit.
+     *
+     * @param u
+     */
     public void editUserLogado(AppUser u) {
 
-        String pass = CodificarMD5.cryptWithMD5(u.getPassword());
+        String pass = EncryptMD5.cryptWithMD5(u.getPassword());
         u.setPassword(pass);
         this.edit(u);
     }
 
-    public AppUser existUser(String email) throws DuplicateEmailException {
+    /**
+     * Receives one email as parameter, in order to check if the email is
+     * already registered. If yes, returns null, else, returns user.
+     *
+     * @param email
+     * @return
+     */
+    public AppUser existUser(String email) {
+
+        try {
+            AppUser u = (AppUser) em.createNamedQuery("appuser.findByEmail").setParameter("email", email).getSingleResult();
+            return u;
+        } catch (Exception e) {
+
+            return null;
+        }
+    }
+
+    /**
+     * Receives one email as parameter, in order to check if the email is
+     * already registered. If yes, returns null, else, returns user.
+     *
+     * @param email
+     * @return
+     */
+    public AppUser existUser2(String email) throws DuplicateEmailException {
         try {
             AppUser u = (AppUser) em.createNamedQuery("appuser.findByEmail").setParameter("email", email).getSingleResult();
             throw new DuplicateEmailException();
@@ -67,7 +98,15 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
 
     }
 
-    public AppUser validaPassword(String email, String password) throws DuplicateEmailException {
+    /**
+     * Receives email and password in order to validate the login for the
+     * existent user.
+     *
+     * @param email
+     * @param password
+     * @return
+     */
+    public AppUser validaPassword(String email, String password) {
 
         AppUser u = existUser(email);
 
@@ -80,6 +119,12 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
         }
     }
 
+    /**
+     * Check if the receive user is valid or null, if null redirect page
+     * automatically to index, if not null the user keep going with navigation.
+     *
+     * @param user
+     */
     public void isLogged(AppUser user) {
         FacesContext fc = FacesContext.getCurrentInstance();
         ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
