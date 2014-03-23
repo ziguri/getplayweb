@@ -54,8 +54,9 @@ public class LoginMb {
      * credencials, return User if not, return null.
      *
      * @return
+     * @throws Exceptions.DuplicateEmailException
      */
-    public String confirmaLogin() {
+    public String confirmaLogin() throws DuplicateEmailException {
 
         String pass = CodificarMD5.cryptWithMD5(this.password);
         AppUser us = user_ejb.validaPassword(this.email, pass);

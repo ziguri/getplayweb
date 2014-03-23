@@ -10,6 +10,8 @@ import entities.AppUser;
 import entities.Music;
 import entities.Playlist;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,7 +20,6 @@ import javax.persistence.PersistenceContext;
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 @Stateless
 public class PlaylistFacade extends AbstractFacade<Playlist> {
 
@@ -31,13 +32,18 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
             this.create(p);
 
         } catch (Exception e) {
-            System.err.println("Excepcion " + e);
+            Logger.getLogger(PlaylistFacade.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     public void editPlaylist(Playlist p, AppUser u) {
-        p.setUser(u);
-        this.edit(p);
+        try {
+            p.setUser(u);
+            this.edit(p);
+        } catch (Exception e) {
+            Logger.getLogger(PlaylistFacade.class.getName()).log(Level.SEVERE, null, e);
+        }
+
     }
 
     public boolean musicExistInPlaylist(Playlist p, Music m) {
@@ -54,20 +60,29 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
     public void addMusicToPlaylist(Playlist playlist, Music music) throws MusicsAlreadyExistInPlaylistException {
 
         boolean equal = musicExistInPlaylist(playlist, music);
+        try {
+            if (equal) {
+                throw new MusicsAlreadyExistInPlaylistException();
+            } else {
+                playlist.getMusics().add(music);
+            }
 
-        if (equal) {
-            throw new MusicsAlreadyExistInPlaylistException();
-        } else {
-            playlist.getMusics().add(music);
+            edit(playlist);
+
+        } catch (NullPointerException | IllegalArgumentException | IllegalStateException ex) {
+            Logger.getLogger(PlaylistFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        edit(playlist);
     }
 
     public void removeMusicFromPlaylist(Playlist playlist, Music music) {
+        try {
+            playlist.getMusics().remove(music);
+            edit(playlist);
+        } catch (NullPointerException | UnsupportedOperationException ex) {
+            Logger.getLogger(PlaylistFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        playlist.getMusics().remove(music);
-        edit(playlist);
     }
 
     @Override
@@ -85,7 +100,9 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
 
             List<Playlist> pl = (List<Playlist>) em.createNamedQuery("Playlist.findPlaylistByUser").setParameter("user", u).getResultList();
             return pl;
-        } catch (Exception e) {
+
+        } catch (NullPointerException | IllegalStateException ex) {
+            Logger.getLogger(PlaylistFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -96,15 +113,20 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
 
             List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByPlaylist").setParameter("playlist", p).getResultList();
             return m;
-        } catch (Exception e) {
+        } catch (NullPointerException | IllegalStateException ex) {
+            Logger.getLogger(PlaylistFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
 
     public List<Playlist> orderPlaylist(String column, String order, AppUser u) {
-
-        String namequery = "Playlist.OrderBy" + column + order;
-        List<Playlist> pl = (List<Playlist>) em.createNamedQuery(namequery).setParameter("user", u).getResultList();
-        return pl;
+        try {
+            String namequery = "Playlist.OrderBy" + column + order;
+            List<Playlist> pl = (List<Playlist>) em.createNamedQuery(namequery).setParameter("user", u).getResultList();
+            return pl;
+        } catch (NullPointerException | IllegalStateException ex) {
+            Logger.getLogger(PlaylistFacade.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
     }
 }

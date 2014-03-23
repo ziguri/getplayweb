@@ -59,7 +59,7 @@ public class AppUserFacadeTest {
         AppUser u = new AppUser("testeName", "teste@Email.com", "testePass111");
 
         facade.create(u);
-        AppUser result = facade.existUser2(u.getEmail());
+        AppUser result = facade.existUser(u.getEmail());
 
         assertEquals(u.getEmail(), result.getEmail());
         assertEquals(u.getName(), result.getName());
@@ -80,7 +80,7 @@ public class AppUserFacadeTest {
 
         facade.create(u);
 
-        AppUser result = facade.existUser2(expectedEmail);
+        AppUser result = facade.existUser(expectedEmail);
         assertEquals(u, result);
 
         facade.remove(u);
