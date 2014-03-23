@@ -11,6 +11,8 @@ import entities.Music;
 import entities.Playlist;
 import java.io.File;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -20,7 +22,6 @@ import javax.persistence.PersistenceContext;
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 @Stateless
 public class MusicFacade extends AbstractFacade<Music> {
 
@@ -98,24 +99,33 @@ public class MusicFacade extends AbstractFacade<Music> {
     public List<Music> searchByColumn(String column, String word) throws SearchNullException {//Mostra as músicas resultantes de uma pesquisa.
 
         List<Music> m = null;
+        try {
 
-        if (column.equals("Title")) {
-            m = (List<Music>) em.createNamedQuery("Music.findMusicByTitle").setParameter("word", "%" + word + "%").getResultList();
-        }
+            if (column.equals("Title")) {
+                m = (List<Music>) em.createNamedQuery("Music.findMusicByTitle").setParameter("word", "%" + word + "%").getResultList();
+            }
 
-        if (column.equals("Artist")) {
-            m = (List<Music>) em.createNamedQuery("Music.findMusicByArtist").setParameter("word", "%" + word + "%").getResultList();
-        }
+            if (column.equals("Artist")) {
+                m = (List<Music>) em.createNamedQuery("Music.findMusicByArtist").setParameter("word", "%" + word + "%").getResultList();
+            }
 
-        if (column.equals("ArTi")) {
-            m = (List<Music>) em.createNamedQuery("Music.findMusicByTitleOrArtist").setParameter("word", "%" + word + "%").getResultList();
-        }
+            if (column.equals("ArTi")) {
+                m = (List<Music>) em.createNamedQuery("Music.findMusicByTitleOrArtist").setParameter("word", "%" + word + "%").getResultList();
+            }
 
-        if (m.isEmpty()) {
-            throw new SearchNullException();
+            if (m.isEmpty()) {
+                throw new SearchNullException();
+            }
+            return m;
+
+        } catch (NullPointerException | IllegalStateException ex) {
+            Logger.getLogger(MusicFacade.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return m;
-    }
+    
+}
+
+    
 
     public List<Music> showUserMusics(AppUser u) {
 
