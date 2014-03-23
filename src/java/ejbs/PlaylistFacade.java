@@ -18,13 +18,28 @@ import javax.persistence.PersistenceContext;
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 @Stateless
 public class PlaylistFacade extends AbstractFacade<Playlist> {
 
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public PlaylistFacade() {
+        super(Playlist.class);
+    }
+
+    /**
+     * Receives User and Playlist as parameter in order to add new Playlist to
+     * the system.
+     *
+     * @param p
+     * @param u
+     */
     public void addPlaylist(Playlist p, AppUser u) {
         try {
             p.setUser(u);
@@ -35,11 +50,26 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         }
     }
 
+    /**
+     * Receives Playlist and User as parameter in order to edit existent
+     * playlist.
+     *
+     * @param p
+     * @param u
+     */
     public void editPlaylist(Playlist p, AppUser u) {
         p.setUser(u);
         this.edit(p);
     }
 
+    /**
+     * Receives Playlist and Music as parameter, check if the music exist in
+     * playlist and return boolean with the result.
+     *
+     * @param p
+     * @param m
+     * @return
+     */
     public boolean musicExistInPlaylist(Playlist p, Music m) {
         boolean igual = false;
 
@@ -51,6 +81,14 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         return igual;
     }
 
+    /**
+     * Receive Playlist and Music as parameter in order to add new music to the
+     * system.
+     *
+     * @param playlist
+     * @param music
+     * @throws MusicsAlreadyExistInPlaylistException
+     */
     public void addMusicToPlaylist(Playlist playlist, Music music) throws MusicsAlreadyExistInPlaylistException {
 
         boolean equal = musicExistInPlaylist(playlist, music);
@@ -64,21 +102,26 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         edit(playlist);
     }
 
+    /**
+     * Receives Playlist and music as parameter in order to remove that same
+     * music from the playlist.
+     *
+     * @param playlist
+     * @param music
+     */
     public void removeMusicFromPlaylist(Playlist playlist, Music music) {
 
         playlist.getMusics().remove(music);
         edit(playlist);
     }
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
-    public PlaylistFacade() {
-        super(Playlist.class);
-    }
-
+    /**
+     * Receives User as paramente and return List<Playlist> with all user
+     * playlists.
+     *
+     * @param u
+     * @return
+     */
     public List<Playlist> showMyPlaylist(AppUser u) {
 
         try {
@@ -90,6 +133,13 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         }
     }
 
+    /**
+     * Receives Playlist and return List<Music> with all the music from the
+     * playlist.
+     *
+     * @param p
+     * @return
+     */
     public List<Music> showMusicPlaylist(Playlist p) {
 
         try {
@@ -101,6 +151,15 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         }
     }
 
+    /**
+     * Receives column, order and user and return sorted List<Playlist> with the
+     * result.
+     *
+     * @param column
+     * @param order
+     * @param u
+     * @return
+     */
     public List<Playlist> orderPlaylist(String column, String order, AppUser u) {
 
         String namequery = "Playlist.OrderBy" + column + order;

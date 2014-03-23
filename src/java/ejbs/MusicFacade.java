@@ -30,6 +30,22 @@ public class MusicFacade extends AbstractFacade<Music> {
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public MusicFacade() {
+        super(Music.class);
+    }
+
+    /**
+     * Receives Music, User and path in order to create and persist new music.
+     *
+     * @param m
+     * @param u
+     * @param path
+     */
     public void addMusic(Music m, AppUser u, String path) {
         try {
             m.setMusic_path(path);
@@ -41,27 +57,12 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
 
-    //Método não utilizado. Apagar comentário se passar a ser
-    public void editMusic(Music m, AppUser u) {
-        try {
-            m.setUser(u);
-            this.edit(m);
-
-        } catch (Exception e) {
-            System.out.println("Exception " + e);
-        }
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
-    public MusicFacade() {
-        super(Music.class);
-    }
-
-    public List<Music> showAllMusics() {//Mostra todas as músicas da aplicação.
+    /**
+     * Find and returns all musics in the application.
+     *
+     * @return
+     */
+    public List<Music> showAllMusics() {
         try {
             List<Music> m = (List<Music>) em.createNamedQuery("Music.findAll").getResultList();
             return m;
@@ -70,6 +71,13 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
 
+    /**
+     * Receive Playlist as a parameter, find and return List<Music> with the all
+     * musics of the playlist.
+     *
+     * @param p
+     * @return
+     */
     public List<Music> showMusicsPlaylist(Playlist p) {
 
         try {
@@ -81,6 +89,13 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
 
+    /**
+     * Receives one music in order to remove. First remove the music from the
+     * existent playlist, then remove the music from data base and finally
+     * removes the file from host.
+     *
+     * @param music
+     */
     public void removeMusic(Music music) {
 
         for (int i = 0; i < music.getPlaylists().size(); i++) {
@@ -96,6 +111,15 @@ public class MusicFacade extends AbstractFacade<Music> {
 
     }
 
+    /**
+     * Receives word and column as a parameter in order to set the named querys
+     * that will order tables. Return the recultant List<Music>
+     *
+     * @param column
+     * @param word
+     * @return
+     * @throws SearchNullException
+     */
     public List<Music> searchByColumn(String column, String word) throws SearchNullException {//Mostra as músicas resultantes de uma pesquisa.
 
         List<Music> m = null;
@@ -122,11 +146,15 @@ public class MusicFacade extends AbstractFacade<Music> {
             Logger.getLogger(MusicFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-    
-}
 
-    
+    }
 
+    /**
+     * Receives one user and return List<Music> with the user musics.
+     *
+     * @param u
+     * @return
+     */
     public List<Music> showUserMusics(AppUser u) {
 
         try {

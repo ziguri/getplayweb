@@ -7,7 +7,7 @@ package ManageBeans;
 
 import Exceptions.DuplicateEmailException;
 import ejbs.AppUserFacade;
-import ejbs.CodificarMD5;
+import ejbs.EncryptMD5;
 import entities.AppUser;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,7 +57,7 @@ public class LoginMb {
      */
     public String confirmaLogin() {
 
-        String pass = CodificarMD5.cryptWithMD5(this.password);
+        String pass = EncryptMD5.cryptWithMD5(this.password);
         AppUser us = user_ejb.validaPassword(this.email, pass);
 
         try {
