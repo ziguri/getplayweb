@@ -7,9 +7,10 @@
 package Exceptions;
 
 /**
- *
- * @author Elsa
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 public class DuplicateEmailException extends Exception{
     public DuplicateEmailException(){
         super("Email already exist! Try again!");

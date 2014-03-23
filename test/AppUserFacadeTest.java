@@ -17,9 +17,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
- * @author Elsa
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 public class AppUserFacadeTest {
 
     static EJBContainer container;

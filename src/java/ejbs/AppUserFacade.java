@@ -17,9 +17,10 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 @Stateless
 public class AppUserFacade extends AbstractFacade<AppUser> {
 

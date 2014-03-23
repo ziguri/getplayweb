@@ -7,9 +7,10 @@
 package Exceptions;
 
 /**
- *
- * @author Elsa
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 public class SearchNullException extends Exception{
     public SearchNullException(){
         super("Your search returned no results! Try again!");

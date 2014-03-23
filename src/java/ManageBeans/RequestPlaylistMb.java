@@ -16,9 +16,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author Elsa
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 @Named("requestPlaylistMb")
 @RequestScoped
 public class RequestPlaylistMb {

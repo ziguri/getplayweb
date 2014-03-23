@@ -20,6 +20,7 @@ import javax.inject.Named;
  * @author Elsa Santos
  * @author Orlando Neves
  */
+
 @Named
 @RequestScoped
 public class LoginMb {

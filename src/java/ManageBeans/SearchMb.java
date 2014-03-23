@@ -23,9 +23,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author Elsa
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 @Named("searchMb")
 @RequestScoped
 public class SearchMb implements Serializable {

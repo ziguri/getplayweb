@@ -23,9 +23,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 @Entity
 @Table(name = "appuser")
 @NamedQueries({

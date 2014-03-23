@@ -17,6 +17,7 @@ import javax.inject.Inject;
  * @author Elsa Santos
  * @author Orlando Neves
  */
+
 @Stateful
 public class DeleteUser {
 

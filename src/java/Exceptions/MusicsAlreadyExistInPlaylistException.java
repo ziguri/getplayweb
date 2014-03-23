@@ -7,9 +7,10 @@
 package Exceptions;
 
 /**
- *
- * @author Elsa
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 public class MusicsAlreadyExistInPlaylistException extends Exception{
     public MusicsAlreadyExistInPlaylistException(){
         super("This music already exist in the select playlist.");

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
  * @author Elsa Santos
  * @author Orlando Neves
  */
+
 @Named("logged")
 @SessionScoped
 public class LoggedUserMb implements Serializable {
@@ -64,7 +65,7 @@ public class LoggedUserMb implements Serializable {
      */
     public String editUser() {
         user_ejb.editUserLogado(user);
-        return "principal";
+        return "listAllMusics.xhtml";
 
     }
 
