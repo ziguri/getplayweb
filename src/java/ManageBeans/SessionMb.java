@@ -11,9 +11,10 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
- *
- * @author Elsa
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 @Named("sessionMb")
 @SessionScoped
 public class SessionMb implements Serializable {

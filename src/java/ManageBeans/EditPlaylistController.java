@@ -19,9 +19,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 @Named("editPlaylistController")
 @ViewScoped
 public class EditPlaylistController {

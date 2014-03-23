@@ -193,9 +193,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 @Entity
 @Table(name = "PLAYLIST")
 @NamedQueries({

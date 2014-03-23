@@ -17,9 +17,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 @Stateless
 public class MusicFacade extends AbstractFacade<Music> {
 

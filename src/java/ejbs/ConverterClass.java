@@ -13,9 +13,10 @@ import javax.faces.convert.ConverterException;
 import javax.inject.Inject;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
+
 public class ConverterClass implements Converter {
 
     @Inject
