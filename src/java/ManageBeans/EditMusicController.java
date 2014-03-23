@@ -26,7 +26,7 @@ public class EditMusicController {
     @Inject
     private MusicFacade musicEjb;
     @Inject
-    private LoggedUserEjb loggedUser;
+    private LoggedUserMb loggedUser;
 
     /**
      * Creates a new instance of EditMusicController
@@ -40,6 +40,12 @@ public class EditMusicController {
         setMusicSelected((Music) flash.get("music"));
     }
 
+    /**
+     * Verify if the music to edit is from the actual logged user and. Only the
+     * musics owned by the logged user can be edited.
+     *
+     * @return
+     */
     public String editMusic() {
 
         if (musicSelected.getUser().equals(loggedUser.getUser())) {
@@ -52,10 +58,20 @@ public class EditMusicController {
     }
 
     //Getter and Setter
+    /**
+     * Return Music object
+     *
+     * @return
+     */
     public Music getMusicSelected() {
         return musicSelected;
     }
 
+    /**
+     * Receives Music Object and set current musicSelected
+     *
+     * @param musicSelected
+     */
     public void setMusicSelected(Music musicSelected) {
         this.musicSelected = musicSelected;
     }

@@ -50,25 +50,8 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
         return igual;
     }
 
-//    public void addMusicToPlaylist(Integer playlistId, Integer musicId) throws MusicsAlreadyExistInPlaylist {
-//
-//        // TODO retrieve entities
-//        Music music = musicBean.find(musicId);
-//        Playlist playlist = this.find(playlistId);
-//
-//        boolean equal = musicExistInPlaylist(playlist, music);
-//
-//        if (equal) {
-//            throw new MusicsAlreadyExistInPlaylist();
-//        } else {
-//            playlist.getMusics().add(music);
-//        }
-//
-//        edit(playlist);
-//    }
     public void addMusicToPlaylist(Playlist playlist, Music music) throws MusicsAlreadyExistInPlaylistException {
 
-        // TODO retrieve entities
         boolean equal = musicExistInPlaylist(playlist, music);
 
         if (equal) {

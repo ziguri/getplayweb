@@ -36,7 +36,7 @@ public class RequestMusicMb implements Serializable {
     private Music music;
     private String pathToSave;
     @Inject
-    private LoggedUserEjb user;
+    private LoggedUserMb user;
     private int selectedItemIndex;
     private DataModel<Music> musics;
     private String musicPath;
@@ -175,11 +175,11 @@ public class RequestMusicMb implements Serializable {
         this.pathToSave = pathToSave;
     }
 
-    public LoggedUserEjb getUser() {
+    public LoggedUserMb getUser() {
         return user;
     }
 
-    public void setUser(LoggedUserEjb user) {
+    public void setUser(LoggedUserMb user) {
         this.user = user;
     }
 

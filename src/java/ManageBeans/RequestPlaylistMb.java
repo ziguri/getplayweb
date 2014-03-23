@@ -28,7 +28,7 @@ public class RequestPlaylistMb {
     @Inject
     private MusicFacade musics_ejb;
     @Inject
-    private LoggedUserEjb user;
+    private LoggedUserMb user;
     private DataModel<Playlist> play;
     private Playlist playlist;
     private String message;
@@ -96,11 +96,11 @@ public class RequestPlaylistMb {
         this.musics_ejb = musics_ejb;
     }
 
-    public LoggedUserEjb getUser() {
+    public LoggedUserMb getUser() {
         return user;
     }
 
-    public void setUser(LoggedUserEjb user) {
+    public void setUser(LoggedUserMb user) {
         this.user = user;
     }
 

@@ -15,8 +15,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
 @Named("addMusicFromSearch")
 @ViewScoped
@@ -41,34 +41,74 @@ public class AddMusicFromSearch {
     }
 
     //Getter and Setter
+    /**
+     * Return DataModel<Music>
+     *
+     * @return
+     */
     public DataModel<Music> getModel() {
         return model;
     }
 
+    /**
+     * Receives DataModel<Music> and set current DataModel<Music>
+     *
+     * @param model
+     */
     public void setModel(DataModel<Music> model) {
         this.model = model;
     }
 
+    /**
+     * Return Music musicSelected
+     *
+     * @return
+     */
     public Music getMusicSelected() {
         return musicSelected;
     }
 
+    /**
+     * Receives Music Object and set current musicSelected
+     *
+     * @param musicSelected
+     */
     public void setMusicSelected(Music musicSelected) {
         this.musicSelected = musicSelected;
     }
 
+    /**
+     * Return Playlist playlistSelected
+     *
+     * @return
+     */
     public Playlist getPlaylistSelected() {
         return playlistSelected;
     }
 
+    /**
+     * Receives Playlist Object and set current playlistSelected
+     *
+     * @param playlistSelected
+     */
     public void setPlaylistSelected(Playlist playlistSelected) {
         this.playlistSelected = playlistSelected;
     }
 
+    /**
+     * Return String word
+     *
+     * @return
+     */
     public String getWord() {
         return word;
     }
 
+    /**
+     * Receives String Object and set current word
+     *
+     * @param word
+     */
     public void setWord(String word) {
         this.word = word;
     }

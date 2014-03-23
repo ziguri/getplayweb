@@ -9,6 +9,7 @@ import Exceptions.SearchNullException;
 import entities.AppUser;
 import entities.Music;
 import entities.Playlist;
+import java.io.File;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -87,6 +88,9 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
 
         remove(music);
+
+        File file = new File(music.getMusic_path());
+        file.delete();
 
     }
 
