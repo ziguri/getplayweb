@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -42,6 +43,7 @@ public class RequestMusicMb implements Serializable {
     private String musicPath;
     private Part file1;
     private String message;
+    private GregorianCalendar gc;
 
     /**
      * Creates a new instance of MusicMb
@@ -55,6 +57,7 @@ public class RequestMusicMb implements Serializable {
         this.music = new Music();
         this.musics = null;
         this.message = null;
+        gc = new GregorianCalendar();
     }
 
     /**
