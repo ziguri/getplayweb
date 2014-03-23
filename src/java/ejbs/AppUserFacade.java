@@ -10,6 +10,8 @@ import entities.AppUser;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.faces.application.ConfigurableNavigationHandler;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -33,13 +35,7 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
         super(AppUser.class);
     }
 
-    public void addUser(AppUser u) {
-        String pass = CodificarMD5.cryptWithMD5(u.getPassword());
-        u.setPassword(pass);
-        this.create(u);
-    }
-
-    public void addUser2(AppUser u) throws DuplicateEmailException {
+    public void addUser(AppUser u) throws DuplicateEmailException {
         String pass = CodificarMD5.cryptWithMD5(u.getPassword());
         u.setPassword(pass);
         try {
@@ -53,10 +49,10 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
     }
 
     public void editUserLogado(AppUser u) {
- 
-            String pass = CodificarMD5.cryptWithMD5(u.getPassword());
-            u.setPassword(pass);
-            this.edit(u);
+
+        String pass = CodificarMD5.cryptWithMD5(u.getPassword());
+        u.setPassword(pass);
+        this.edit(u);
     }
 
     public AppUser existUser(String email) {
@@ -91,6 +87,16 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
 
             return null;
         }
+    }
+
+    public void isLogged(AppUser user) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) fc.getApplication().getNavigationHandler();
+
+        if (user == null) {
+            nav.performNavigation("index?faces-redirect=true");
+        }
+
     }
 
 }

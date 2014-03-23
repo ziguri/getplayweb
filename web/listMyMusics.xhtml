@@ -12,6 +12,8 @@ and open the template in the editor.
 
 
     <h:head>
+        <ui:insert name="metadata"/>
+        <f:event type="preRenderView" listener="#{loginMb.verifyUser()}" />
         <title>List My Musics</title>
     </h:head>
 

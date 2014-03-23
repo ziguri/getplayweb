@@ -10,8 +10,8 @@ import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Music;
 import entities.Playlist;
-import java.io.File;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -24,8 +24,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
 @Named
 @RequestScoped
@@ -34,20 +34,31 @@ public class GeneralController implements Converter {
     @Inject
     private PlaylistFacade playlistEjb;
     @Inject
-    private LoggedUserEjb loggedUser;
+    private LoggedUserMb loggedUser;
     @Inject
     private MusicFacade musicEjb;
     private Playlist playlistSelected;
     private Music musicSelected;
     private Integer musicIdSelected;
     private Integer playlistIdSelected;
-    private List<Playlist> itemsPlays = null;
+    private List<Playlist> itemsPlays;
     private DataModel<Music> musics;
     private String messageErrorMusic;
 
     public GeneralController() {
     }
 
+    @PostConstruct
+    public void init() {
+        itemsPlays = null;
+    }
+
+    /**
+     * Invokes Playlist EJB method to add music to selected playlist
+     *
+     * @return
+     * @throws MusicsAlreadyExistInPlaylistException
+     */
     public String saveMusic() throws MusicsAlreadyExistInPlaylistException {
         try {
             playlistEjb.addMusicToPlaylist(playlistSelected, musicSelected);
@@ -57,7 +68,15 @@ public class GeneralController implements Converter {
         }
     }
 
-    //Acaba aqui a transferência desde o EditMusciMb
+    /**
+     * Overridable method from abstract class Converter. Transforms received
+     * value into selected Object.
+     *
+     * @param context
+     * @param component
+     * @param value
+     * @return
+     */
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         if (value == null || value.isEmpty()) {
@@ -71,6 +90,15 @@ public class GeneralController implements Converter {
         return playlistEjb.find(id);
     }
 
+    /**
+     * Overridable method from abstract class Converter. Transforms object into
+     * String value.
+     *
+     * @param context
+     * @param component
+     * @param value
+     * @return
+     */
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
 
@@ -86,12 +114,22 @@ public class GeneralController implements Converter {
         return (id != null) ? id.toString() : null;
     }
 
+    /**
+     * Invokes Playlist EJB method in order to show all logged user playlists
+     *
+     * @return
+     */
     public List<Playlist> myPlaylists() {
 
         itemsPlays = playlistEjb.showMyPlaylist(loggedUser.getUser());
         return itemsPlays;
     }
 
+    /**
+     * Invokes Music EJB method in order to construct DataModel with all musics
+     *
+     * @return DataModel<Music>
+     */
     public DataModel<Music> getMusicList() {
         if (musicEjb != null) {
             DataModel model = (DataModel<Music>) new ListDataModel(musicEjb.findAll());
@@ -101,33 +139,52 @@ public class GeneralController implements Converter {
         return null;
     }
 
+    /**
+     * Invokes Music EJB method to remove selected object.
+     *
+     * @return
+     */
     public String destroy() {
 
         if (musicSelected.getUser().equals(loggedUser.getUser())) {
-
-            File file = new File(musicSelected.getMusic_path());
-            file.delete();
             musicEjb.removeMusic(musicSelected);
-            //musicEjb.remove(musicSelected);
-
             return "listMyMusics";
         }
         return "listMyMusics";
 
     }
 
+    /**
+     * Invokes Playlist EJB method to remove selected music from selected
+     * playlist.
+     *
+     * @return String
+     */
     public String removeMusicPlaylist() {
         playlistEjb.removeMusicFromPlaylist(playlistSelected, musicSelected);
         return "viewPlaylist";
     }
 
+    /**
+     * Invokes Music EJB method in order to construct and return
+     * DataModel<Music>
+     *
+     * @return DataModel<Music>
+     */
     public DataModel<Music> getPlaylistMusics() {
 
-        DataModel model = (DataModel<Music>) new ListDataModel(musicEjb.showMusicsPlaylist(playlistSelected));
+        DataModel model = (DataModel<Music>) new ListDataModel(musicEjb.
+                showMusicsPlaylist(playlistSelected));
         return model;
 
     }
 
+    /**
+     * Saves selected playlist in flash scope to use in add music to playlist
+     * view
+     *
+     * @return String
+     */
     public String addMusicToSelectedPlaylist() {
 
         Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -137,6 +194,12 @@ public class GeneralController implements Converter {
 
     }
 
+    /**
+     * Saves selected playlist in flash scope to use in selected playlist
+     * edition
+     *
+     * @return String
+     */
     public String editSelectedPlaylist() {
 
         Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -146,6 +209,11 @@ public class GeneralController implements Converter {
 
     }
 
+    /**
+     * Saves selected music in flash scope to use in selected music edition
+     *
+     * @return
+     */
     public String editSelectedMusic() {
 
         Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -156,82 +224,182 @@ public class GeneralController implements Converter {
     }
 
     //Getter and Setter
+    /**
+     * Get Playlist EJB
+     *
+     * @return
+     */
     public PlaylistFacade getPlaylistEjb() {
         return playlistEjb;
     }
 
+    /**
+     * Set Playlist EJB
+     *
+     * @param playlistEjb
+     */
     public void setPlaylistEjb(PlaylistFacade playlistEjb) {
         this.playlistEjb = playlistEjb;
     }
 
-    public LoggedUserEjb getLoggedUser() {
+    /**
+     * Get logged user
+     *
+     * @return
+     */
+    public LoggedUserMb getLoggedUser() {
         return loggedUser;
     }
 
-    public void setLoggedUser(LoggedUserEjb loggedUser) {
+    /**
+     * Set logged user
+     *
+     * @param loggedUser
+     */
+    public void setLoggedUser(LoggedUserMb loggedUser) {
         this.loggedUser = loggedUser;
     }
 
+    /**
+     * Get Music EJB
+     *
+     * @return
+     */
     public MusicFacade getMusicEjb() {
         return musicEjb;
     }
 
+    /**
+     * Set Get Music EJB
+     *
+     * @param musicEjb
+     */
     public void setMusicEjb(MusicFacade musicEjb) {
         this.musicEjb = musicEjb;
     }
 
+    /**
+     * Get selected playlist
+     *
+     * @return
+     */
     public Playlist getPlaylistSelected() {
         return playlistSelected;
     }
 
+    /**
+     * Set selected playlist
+     *
+     * @param playlistSelected
+     */
     public void setPlaylistSelected(Playlist playlistSelected) {
         this.playlistSelected = playlistSelected;
     }
 
+    /**
+     * Get List<Playlist>
+     *
+     * @return
+     */
     public List<Playlist> getItemsPlays() {
         return itemsPlays;
     }
 
+    /**
+     * Set List<Playlist>
+     *
+     * @param itemsPlays
+     */
     public void setItemsPlays(List<Playlist> itemsPlays) {
         this.itemsPlays = itemsPlays;
     }
 
+    /**
+     * Get DataModel<Music>
+     *
+     * @return
+     */
     public DataModel<Music> getMusics() {
         return musics;
     }
 
+    /**
+     * Set DataModel<Music>
+     *
+     * @param musics
+     */
     public void setMusics(DataModel<Music> musics) {
         this.musics = musics;
     }
 
+    /**
+     * Get selected music
+     *
+     * @return
+     */
     public Music getMusicSelected() {
         return musicSelected;
     }
 
+    /**
+     * Set selected music
+     *
+     * @param musicSelected
+     */
     public void setMusicSelected(Music musicSelected) {
         this.musicSelected = musicSelected;
     }
 
+    /**
+     * Get music error message
+     *
+     * @return
+     */
     public String getMessageErrorMusic() {
         return messageErrorMusic;
     }
 
+    /**
+     * Set music error message
+     *
+     * @param messageErrorMusic
+     */
     public void setMessageErrorMusic(String messageErrorMusic) {
         this.messageErrorMusic = messageErrorMusic;
     }
 
+    /**
+     * Get selected music ID
+     *
+     * @return
+     */
     public Integer getMusicIdSelected() {
         return musicIdSelected;
     }
 
+    /**
+     * Set selected music ID
+     *
+     * @param musicIdSelected
+     */
     public void setMusicIdSelected(Integer musicIdSelected) {
         this.musicIdSelected = musicIdSelected;
     }
 
+    /**
+     * Get selected Playlist ID
+     *
+     * @return
+     */
     public Integer getPlaylistIdSelected() {
         return playlistIdSelected;
     }
 
+    /**
+     * Set selected Playlist ID
+     *
+     * @param playlistIdSelected
+     */
     public void setPlaylistIdSelected(Integer playlistIdSelected) {
         this.playlistIdSelected = playlistIdSelected;
     }

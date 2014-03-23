@@ -14,8 +14,8 @@ import javax.ejb.Stateful;
 import javax.inject.Inject;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
 @Stateful
 public class DeleteUser {
@@ -25,6 +25,13 @@ public class DeleteUser {
     @EJB
     AppUserFacade users;
 
+    /**
+     * Method to safely remove user from application. First remove all the
+     * reference from the user in other tables, and then removes the user
+     * himself.
+     *
+     * @param user
+     */
     public void userRemove(AppUser user) {
 
         List<Playlist> p = playlists.findAll();
@@ -33,9 +40,7 @@ public class DeleteUser {
             for (int j = 0; j < p.get(i).getMusics().size(); j++) {
                 if (p.get(i).getMusics().get(j).getUser().equals(user)) {
                     File file = new File(p.get(i).getMusics().get(j).getMusic_path());
-                    System.err.println("FILE PATH -->" + file.getPath());
                     p.get(i).getMusics().remove(p.get(i).getMusics().get(j));
-                    System.err.println("FILE PATH2 -->" + file.getPath());
                     file.delete();
                 }
             }

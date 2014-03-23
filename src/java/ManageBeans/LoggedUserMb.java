@@ -17,13 +17,12 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Zueb LDA
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
-//@ManagedBean(name = "logged")
 @Named("logged")
 @SessionScoped
-public class LoggedUserEjb implements Serializable {
+public class LoggedUserMb implements Serializable {
 
     private AppUser user;
     @Inject
@@ -36,7 +35,7 @@ public class LoggedUserEjb implements Serializable {
     /**
      * Creates a new instance of LoggedUser
      */
-    public LoggedUserEjb() {
+    public LoggedUserMb() {
     }
 
     @PostConstruct
@@ -44,46 +43,11 @@ public class LoggedUserEjb implements Serializable {
         this.errorMessage = null;
     }
 
-    public AppUser getUser() {
-        return user;
-    }
-
-    public void setUser(AppUser user) {
-        this.user = user;
-    }
-
-    public AppUserFacade getUser_ejb() {
-        return user_ejb;
-    }
-
-    public void setUser_ejb(AppUserFacade user_ejb) {
-        this.user_ejb = user_ejb;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public DeleteUser getDelUser() {
-        return delUser;
-    }
-
-    public void setDelUser(DeleteUser delUser) {
-        this.delUser = delUser;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
+    /**
+     * Invalidate the current session in the user logout
+     *
+     * @return String
+     */
     public String logout() {
 
         FacesContext context = FacesContext.getCurrentInstance();
@@ -93,15 +57,116 @@ public class LoggedUserEjb implements Serializable {
         return "index.xhtml";
     }
 
+    /**
+     * Invokes User EJB method in order to edit logged user
+     *
+     * @return
+     */
     public String editUser() {
         user_ejb.editUserLogado(user);
         return "principal";
 
     }
 
+    /**
+     * Invokes DelUser EJB method to remove logged user
+     *
+     * @return
+     */
     public String deleteUser() {
         delUser.userRemove(user);
         return "index.xhtml";
+    }
+
+    //Getter and Setter
+    /**
+     * Get User
+     *
+     * @return
+     */
+    public AppUser getUser() {
+        return user;
+    }
+
+    /**
+     * Set User
+     *
+     * @param user
+     */
+    public void setUser(AppUser user) {
+        this.user = user;
+    }
+
+    /**
+     * Get User EJB
+     *
+     * @return
+     */
+    public AppUserFacade getUser_ejb() {
+        return user_ejb;
+    }
+
+    /**
+     * Set User EJB
+     *
+     * @param user_ejb
+     */
+    public void setUser_ejb(AppUserFacade user_ejb) {
+        this.user_ejb = user_ejb;
+    }
+
+    /**
+     * Get Password
+     *
+     * @return
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Set Password
+     *
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Get DelUser EJB
+     *
+     * @return
+     */
+    public DeleteUser getDelUser() {
+        return delUser;
+    }
+
+    /**
+     * Set DelUser EJB
+     *
+     * @param delUser
+     */
+    public void setDelUser(DeleteUser delUser) {
+        this.delUser = delUser;
+    }
+
+    /**
+     * Get error message
+     *
+     * @return
+     */
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    /**
+     * Set error message
+     *
+     * @param errorMessage
+     */
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
 }

@@ -33,7 +33,7 @@ public class EditPlaylistController {
     private Music musicSelected;
     private Playlist playlistSelected;
     @Inject
-    LoggedUserEjb loggedUser;
+    LoggedUserMb loggedUser;
     private DataModel<Playlist> play;
 
     /**
@@ -49,11 +49,22 @@ public class EditPlaylistController {
         this.play = (DataModel<Playlist>) new ListDataModel(playlistEjb.showMyPlaylist(loggedUser.getUser()));
     }
 
+    /**
+     * This method invokes the Playlist EJB removeMusicFromPlaylist method in
+     * order to remove the music from the playlist and edit the actual playlist.
+     *
+     * @return
+     */
     public String removeMusicPlaylist() {
         playlistEjb.removeMusicFromPlaylist(playlistSelected, musicSelected);
         return null;
     }
 
+    /**
+     * Save the selected playlist in flash scoped between views
+     *
+     * @return String
+     */
     public String saveSelectedPlaylist() {
 
         Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
@@ -63,6 +74,12 @@ public class EditPlaylistController {
 
     }
 
+    /**
+     * Invoques the music EJB method showMusicsPLaylist in order to construct
+     * and return a DataModel<Music>
+     *
+     * @return DataModel<Music>
+     */
     public DataModel<Music> getPlaylistMusics() {
 
         DataModel model = (DataModel<Music>) new ListDataModel(musicEjb.showMusicsPlaylist(playlistSelected));
@@ -70,11 +87,24 @@ public class EditPlaylistController {
 
     }
 
+    /**
+     * Invoques the Playlist EJB method editPlaylist(Playlist, User) ir order to
+     * edit Playlist sent.
+     *
+     * @return String
+     */
     public String editPlaylist() {
         playlistEjb.editPlaylist(playlistSelected, loggedUser.getUser());
         return "listMyPlaylist";
     }
 
+    /**
+     * Invokes Playlist EJB method in order to sort Playlist table.
+     *
+     * @param column
+     * @param order
+     * @return null;
+     */
     public String sortTable(String column, String order) {
 
         DataModel model = (DataModel<Playlist>) new ListDataModel(playlistEjb.orderPlaylist(column, order, loggedUser.getUser()));
@@ -83,6 +113,11 @@ public class EditPlaylistController {
 
     }
 
+    /**
+     * Invokes Playlist EJB method in order to show logged user playlists
+     *
+     * @return
+     */
     public DataModel<Playlist> getMyPlaylist() {
         if (playlistEjb != null) {
             DataModel model = (DataModel<Playlist>) new ListDataModel(playlistEjb.showMyPlaylist(loggedUser.getUser()));
@@ -92,6 +127,11 @@ public class EditPlaylistController {
         return null;
     }
 
+    /**
+     * Invokes Playlist EJB method to remover Object
+     *
+     * @return
+     */
     public String destroy() {
         Playlist playlist = (Playlist) this.play.getRowData();
         playlistEjb.remove(playlist);
@@ -132,11 +172,11 @@ public class EditPlaylistController {
         this.musicEjb = musicEjb;
     }
 
-    public LoggedUserEjb getLoggedUser() {
+    public LoggedUserMb getLoggedUser() {
         return loggedUser;
     }
 
-    public void setLoggedUser(LoggedUserEjb loggedUser) {
+    public void setLoggedUser(LoggedUserMb loggedUser) {
         this.loggedUser = loggedUser;
     }
 
