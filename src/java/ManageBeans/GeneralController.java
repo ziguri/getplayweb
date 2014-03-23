@@ -49,8 +49,12 @@ public class GeneralController implements Converter {
     }
 
     public String saveMusic() throws MusicsAlreadyExistInPlaylistException {
-        playlistEjb.addMusicToPlaylist(playlistSelected, musicSelected);
-        return null;
+        try {
+            playlistEjb.addMusicToPlaylist(playlistSelected, musicSelected);
+            return null;
+        } catch (MusicsAlreadyExistInPlaylistException e) {
+            return "MessageDuplicatedMusic";
+        }
     }
 
     //Acaba aqui a transferência desde o EditMusciMb
