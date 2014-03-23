@@ -66,12 +66,12 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
         }
     }
 
-    public boolean existUser2(String email) throws DuplicateEmailException {
+    public AppUser existUser2(String email) throws DuplicateEmailException {
         try {
             AppUser u = (AppUser) em.createNamedQuery("appuser.findByEmail").setParameter("email", email).getSingleResult();
             throw new DuplicateEmailException();
         } catch (NoResultException ex) {
-            return true;
+            return null;
         }
 
     }
