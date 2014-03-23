@@ -53,7 +53,7 @@ public class MusicFacade extends AbstractFacade<Music> {
             this.create(m);
 
         } catch (Exception e) {
-            System.err.println("Exception " + e);
+            Logger.getLogger(MusicFacade.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -66,7 +66,8 @@ public class MusicFacade extends AbstractFacade<Music> {
         try {
             List<Music> m = (List<Music>) em.createNamedQuery("Music.findAll").getResultList();
             return m;
-        } catch (Exception e) {
+        } catch (NullPointerException | IllegalStateException ex) {
+            Logger.getLogger(MusicFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -83,8 +84,8 @@ public class MusicFacade extends AbstractFacade<Music> {
         try {
             List<Music> m = (List<Music>) em.createNamedQuery("Music.findMusicByPlaylist").setParameter("playlists", p).getResultList();
             return m;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NullPointerException | IllegalStateException ex) {
+            Logger.getLogger(MusicFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -97,18 +98,22 @@ public class MusicFacade extends AbstractFacade<Music> {
      * @param music
      */
     public void removeMusic(Music music) {
+        try {
 
-        for (int i = 0; i < music.getPlaylists().size(); i++) {
+            for (int i = 0; i < music.getPlaylists().size(); i++) {
 
-            music.getPlaylists().get(i).setSize(music.getPlaylists().get(i).getSize() - 1);
-            playlistEjb.edit(music.getPlaylists().get(i));
+                music.getPlaylists().get(i).setSize(music.getPlaylists().get(i).getSize() - 1);
+                playlistEjb.edit(music.getPlaylists().get(i));
+            }
+
+            remove(music);
+
+            File file = new File(music.getMusic_path());
+            file.delete();
+
+        } catch (IndexOutOfBoundsException ex) {
+            Logger.getLogger(MusicFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        remove(music);
-
-        File file = new File(music.getMusic_path());
-        file.delete();
-
     }
 
     /**
@@ -160,7 +165,8 @@ public class MusicFacade extends AbstractFacade<Music> {
         try {
             List<Music> mus = (List<Music>) em.createNamedQuery("Music.findAllFromUser").setParameter("user", u).getResultList();
             return mus;
-        } catch (Exception e) {
+        } catch (NullPointerException | IllegalStateException ex) {
+            Logger.getLogger(MusicFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

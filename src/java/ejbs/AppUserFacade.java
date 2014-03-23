@@ -45,13 +45,8 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
     public void addUser(AppUser u) throws DuplicateEmailException {
         String pass = EncryptMD5.cryptWithMD5(u.getPassword());
         u.setPassword(pass);
-        try {
-            this.existUser2(u.getEmail());
-            this.create(u);
-        } catch (DuplicateEmailException ex) {
-            Logger.getLogger(AppUserFacade.class.getName()).log(Level.SEVERE, null, ex);
-            throw new DuplicateEmailException();
-        }
+        this.existUser(u.getEmail());
+        this.create(u);
 
     }
 
@@ -97,6 +92,7 @@ public class AppUserFacade extends AbstractFacade<AppUser> {
             AppUser u = (AppUser) em.createNamedQuery("appuser.findByEmail").setParameter("email", email).getSingleResult();
             throw new DuplicateEmailException();
         } catch (NoResultException ex) {
+            Logger.getLogger(AppUserFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
 
