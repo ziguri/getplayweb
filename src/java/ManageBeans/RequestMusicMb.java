@@ -7,6 +7,7 @@ package ManageBeans;
 
 import ejbs.MusicFacade;
 import entities.Music;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -58,25 +59,28 @@ public class RequestMusicMb implements Serializable {
 
     public void addMusic() throws FileNotFoundException, IOException {
         try {
- 
-                musicPath = "C:\\APPGetPlayWeb\\" + file1.getSubmittedFileName();
-                InputStream inputStream = file1.getInputStream();
-                FileOutputStream outputStream = new FileOutputStream(musicPath);
 
-                byte[] buffer = new byte[4096];
-                int bytesRead = 0;
-                while (true) {
-                    bytesRead = inputStream.read(buffer);
-                    if (bytesRead > 0) {
-                        outputStream.write(buffer, 0, bytesRead);
-                    } else {
-                        break;
-                    }
+            File file = new File("C:\\APPGetPlayWeb\\");
+            file.mkdir();
+            musicPath = "C:\\APPGetPlayWeb\\" + file1.getSubmittedFileName();
+            InputStream inputStream = file1.getInputStream();
+            FileOutputStream outputStream = new FileOutputStream(musicPath);
+
+            byte[] buffer = new byte[4096];
+            int bytesRead = 0;
+            while (true) {
+                bytesRead = inputStream.read(buffer);
+                if (bytesRead > 0) {
+                    outputStream.write(buffer, 0, bytesRead);
+                } else {
+                    break;
                 }
-                outputStream.close();
-                inputStream.close();
-                music_ejb.addMusic(music, user.getUser(), musicPath);
-                message = "Music " + music.getTitle() + " create with success.";
+            }
+            outputStream.close();
+            inputStream.close();
+            music_ejb.addMusic(music, user.getUser(), musicPath);
+
+            message = "Music " + music.getTitle() + " created with success.";
 
         } catch (FileNotFoundException ex) {
             System.err.println(ex.getMessage());

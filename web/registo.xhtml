@@ -28,12 +28,12 @@
                     <p></p>
                     <h:messages id="messages" layout="table" infoClass="info" errorClass="error" style="color: #e33b06;" />
                     <br></br>
-                    
+
                     <h:panelGrid columns="2" cellspacing="10">
-                        
+
                         <h:outputLabel value="Nome" class="textLabel"/>
                         <h:inputText label="Nome" value="#{loginMb.user.name}" />
-                        
+
                         <h:outputLabel value="Email" class="textLabel"/>
                         <h:inputText label="Email" value="#{loginMb.user.email}"/>
 
@@ -43,9 +43,9 @@
                         <h:commandButton type="submit"  value="Save" action="#{loginMb.addUser2()}"  class="button"/>
 
                         <h:button value="Return"  outcome="index.xhtml"  class="button"/>
-                        
+
                     </h:panelGrid>
-                    <h:outputLabel value="#{loginMb.successfullyRegistered}" style="color: #e33b06; font-weight: bold"/>
+                    <h:outputLabel value="#{loginMb.successfullyRegistered}" style="color: #99FF66; font-weight: bold"/>
                     <br/>
                     <p></p>
                     <h:outputLabel value="#{loginMb.errorMessageExperience}" style="color: #e33b06; font-weight: bold"/>

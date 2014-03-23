@@ -30,12 +30,11 @@ public class EditPlaylistController {
     private PlaylistFacade playlistEjb;
     @Inject
     private MusicFacade musicEjb;
-//    @ManagedProperty("#{flash}")
-//    private Flash playlistFlash;
     private Music musicSelected;
     private Playlist playlistSelected;
     @Inject
     LoggedUserEjb loggedUser;
+    private DataModel<Playlist> play;
 
     /**
      * Creates a new instance of EditPlaylistController
@@ -47,6 +46,7 @@ public class EditPlaylistController {
     public void init() {
         Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
         setPlaylistSelected((Playlist) flash.get("play"));
+        this.play = (DataModel<Playlist>) new ListDataModel(playlistEjb.showMyPlaylist(loggedUser.getUser()));
     }
 
     public String removeMusicPlaylist() {
@@ -73,6 +73,14 @@ public class EditPlaylistController {
     public String editPlaylist() {
         playlistEjb.editPlaylist(playlistSelected, loggedUser.getUser());
         return "listMyPlaylist";
+    }
+
+    public String sortTable(String column, String order) {
+
+        DataModel model = (DataModel<Playlist>) new ListDataModel(playlistEjb.orderPlaylist(column, order, loggedUser.getUser()));
+        play = model;
+        return null;
+
     }
 
     //Getter and Setter
@@ -106,6 +114,22 @@ public class EditPlaylistController {
 
     public void setMusicEjb(MusicFacade musicEjb) {
         this.musicEjb = musicEjb;
+    }
+
+    public LoggedUserEjb getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(LoggedUserEjb loggedUser) {
+        this.loggedUser = loggedUser;
+    }
+
+    public DataModel<Playlist> getPlay() {
+        return play;
+    }
+
+    public void setPlay(DataModel<Playlist> play) {
+        this.play = play;
     }
 
 }

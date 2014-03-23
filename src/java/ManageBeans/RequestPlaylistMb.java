@@ -25,13 +25,10 @@ public class RequestPlaylistMb {
 
     @Inject
     private PlaylistFacade playlist_ejb;
-
     @Inject
     private MusicFacade musics_ejb;
-
     @Inject
     private LoggedUserEjb user;
-
     private DataModel<Playlist> play;
     private Playlist playlist;
     private String message;
@@ -45,19 +42,17 @@ public class RequestPlaylistMb {
     @PostConstruct
     public void init() {
         this.playlist = new Playlist();
-        this.play = (DataModel<Playlist>) new ListDataModel(playlist_ejb.showMyPlaylist(user.getUser()));
         this.message = null;
     }
 
     public void addPlaylist() {
-        if (!this.playlist.getName().equals("")){
+        if (!this.playlist.getName().equals("")) {
             playlist_ejb.addPlaylist(playlist, user.getUser());
             this.message = "Playlist " + playlist.getName() + " create with success.";
-            
-        }
-        else {
+
+        } else {
             this.message = "Invalid Name. Please insert a name for your playlist.";
-            
+
         }
     }
 
@@ -68,14 +63,6 @@ public class RequestPlaylistMb {
             return model;
         }
         return null;
-    }
-
-    public String sortTable(String column, String order) {
-
-        DataModel model = (DataModel<Playlist>) new ListDataModel(playlist_ejb.orderPlaylist(column, order, user.getUser()));
-        play = model;
-        return null;
-
     }
 
     public String destroy() {

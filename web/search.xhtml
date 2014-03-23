@@ -24,12 +24,12 @@ and open the template in the editor.
                 <h:form>
                     <f:view>
                         <h:form>
-                            <h1>Search for <h:outputText value="#{searchMb.word}"/></h1>
+                            <h1>Search for <h:outputText value="#{addMusicFromSearch.word}"/></h1>
                             <h:outputLabel value="YOUR PLAYLIST´S:"/>
-                            <h:selectOneMenu value="#{sessionMb.selectedPlaylist}" converter="#{sessionMb}">
-                                <f:selectItems value="#{sessionMb.myPlaylists()}" var="playlist" itemLabel="#{playlist.name}"/>
+                            <h:selectOneMenu value="#{generalController.playlistSelected}" converter="#{generalController}">
+                                <f:selectItems value="#{generalController.myPlaylists()}" var="playlist" itemLabel="#{playlist.name}"/>
                             </h:selectOneMenu>
-                            <h:dataTable value="#{searchMb.model}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" 
+                            <h:dataTable value="#{addMusicFromSearch.model}" var="music" border="1" cellpadding="2" cellspacing="2" rules="all" 
                                          styleClass="dataTable"
                                          headerClass="dataTableTitle"
                                          >
@@ -66,8 +66,8 @@ and open the template in the editor.
                                 <h:column>      
                                     <f:facet name="header" class="dataTableTitle">ADD TO PLAYLIST</f:facet>
                                     <h:commandButton value="+" action="#{generalController.saveMusic()}" >
-                                        <f:setPropertyActionListener target="#{generalController.musicIdSelected}" value="#{music.id}" />
-                                        <f:setPropertyActionListener target="#{generalController.playlistIdSelected}" value="#{playlist.id}" />
+                                        <f:setPropertyActionListener target="#{generalController.musicSelected}" value="#{music}" />
+
                                     </h:commandButton>
                                 </h:column>
 

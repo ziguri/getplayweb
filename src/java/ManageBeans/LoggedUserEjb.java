@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author Zueb LDA
  */
-
 //@ManagedBean(name = "logged")
 @SessionScoped
 @Stateful(name = "logged")
@@ -39,7 +38,7 @@ public class LoggedUserEjb implements Serializable {
      */
     public LoggedUserEjb() {
     }
-    
+
     @PostConstruct
     public void init() {
         this.errorMessage = null;
@@ -95,13 +94,13 @@ public class LoggedUserEjb implements Serializable {
     }
 
     public String editUser() {
-            user_ejb.editUserLogado(user);
-            return "principal";
-        
+        user_ejb.editUserLogado(user);
+        return "principal";
+
     }
 
     public String deleteUser() {
-        user_ejb.remove(user);
+        delUser.userRemove(user);
         return "index.xhtml";
     }
 

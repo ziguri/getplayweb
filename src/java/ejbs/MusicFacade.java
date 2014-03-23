@@ -78,10 +78,15 @@ public class MusicFacade extends AbstractFacade<Music> {
         }
     }
 
-    public void removeMusic(Music music, Playlist playlist) {
+    public void removeMusic(Music music) {
+
+        for (int i = 0; i < music.getPlaylists().size(); i++) {
+
+            music.getPlaylists().get(i).setSize(music.getPlaylists().get(i).getSize() - 1);
+            playlistEjb.edit(music.getPlaylists().get(i));
+        }
 
         remove(music);
-        playlistEjb.edit(playlist);
 
     }
 

@@ -137,7 +137,7 @@ public class LoginMb {
     public void addUser2() {
         try {
             user_ejb.addUser2(user);
-            successfullyRegistered = "Successfully Registered!!!!";
+            successfullyRegistered = "Successfully Registered! Click \"return\" to login";
 //            return "index.xhtml";
         } catch (DuplicateEmailException ex) {
             Logger.getLogger(LoginMb.class.getName()).log(Level.SEVERE, null, ex);

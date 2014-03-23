@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Inject;
@@ -118,6 +120,9 @@ public class SearchMb implements Serializable {
         try {
             List<Music> results = musics_ejb.searchByColumn(option, word);
             this.model = (DataModel<Music>) new ListDataModel(results);
+            Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+            flash.put("model", model);
+            flash.put("word", word);
 
         } catch (SearchNullException ex) {
             Logger.getLogger(SearchMb.class.getName()).log(Level.SEVERE, null, ex);
