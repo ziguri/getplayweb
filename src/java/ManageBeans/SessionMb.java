@@ -9,17 +9,11 @@ import ejbs.MusicFacade;
 import ejbs.PlaylistFacade;
 import entities.Music;
 import entities.Playlist;
-import java.io.File;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.ConverterException;
-import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -29,7 +23,7 @@ import javax.inject.Named;
  */
 @Named("sessionMb")
 @SessionScoped
-public class SessionMb implements Serializable, Converter {
+public class SessionMb implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Inject
@@ -50,22 +44,17 @@ public class SessionMb implements Serializable, Converter {
      */
     public SessionMb() {
     }
-    
+
     @PostConstruct
     public void init() {
         this.message = null;
     }
-    public void pickAction(ActionEvent ev) {
 
-        selectedPlaylist = (Playlist) ev.getSource();
-    }
-
-    public List<Playlist> myPlaylists() {
-
-        itemsPlays = playlist_ejb.showMyPlaylist(loggedUser.getUser());
-        return itemsPlays;
-    }
-
+//    public List<Playlist> myPlaylists() {
+//
+//        itemsPlays = playlist_ejb.showMyPlaylist(loggedUser.getUser());
+//        return itemsPlays;
+//    }
     public String prepareViewMusicPlaylist() {
         return "viewPlaylist";
     }
@@ -86,11 +75,10 @@ public class SessionMb implements Serializable, Converter {
      }
      */
 
-    public String editPlaylist() {
-        playlist_ejb.editPlaylist(selectedPlaylist, loggedUser.getUser());
-        return "listMyPlaylist";
-    }
-
+//    public String editPlaylist() {
+//        playlist_ejb.editPlaylist(selectedPlaylist, loggedUser.getUser());
+//        return "listMyPlaylist";
+//    }
     public PlaylistFacade getPlaylist_ejb() {
         return playlist_ejb;
     }
@@ -139,13 +127,12 @@ public class SessionMb implements Serializable, Converter {
         this.itemsPlays = itemsPlays;
     }
 
-    public DataModel<Music> getPlaylistMusics() {
-
-        DataModel model = (DataModel<Music>) new ListDataModel(music_ejb.showMusicsPlaylist(selectedPlaylist));
-        return model;
-
-    }
-
+//    public DataModel<Music> getPlaylistMusics() {
+//
+//        DataModel model = (DataModel<Music>) new ListDataModel(music_ejb.showMusicsPlaylist(selectedPlaylist));
+//        return model;
+//
+//    }
     public DataModel<Music> getMusics() {
         return musics;
     }
@@ -162,67 +149,62 @@ public class SessionMb implements Serializable, Converter {
         this.message = message;
     }
 
-    public String removeMusicPlaylist() {
-
-        selectedPlaylist.getMusics().remove(musicSelected);
-        playlist_ejb.edit(selectedPlaylist);
-        return "viewPlaylist";
-    }
-
+//    public String removeMusicPlaylist() {
+//
+//        selectedPlaylist.getMusics().remove(musicSelected);
+//        playlist_ejb.edit(selectedPlaylist);
+//        return "viewPlaylist";
+//    }
     //Começa aqui a transferência desde o EditMusicMb
-    public String destroy() {
-
-        if (musicSelected.getUser().equals(loggedUser.getUser())) {
-
-            File file = new File(musicSelected.getMusic_path());
-            file.delete();
-            music_ejb.remove(musicSelected);
-
-            return "listMyMusics";
-        }
-        return "listMyMusics";
-
-    }
-
-    public String editMusic() {
-
-        if (musicSelected.getUser().equals(loggedUser.getUser())) {
-            music_ejb.edit(musicSelected);
-
-            return "listMyMusics";
-        } else {
-            return "listMyMusics";
-        }
-
-    }
-
+//    public String destroy() {
+//
+//        if (musicSelected.getUser().equals(loggedUser.getUser())) {
+//
+//            File file = new File(musicSelected.getMusic_path());
+//            file.delete();
+//            music_ejb.remove(musicSelected);
+//
+//            return "listMyMusics";
+//        }
+//        return "listMyMusics";
+//
+//    }
+//    public String editMusic() {
+//
+//        if (musicSelected.getUser().equals(loggedUser.getUser())) {
+//            music_ejb.edit(musicSelected);
+//
+//            return "listMyMusics";
+//        } else {
+//            return "listMyMusics";
+//        }
+//  w  }
     //Acaba aqui a transferência desde o EditMusciMb
-    @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        if (value == null || value.isEmpty()) {
-            return null;
-        }
-        if (!value.matches("\\d+")) {
-            throw new ConverterException("The value is not a valid playlist ID: " + value);
-        }
-
-        Integer id = Integer.parseInt(value);
-        return playlist_ejb.find(id);
-    }
-
-    @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
-
-        if (value == null) {
-            return null;
-        }
-
-        if (!(value instanceof Playlist)) {
-            throw new ConverterException("The value is not a Playlist: " + value);
-        }
-
-        String id = ((Playlist) value).getId().toString();
-        return (id != null) ? id.toString() : null;
-    }
-
+//    @Override
+//    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+//        if (value == null || value.isEmpty()) {
+//            return null;
+//        }
+//        if (!value.matches("\\d+")) {
+//            throw new ConverterException("The value is not a valid playlist ID: " + value);
+//        }
+//
+//        Integer id = Integer.parseInt(value);
+//        return playlist_ejb.find(id);
+//    }
+//
+//    @Override
+//    public String getAsString(FacesContext context, UIComponent component, Object value) {
+//
+//        if (value == null) {
+//            return null;
+//        }
+//
+//        if (!(value instanceof Playlist)) {
+//            throw new ConverterException("The value is not a Playlist: " + value);
+//        }
+//
+//        String id = ((Playlist) value).getId().toString();
+//        return (id != null) ? id.toString() : null;
+//    }
 }

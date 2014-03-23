@@ -65,9 +65,9 @@ and open the template in the editor.
                                 </h:column>
                                 <h:column>      
                                     <f:facet name="header" class="dataTableTitle">ADD TO PLAYLIST</f:facet>
-                                    <h:commandButton value="+" action="#{saveMusicController.saveMusic()}" >
-                                        <f:setPropertyActionListener target="#{saveMusicController.musicIdSelected}" value="#{music.id}" />
-                                        <f:setPropertyActionListener target="#{saveMusicController.playlistIdSelected}" value="#{playlist.id}" />
+                                    <h:commandButton value="+" action="#{generalController.saveMusic()}" >
+                                        <f:setPropertyActionListener target="#{generalController.musicIdSelected}" value="#{music.id}" />
+                                        <f:setPropertyActionListener target="#{generalController.playlistIdSelected}" value="#{playlist.id}" />
                                     </h:commandButton>
                                 </h:column>
 

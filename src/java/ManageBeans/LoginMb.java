@@ -9,7 +9,6 @@ import Exceptions.DuplicateEmailException;
 import ejbs.AppUserFacade;
 import ejbs.CodificarMD5;
 import entities.AppUser;
-import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -25,7 +24,7 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class LoginMb implements Serializable {
+public class LoginMb {
 
     @Inject
     private AppUserFacade user_ejb;
@@ -43,7 +42,7 @@ public class LoginMb implements Serializable {
      */
     public LoginMb() {
     }
-    
+
     @PostConstruct
     public void init() {
         this.errorMessageExperience = null;
@@ -100,7 +99,6 @@ public class LoginMb implements Serializable {
     public void setSuccessfullyRegistered(String successfullyRegistered) {
         this.successfullyRegistered = successfullyRegistered;
     }
-      
 
     public String confirmaLogin() {
 
@@ -139,7 +137,7 @@ public class LoginMb implements Serializable {
     public void addUser2() {
         try {
             user_ejb.addUser2(user);
-            successfullyRegistered="Successfully Registered!!!!";
+            successfullyRegistered = "Successfully Registered!!!!";
 //            return "index.xhtml";
         } catch (DuplicateEmailException ex) {
             Logger.getLogger(LoginMb.class.getName()).log(Level.SEVERE, null, ex);

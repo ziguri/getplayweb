@@ -20,19 +20,19 @@ and open the template in the editor.
                     <h:panelGrid columns="2" cellspacing="10">
 
                         <h:outputLabel value="Title"/>
-                        <h:inputText label="Title" value="#{sessionMb.musicSelected.title}" />
+                        <h:inputText label="Title" value="#{editMusicController.musicSelected.title}" />
 
                         <h:outputLabel value="Artist"/>
-                        <h:inputText label="Artist" value="#{sessionMb.musicSelected.artist}"/>
+                        <h:inputText label="Artist" value="#{editMusicController.musicSelected.artist}"/>
 
                         <h:outputLabel value="Album"/>
-                        <h:inputText label="Album" value="#{sessionMb.musicSelected.album}"/>
+                        <h:inputText label="Album" value="#{editMusicController.musicSelected.album}"/>
 
                         <h:outputLabel value="Year"/>
-                        <h:inputText label="Year" value="#{sessionMb.musicSelected.music_year}"/>
+                        <h:inputText label="Year" value="#{editMusicController.musicSelected.music_year}"/>
 
                         <p></p>
-                        <h:commandButton type="submit"  value="Save" action="#{sessionMb.editMusic()}"  />
+                        <h:commandButton type="submit"  value="Save" action="#{editMusicController.editMusic}"  />
                     </h:panelGrid>
                 </h:form>
 

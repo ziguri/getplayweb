@@ -20,19 +20,17 @@ import javax.inject.Inject;
 public class DeleteUser {
 
     @Inject
-    MusicFacade musics;
-    @Inject
     PlaylistFacade playlists;
     @EJB
     AppUserFacade users;
-    
+
     public void userRemove(AppUser user) {
 
         List<Playlist> p = playlists.findAll();
-        
-        for (int i = 0; i<p.size(); i++){
-            for (int j=0; j<p.get(i).getMusics().size(); j++){
-                if(p.get(i).getMusics().get(j).getUser().equals(user)){
+
+        for (int i = 0; i < p.size(); i++) {
+            for (int j = 0; j < p.get(i).getMusics().size(); j++) {
+                if (p.get(i).getMusics().get(j).getUser().equals(user)) {
                     p.get(i).getMusics().remove(p.get(i).getMusics().get(j));
                 }
             }

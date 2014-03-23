@@ -11,6 +11,7 @@ import entities.Music;
 import entities.Playlist;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -21,6 +22,8 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class MusicFacade extends AbstractFacade<Music> {
 
+    @Inject
+    private PlaylistFacade playlistEjb;
     @PersistenceContext(unitName = "GetPlayWebPU")
     private EntityManager em;
 
@@ -29,7 +32,7 @@ public class MusicFacade extends AbstractFacade<Music> {
             m.setMusic_path(path);
             m.setUser(u);
             this.create(m);
-            
+
         } catch (Exception e) {
             System.err.println("Exception " + e);
         }
@@ -73,6 +76,13 @@ public class MusicFacade extends AbstractFacade<Music> {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void removeMusic(Music music, Playlist playlist) {
+
+        remove(music);
+        playlistEjb.edit(playlist);
+
     }
 
     public List<Music> searchByColumn(String column, String word) throws SearchNullException {//Mostra as músicas resultantes de uma pesquisa.

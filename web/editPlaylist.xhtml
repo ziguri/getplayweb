@@ -19,13 +19,13 @@ and open the template in the editor.
 
                 <h:form>
                     <h:panelGrid columns="2" cellspacing="10">
-                        
-                    <h:outputLabel value="Name"/>
-                    <h:inputText label="Name" value="#{sessionMb.selectedPlaylist.name}" />
 
-                    <p></p>
-                    <h:commandButton type="submit"  value="Save" action="#{sessionMb.editPlaylist()}"  />
-                </h:panelGrid>
+                        <h:outputLabel value="Name"/>
+                        <h:inputText label="Name" value="#{editPlaylistController.playlistSelected.name}" />
+
+                        <p></p>
+                        <h:commandButton type="submit"  value="Save" action="#{editPlaylistController.editPlaylist()}"  />
+                    </h:panelGrid>
                 </h:form>
 
             </ui:define>

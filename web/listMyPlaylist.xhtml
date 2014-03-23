@@ -62,19 +62,20 @@ and open the template in the editor.
                                     <f:facet name="header">VIEW/EDIT/DELETE</f:facet>
                                     <h:commandButton type="submit"
                                                      value="View" 
-                                                     action="viewPlaylist" >
-                                        <f:setPropertyActionListener target="#{sessionMb.selectedPlaylist}" value="#{playlist}" />
+                                                     action="#{generalController.addMusicToSelectedPlaylist()}" >
+                                        <f:setPropertyActionListener target="#{generalController.playlistSelected}" value="#{playlist}" />
+
+
                                     </h:commandButton>
 
                                     <h:commandButton type="submit"
                                                      value="Edit" 
-                                                     action="editPlaylist" >
-                                        <f:setPropertyActionListener target="#{sessionMb.selectedPlaylist}" value="#{playlist}" />
-                                    </h:commandButton>
+                                                     action="#{generalController.editSelectedPlaylist()}" />
 
                                     <h:commandButton  type="submit"
                                                       value="Delete" 
                                                       action="#{requestPlaylistMb.destroy}" />
+
                                 </h:column>
 
                             </h:dataTable>
