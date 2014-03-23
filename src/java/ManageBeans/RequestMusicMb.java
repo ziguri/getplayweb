@@ -23,8 +23,8 @@ import javax.inject.Named;
 import javax.servlet.http.Part;
 
 /**
- *
- * @author Elsa
+ * @author Elsa Santos
+ * @author Orlando Neves
  */
 @Named("requestMusicMb")
 @RequestScoped
@@ -57,7 +57,16 @@ public class RequestMusicMb implements Serializable {
         this.message = null;
     }
 
+    /**
+     * addMusic() create one directory in the server (if don´t exist), than copy
+     * the byte[] to the new location path and invoke the method addMusic from
+     * Music EJB, in order to add the music reference to the DB.
+     *
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void addMusic() throws FileNotFoundException, IOException {
+
         try {
 
             File file = new File("C:\\APPGetPlayWeb\\");
@@ -91,11 +100,21 @@ public class RequestMusicMb implements Serializable {
         }
     }
 
+    /**
+     * Invoke Music EJB method that return one List<Music>
+     *
+     * @return List<Music>
+     */
     public List<Music> viewAllMusic() {
         return music_ejb.showAllMusics();
 
     }
 
+    /**
+     * Invoke Music EJB method in order to fill one Music DataModel
+     *
+     * @return DataModel<Music>
+     */
     public DataModel<Music> getMusicList() {
         if (music_ejb != null) {
             DataModel model = (DataModel<Music>) new ListDataModel(music_ejb.findAll());
@@ -105,34 +124,38 @@ public class RequestMusicMb implements Serializable {
         return null;
     }
 
+    /**
+     * Invoke Music EJB method in order to fill Music DataModel with logged user
+     * musics.
+     *
+     * @return DataModel<Music>
+     */
     public DataModel<Music> getMyMusicList() {
 
         DataModel model = (DataModel<Music>) new ListDataModel(music_ejb.showUserMusics(user.getUser()));
         return model;
     }
 
+    /**
+     * Invoke the Music EJB method with item count.
+     *
+     * @return
+     */
     public int countAllItens() {
         return music_ejb.count();
     }
 
+    /**
+     * Create a new Instance of object.
+     *
+     * @return Music
+     */
     public Music getMusicSelected() {
         if (music == null) {
             music = new Music();
             selectedItemIndex = -1;
         }
         return music;
-    }
-
-    public String destroy() {
-        //music = (Music) this.musics.getRowData();
-        if (music.getUser().equals(user.getUser())) {
-            music_ejb.remove(music);
-            //recreateModel();
-            getMusicList();
-            return "listAllMusics";
-        }
-        return "listAllMusics";
-
     }
 
     private void recreateModel() {
