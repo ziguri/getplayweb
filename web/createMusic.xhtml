@@ -36,7 +36,7 @@ and open the template in the editor.
                         <h:inputText label="Album" value="#{requestMusicMb.music.album}"/>
 
                         <h:outputLabel value="Year"/>
-                        <h:inputText label="Year" value="#{requestMusicMb.music.music_year}"/>
+                        <h:inputText label="Year" value="#{requestMusicMb.music.music_year}" validator="#{dateValidator}"/>
 
                         <h:outputLabel value="Path"/>
                         <h:inputFile id="f" required="true" requiredMessage="Please choose a file" value="#{requestMusicMb.file1}" />

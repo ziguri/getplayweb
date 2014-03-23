@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entities;
 
 import java.io.Serializable;
@@ -26,41 +25,39 @@ import javax.validation.constraints.Pattern;
  * @author Elsa Santos
  * @author Orlando Neves
  */
-
 @Entity
 @Table(name = "appuser")
 @NamedQueries({
     @NamedQuery(name = "appuser.findAll", query = "SELECT u FROM AppUser u"),
-    @NamedQuery(name ="appuser.findByEmail", query = "SELECT u FROM AppUser u WHERE u.email = :email"),
-})
+    @NamedQuery(name = "appuser.findByEmail", query = "SELECT u FROM AppUser u WHERE u.email = :email"),})
 public class AppUser implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
-    
-    //@NotNull
-    @Pattern (regexp = "^[\\p{L} .'-]+$", message = "Invalid Name")
-    @Column (name = "NAME", nullable = false)
+
+    @NotNull(message = "Please insert your name")
+    @Pattern(regexp = "^[\\p{L} .'-]+$", message = "Invalid Name")
+    @Column(name = "NAME", nullable = false)
     private String name;
-    
-    //@NotNull
-    @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Invalid Email")
-    @Column (name = "EMAIL", nullable = false, unique = true)
+
+    @NotNull(message = "Please insert email")
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "Invalid Email")
+    @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
-    
+
     @NotNull(message = "Please insert password")
     //@Pattern(regexp ="((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,12})", message="Invalid Password. You need between 6-12 characteres, at least 1 lower case, 1 upper case and 1 numeric")
-    @Column (name = "PASSWORD", nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
-   
-    
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Music> musics;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Playlist> playlists;
-    
+
     public AppUser() {
     }
 
@@ -69,7 +66,7 @@ public class AppUser implements Serializable {
         this.email = email;
         this.password = password;
     }
-    
+
     public Integer getUser_id() {
         return user_id;
     }
@@ -142,5 +139,5 @@ public class AppUser implements Serializable {
     public String toString() {
         return "persistence.Registered_User[ id=" + user_id + " ]";
     }
-    
+
 }
